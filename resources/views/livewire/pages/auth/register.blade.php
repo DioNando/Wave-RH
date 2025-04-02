@@ -5,15 +5,20 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
+use App\Enums\UserRole;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
 new #[Layout('layouts.guest')] class extends Component
 {
-    public string $name = '';
+    public string $nom = '';
+    public string $prenom = '';
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
+    public string $role = UserRole::ADMIN->value;
+    public bool $statut = true;
 
     /**
      * Handle an incoming registration request.
@@ -21,9 +26,12 @@ new #[Layout('layouts.guest')] class extends Component
     public function register(): void
     {
         $validated = $this->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'nom' => ['required', 'string', 'max:255'],
+            'prenom' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'role' => [Rule::in(array_column(UserRole::cases(), 'value'))],
+            'statut' => ['boolean'],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -38,11 +46,18 @@ new #[Layout('layouts.guest')] class extends Component
 
 <div>
     <form wire:submit="register">
-        <!-- Name -->
+        <!-- Nom -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-label for="nom" :value="__('Nom')" />
+            <x-text-input wire:model="nom" id="nom" class="block mt-1 w-full" type="text" name="nom" required autofocus autocomplete="family-name" />
+            <x-input-error :messages="$errors->get('nom')" class="mt-2" />
+        </div>
+
+        <!-- Prénom -->
+        <div class="mt-4">
+            <x-input-label for="prenom" :value="__('Prénom')" />
+            <x-text-input wire:model="prenom" id="prenom" class="block mt-1 w-full" type="text" name="prenom" required autocomplete="given-name" />
+            <x-input-error :messages="$errors->get('prenom')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
