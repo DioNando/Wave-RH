@@ -9,95 +9,116 @@ use Illuminate\Validation\Rule;
 use App\Enums\UserRole;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
+use Livewire\Attributes\Validate;
 
-new #[Layout('layouts.guest')] class extends Component
-{
+new #[Layout('layouts.guest')] class extends Component {
+    #[Validate]
     public string $nom = '';
+    #[Validate]
     public string $prenom = '';
+    #[Validate]
     public string $email = '';
+    #[Validate]
     public string $password = '';
+    #[Validate]
     public string $password_confirmation = '';
-    public string $role = UserRole::ADMIN->value;
+    #[Validate]
+    public string $role = UserRole::AUTRE->value;
+    #[Validate]
     public bool $statut = true;
 
-    /**
-     * Handle an incoming registration request.
-     */
-    public function register(): void
+    protected function rules(): array
     {
-        $validated = $this->validate([
+        return [
             'nom' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'password_confirmation' => ['required', 'string'],
             'role' => [Rule::in(array_column(UserRole::cases(), 'value'))],
             'statut' => ['boolean'],
-        ]);
+        ];
+    }
 
+    public function register(): void
+    {
+        $validated = $this->validate();
         $validated['password'] = Hash::make($validated['password']);
 
-        event(new Registered($user = User::create($validated)));
-
+        event(new Registered(($user = User::create($validated))));
         Auth::login($user);
 
         $this->redirect(route('dashboard', absolute: false), navigate: true);
     }
-}; ?>
+};
+
+?>
 
 <div>
-    <form wire:submit="register">
-        <!-- Nom -->
-        <div>
-            <x-input-label for="nom" :value="__('Nom')" />
-            <x-text-input wire:model="nom" id="nom" class="block mt-1 w-full" type="text" name="nom" required autofocus autocomplete="family-name" />
-            <x-input-error :messages="$errors->get('nom')" class="mt-2" />
+    <x-form.form submit="register">
+        <div class="grid grid-cols-1 gap-x-6 gap-y-8">
+            <!-- Nom -->
+            <div class="col-span-full">
+                <x-form.group name="nom" :label="__('Nom')">
+                    <x-form.input name="nom" required live />
+                </x-form.group>
+            </div>
+
+            <!-- Prénom -->
+            <div class="col-span-full">
+                <x-form.group name="prenom" :label="__('Prénom')">
+                    <x-form.input name="prenom" required live />
+                </x-form.group>
+            </div>
+
+            <!-- Adresse Email -->
+            <div class="col-span-full">
+                <x-form.group name="email" :label="__('Email professionnel')">
+                    <x-form.input name="email" type="email" required live />
+                </x-form.group>
+            </div>
+
+            <!-- Mot de passe -->
+            <div class="col-span-full">
+                <x-form.group name="password" :label="__('Mot de passe')">
+                    <x-form.input name="password" type="password" required live />
+                </x-form.group>
+            </div>
+
+            <!-- Confirmation du mot de passe -->
+            <div class="col-span-full">
+                <x-form.group name="password_confirmation" :label="__('Confirmation du mot de passe')">
+                    <x-form.input name="password_confirmation" type="password" required live />
+                </x-form.group>
+            </div>
+
+            {{-- ! Rôle --}}
+            {{-- <div class="col-span-full">
+                <x-form.group name="role" :label="__('Rôle')">
+                    <x-form.select name="role">
+                        @foreach (\App\Enums\UserRole::cases() as $role)
+                            <option value="{{ $role->value }}">{{ $role }}</option>
+                        @endforeach
+                    </x-form.select>
+                </x-form.group>
+            </div> --}}
+
+            {{-- ! Statut --}}
+            {{-- <div class="col-span-full">
+                <x-form.group name="statut" :label="__('Actif')">
+                    <x-form.checkbox name="statut" />
+                </x-form.group>
+            </div> --}}
         </div>
 
-        <!-- Prénom -->
-        <div class="mt-4">
-            <x-input-label for="prenom" :value="__('Prénom')" />
-            <x-text-input wire:model="prenom" id="prenom" class="block mt-1 w-full" type="text" name="prenom" required autocomplete="given-name" />
-            <x-input-error :messages="$errors->get('prenom')" class="mt-2" />
-        </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input wire:model="password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}" wire:navigate>
-                {{ __('Already registered?') }}
+        <div class="mt-5 flex flex-col items-center gap-4 justify-end">
+            <a class="self-end text-sm font-semibold text-blue-600 hover:text-blue-500" href="{{ route('login') }}"
+                wire:navigate>
+                {{ __('Déjà inscrit ?') }}
             </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+            <x-button.primary type="submit" class="w-full justify-center">
+                {{ __('Créer un compte') }}
+            </x-button.primary>
         </div>
-    </form>
+    </x-form.form>
 </div>

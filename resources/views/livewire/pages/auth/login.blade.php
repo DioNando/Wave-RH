@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
-{
+new #[Layout('layouts.guest')] class extends Component {
     public LoginForm $form;
 
     /**
@@ -28,44 +27,42 @@ new #[Layout('layouts.guest')] class extends Component
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form wire:submit="login">
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
+    <x-form.form submit="login">
+        <div class="grid grid-cols-1 gap-x-6 gap-y-8">
+            <!-- Email Address -->
+            <div class="col-span-full">
+                <x-form.group name="form.email" :label="__('Email')">
+                    <x-form.input name="form.email" required />
+                </x-form.group>
+            </div>
+            <!-- Password -->
+            <div class="col-span-full">
+                <x-form.group name="form.password" :label="__('Mot de passe')">
+                    <x-form.input type="password" name="form.password" required />
+                </x-form.group>
+            </div>
+            <!-- Remember Me -->
+            {{-- ! Revoir style --}}
+            {{-- <div class="col-span-full flex items-center gap-x-3">
+                <x-form.checkbox name="form.remember" />
+                <x-form.label name="form.remember" :label="__('Se souvenir de moi')" />
+            </div> --}}
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
+        <div class="mt-5 flex flex-col items-center gap-4 justify-end ">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}" wire:navigate>
-                    {{ __('Forgot your password?') }}
+                <a class="self-end text-sm font-semibold text-blue-600 hover:text-blue-500"
+                    href="{{ route('password.request') }}" wire:navigate>
+                    {{ __('Mot de passe oublié ?') }}
                 </a>
             @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+            <x-button.primary type="submit" class="w-full justify-center">
+                {{ __('Connexion') }}
+            </x-button.primary>
+            <p class="mt-4 text-sm text-gray-600 dark:text-gray-400"> Vous n'avez pas de compte ? <a
+                    class="font-semibold text-blue-600 hover:text-blue-500" href="{{ route('register') }}"
+                    wire:navigate>
+                    {{ __('Créer un compte') }}
+                </a></p>
         </div>
-    </form>
+    </x-form.form>
 </div>
