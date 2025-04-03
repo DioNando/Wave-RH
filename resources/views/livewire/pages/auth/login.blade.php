@@ -4,6 +4,7 @@ use App\Livewire\Forms\LoginForm;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
+use App\Providers\RouteServiceProvider;
 
 new #[Layout('layouts.guest')] class extends Component {
     public LoginForm $form;
@@ -19,7 +20,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        $this->redirectIntended(default: RouteServiceProvider::home(), navigate: true);
     }
 }; ?>
 
@@ -29,24 +30,23 @@ new #[Layout('layouts.guest')] class extends Component {
 
     <x-form.form submit="login">
         <div class="grid grid-cols-1 gap-x-6 gap-y-8">
-            <!-- Email Address -->
+            {{-- * Adresse email --}}
             <div class="col-span-full">
                 <x-form.group name="form.email" :label="__('Email')">
                     <x-form.input name="form.email" required />
                 </x-form.group>
             </div>
-            <!-- Password -->
+            {{-- * Mot de passe --}}
             <div class="col-span-full">
                 <x-form.group name="form.password" :label="__('Mot de passe')">
                     <x-form.input type="password" name="form.password" required />
                 </x-form.group>
             </div>
-            <!-- Remember Me -->
-            {{-- ! Revoir style --}}
-            {{-- <div class="col-span-full flex items-center gap-x-3">
+            {{-- * Remember me --}}
+            <div class="col-span-full flex items-center gap-x-3">
                 <x-form.checkbox name="form.remember" />
                 <x-form.label name="form.remember" :label="__('Se souvenir de moi')" />
-            </div> --}}
+            </div>
         </div>
         <div class="mt-5 flex flex-col items-center gap-4 justify-end ">
             @if (Route::has('password.request'))

@@ -10,6 +10,7 @@ use App\Enums\UserRole;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 use Livewire\Attributes\Validate;
+use App\Providers\RouteServiceProvider;
 
 new #[Layout('layouts.guest')] class extends Component {
     #[Validate]
@@ -23,7 +24,7 @@ new #[Layout('layouts.guest')] class extends Component {
     #[Validate]
     public string $password_confirmation = '';
     #[Validate]
-    public string $role = UserRole::AUTRE->value;
+    public string $role = UserRole::USER->value;
     #[Validate]
     public bool $statut = true;
 
@@ -33,8 +34,8 @@ new #[Layout('layouts.guest')] class extends Component {
             'nom' => ['required', 'string', 'max:255'],
             'prenom' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
-            'password_confirmation' => ['required', 'string'],
+            'password' => ['required', 'string', Rules\Password::defaults()],
+            'password_confirmation' => ['required', 'string', 'same:password'],
             'role' => [Rule::in(array_column(UserRole::cases(), 'value'))],
             'statut' => ['boolean'],
         ];
@@ -48,7 +49,7 @@ new #[Layout('layouts.guest')] class extends Component {
         event(new Registered(($user = User::create($validated))));
         Auth::login($user);
 
-        $this->redirect(route('dashboard', absolute: false), navigate: true);
+        $this->redirectIntended(default: RouteServiceProvider::home(), navigate: true);
     }
 };
 
@@ -57,58 +58,54 @@ new #[Layout('layouts.guest')] class extends Component {
 <div>
     <x-form.form submit="register">
         <div class="grid grid-cols-1 gap-x-6 gap-y-8">
-            <!-- Nom -->
+            {{-- * Nom --}}
             <div class="col-span-full">
                 <x-form.group name="nom" :label="__('Nom')">
                     <x-form.input name="nom" required live />
                 </x-form.group>
             </div>
 
-            <!-- Prénom -->
+            {{-- * Prénom --}}
             <div class="col-span-full">
                 <x-form.group name="prenom" :label="__('Prénom')">
                     <x-form.input name="prenom" required live />
                 </x-form.group>
             </div>
 
-            <!-- Adresse Email -->
+            {{-- * Adresse email --}}
             <div class="col-span-full">
                 <x-form.group name="email" :label="__('Email professionnel')">
                     <x-form.input name="email" type="email" required live />
                 </x-form.group>
             </div>
 
-            <!-- Mot de passe -->
+            {{-- * Mot de passe --}}
             <div class="col-span-full">
                 <x-form.group name="password" :label="__('Mot de passe')">
                     <x-form.input name="password" type="password" required live />
                 </x-form.group>
             </div>
 
-            <!-- Confirmation du mot de passe -->
+            {{-- * Confirmation du mot de passe --}}
             <div class="col-span-full">
                 <x-form.group name="password_confirmation" :label="__('Confirmation du mot de passe')">
                     <x-form.input name="password_confirmation" type="password" required live />
                 </x-form.group>
             </div>
 
-            {{-- ! Rôle --}}
-            {{-- <div class="col-span-full">
+            {{-- * Rôle --}}
+            <div class="col-span-full">
                 <x-form.group name="role" :label="__('Rôle')">
-                    <x-form.select name="role">
-                        @foreach (\App\Enums\UserRole::cases() as $role)
-                            <option value="{{ $role->value }}">{{ $role }}</option>
-                        @endforeach
-                    </x-form.select>
+                    <x-form.enum-select name="role" :enum="\App\Enums\UserRole::class" :selected="$this->role" required />
                 </x-form.group>
-            </div> --}}
+            </div>
 
-            {{-- ! Statut --}}
-            {{-- <div class="col-span-full">
+            {{-- * Statut --}}
+            <div class="col-span-full">
                 <x-form.group name="statut" :label="__('Actif')">
                     <x-form.checkbox name="statut" />
                 </x-form.group>
-            </div> --}}
+            </div>
         </div>
 
         <div class="mt-5 flex flex-col items-center gap-4 justify-end">
