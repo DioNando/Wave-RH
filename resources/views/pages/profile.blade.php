@@ -1,29 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
+        <x-label.page-title label="Profile" />
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    <livewire:profile.update-profile-information-form />
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    <livewire:profile.update-password-form />
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    <livewire:profile.delete-user-form />
-                </div>
-            </div>
-        </div>
+    <div class="space-y-6">
+        <x-description.card title="Informations du profil"
+            description="Mettez à jour les informations de votre profil et votre adresse e-mail.">
+            <livewire:profile.update-profile-information-form />
+        </x-description.card>
+        <x-description.card title="Modifier le mot de passe"
+            description="Assurez-vous que votre compte utilise un mot de passe long et aléatoire pour rester sécurisé.">
+            <livewire:profile.update-password-form />
+        </x-description.card>
+        <x-description.card title="Supprimer le compte" :defaultOpen="true"
+            description="Une fois votre compte supprimé, toutes ses ressources et données seront définitivement supprimées. Avant de supprimer votre compte, veuillez télécharger toutes les données ou informations que vous souhaitez conserver.">
+            <livewire:profile.delete-user-form />
+        </x-description.card>
     </div>
 </x-app-layout>

@@ -37,3 +37,10 @@
     -webkit-line-clamp: $number_of_line;
     -webkit-box-orient: vertical;
 }
+
+button,
+a {
+    &:hover {
+        cursor: pointer;
+    }
+}
