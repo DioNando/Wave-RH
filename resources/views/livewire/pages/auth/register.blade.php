@@ -74,7 +74,7 @@ new #[Layout('layouts.guest')] class extends Component {
 
             {{-- * Adresse email --}}
             <div class="col-span-full">
-                <x-form.group name="email" :label="__('Email professionnel')">
+                <x-form.group name="email" :label="__('Email')">
                     <x-form.input name="email" type="email" required live />
                 </x-form.group>
             </div>

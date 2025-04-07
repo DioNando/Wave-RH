@@ -38,7 +38,7 @@
         {{-- <div class="lg:w-72">
             Menu
         </div> --}}
-        <div class="flex-1">
+        <div class="flex-1 overflow-auto">
             <livewire:layout.navbar />
             <main class="py-8">
                 <div class="px-4 sm:px-6 lg:px-8">

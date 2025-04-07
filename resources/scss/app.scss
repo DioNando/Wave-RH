@@ -18,6 +18,42 @@
 // Pour appeler un mixin
 // @include pseudo-el(block, absolute, "")
 
+@layer utilities {
+    .scrollbar-none {
+        scrollbar-width: none; /* Firefox */
+    }
+    .scrollbar-none::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+    }
+
+    .scrollbar-custom {
+        /* Largeur de la scrollbar */
+        // scrollbar-width: thin; /* Pour Firefox */
+
+        /* Pour Chrome, Edge et Safari */
+        &::-webkit-scrollbar {
+            width: 0.25rem; /* Largeur réduite de la scrollbar */
+            height: 0.25rem;
+        }
+
+        /* Style de la piste (track) de la scrollbar */
+        &::-webkit-scrollbar-track {
+            // background-color: #f1f1f1;
+        }
+
+        /* Style du "thumb" (la partie mobile de la scrollbar) */
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--color-blue-500);
+            border-radius: 1rem;
+        }
+
+        /* Quand on survole le thumb */
+        &::-webkit-scrollbar-thumb:hover {
+            background-color: var(--color-blue-600);
+        }
+    }
+}
+
 @mixin pseudo-el($display: block, $position: absolute, $content: "") {
     content: $content;
     display: $display;
