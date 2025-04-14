@@ -24,5 +24,8 @@ class DatabaseSeeder extends Seeder
                 'statut' => true,
             ]);
         }
+
+    // Créer 20 utilisateurs additionnels avec des rôles aléatoires
+    User::factory()->count(20)->create();
     }
 }
