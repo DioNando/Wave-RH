@@ -13,7 +13,7 @@
 <x-button.button
     :href="$href"
     :type="$type"
-    variant="primary"
+    variant="secondary"
     :color="$color"
     :size="$size"
     :class="$class"

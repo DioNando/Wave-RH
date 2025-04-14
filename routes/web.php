@@ -23,6 +23,9 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('role:user')->group(function () {
         Route::view('/user/dashboard', 'pages.user.dashboard')->name('user.dashboard');
     });
+
+    // * Page d'exemples de composants UI
+    Route::view('/examples/ui', 'pages.examples-ui')->name('examples.ui');
 });
 
 Route::view('profile', 'pages.profile')

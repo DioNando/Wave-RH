@@ -32,7 +32,7 @@ new class extends Component {
     <div class="h-6 w-px bg-gray-200 lg:hidden dark:bg-gray-700" aria-hidden="true"></div>
 
     <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-        {{-- ? @livewire('base.search') --}}
+        {{-- ! @livewire('layout.search') --}}
         <div class="flex-1"></div>
         <div class="flex items-center gap-x-4 lg:gap-x-6">
             <div x-data="{ theme: localStorage.getItem('theme') || 'system' }"
@@ -48,7 +48,7 @@ new class extends Component {
                     <x-heroicon-o-moon class="size-6" />
                 </button>
             </div>
-            @livewire('base.notifications')
+            @livewire('layout.notifications')
 
             <!-- Separator -->
             <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200 dark:bg-gray-700" aria-hidden="true"></div>

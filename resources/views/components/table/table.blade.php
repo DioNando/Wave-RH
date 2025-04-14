@@ -1,23 +1,46 @@
-@props(['headers' => [], 'data' => []])
+@props(['headers' => []])
 
-<div class="flow-root">
-    <div class="overflow-auto inline-block w-fit align-middle">
-        <div class="overflow-hidden ring-1 ring-gray-200 dark:ring-gray-700 sm:rounded-lg">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-900">
+<div class="flow-root" x-data="doubleScrollbar()">
+    <div class="">
+        <!-- Top scrollbar wrapper -->
+        <div x-ref="topScrollWrapper" @scroll="updateBottomScroll()" class="overflow-x-auto scrollbar-custom">
+            <div x-ref="topScrollContent" style="height: 1px;"></div>
+        </div>
+
+        <!-- Table wrapper -->
+        <div x-ref="tableWrapper" @scroll="updateTopScroll()"
+            class="overflow-auto scrollbar-custom py-2">
+            <table class="w-full md:rounded-lg overflow-hidden outline -outline-offset-1 outline-gray-300 dark:outline-gray-700">
                 <x-table.head :headers="$headers" />
+                {{ $slot }}
                 {{-- <x-table.body :data="$data" /> --}}
-                <tbody>
-                    {{-- {{ $slot }} --}}
-                    @forelse ($data as $row)
-                    @empty
-                        <tr>
-                            <td colspan="{{ count($headers) }}" class="text-center py-5 text-gray-500 dark:text-gray-400">
-                                Aucune donnée disponible
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
             </table>
         </div>
     </div>
 </div>
+
+<script>
+    function doubleScrollbar() {
+        return {
+            init() {
+                this.syncScrollWidth();
+
+                // Observer les changements de taille
+                const resizeObserver = new ResizeObserver(() => this.syncScrollWidth());
+                resizeObserver.observe(this.$refs.tableWrapper);
+            },
+
+            syncScrollWidth() {
+                this.$refs.topScrollContent.style.width = this.$refs.tableWrapper.scrollWidth + 'px';
+            },
+
+            updateTopScroll() {
+                this.$refs.topScrollWrapper.scrollLeft = this.$refs.tableWrapper.scrollLeft;
+            },
+
+            updateBottomScroll() {
+                this.$refs.tableWrapper.scrollLeft = this.$refs.topScrollWrapper.scrollLeft;
+            }
+        };
+    }
+</script>
