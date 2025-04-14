@@ -19,14 +19,9 @@ Route::middleware(['auth'])->group(function () {
         Route::view('/admin/dashboard', 'pages.admin.dashboard')->name('admin.dashboard');
     });
 
-    // * Dashboard RH
-    Route::middleware('role:rh')->group(function () {
-        Route::view('/rh/dashboard', 'pages.rh.dashboard')->name('rh.dashboard');
-    });
-
-    // * Dashboard par défaut User
+    // * Dashboard user
     Route::middleware('role:user')->group(function () {
-        Route::view('/user/dashboard', 'pages.dashboard')->name('dashboard');
+        Route::view('/user/dashboard', 'pages.user.dashboard')->name('user.dashboard');
     });
 });
 
