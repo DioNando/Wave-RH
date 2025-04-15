@@ -45,15 +45,11 @@
         <li>
             <x-layout.link-primary route="profile" icon="user" label="Profile" />
         </li>
-        @if (auth()->user()->isAdmin())
+        @admin
             <li>
-                <x-layout.link-primary route="users.create" icon="user-plus" label="Ajouter un utilisateur" />
+                <x-layout.link-primary route="users.index" icon="users" label="Utilisateurs" />
             </li>
-
-        @endif
-        <li>
-            <x-layout.link-primary route="users.index" icon="users" label="Utilisateurs" />
-        </li>
+        @endadmin
         <li>
             <x-layout.link-primary route="examples.ui" icon="paint-brush" label="Exemples UI" />
         </li>

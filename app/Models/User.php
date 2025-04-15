@@ -52,4 +52,14 @@ class User extends Authenticatable
             'statut' => 'boolean',
         ];
     }
+
+    /**
+     * Vérifie si l'utilisateur est un administrateur.
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === UserRole::ADMIN;
+    }
 }

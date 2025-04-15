@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\View\Components\Card\Card;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,5 +23,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::component('card', Card::class);
+
+        // Directive pour vérifier si l'utilisateur est admin
+        Blade::if('admin', function () {
+            return Auth::check() && Auth::user()->isAdmin();
+        });
+
+        // Vous pouvez ajouter d'autres directives pour d'autres rôles
+        // Exemple:
+        // Blade::if('role', function ($role) {
+        //    return auth()->check() && auth()->user()->role->value === $role;
+        // });
     }
 }

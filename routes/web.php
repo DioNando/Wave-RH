@@ -22,8 +22,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/users', UserController::class);
 });
 
+// Gestion des erreurs personnalisée
 Route::fallback(function () {
-    return response()->view('errors.404', [], 404);
+    $errorCode = 404;
+    return response()->view("errors.{$errorCode}", [], $errorCode);
 });
 
 
