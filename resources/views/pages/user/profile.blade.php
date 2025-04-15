@@ -1,8 +1,6 @@
 <x-app-layout>
-    <x-slot name="header">
-        <x-label.page-title label="Profile" />
-    </x-slot>
-    
+
+
     <div class="space-y-6">
         <x-card>
             <x-card.card-header :dropdown="true" title="Informations du profil"

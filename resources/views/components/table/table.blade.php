@@ -1,16 +1,26 @@
 @props(['headers' => []])
 
-<div class="flow-root" x-data="doubleScrollbar()">
-    <div class="">
+<div class="flow-root space-y-2" x-data="doubleScrollbar()">
+        @if (session('message'))
+            <x-alert.default type="success" :dismissable="false">
+                {{ session('message') }}
+            </x-alert.default>
+        @endif
+        @if (session('error'))
+            <x-alert.default type="error" :dismissable="false">
+                {{ session('message') }}
+            </x-alert.default>
+        @endif
+    <div>
         <!-- Top scrollbar wrapper -->
         <div x-ref="topScrollWrapper" @scroll="updateBottomScroll()" class="overflow-x-auto scrollbar-custom">
             <div x-ref="topScrollContent" style="height: 1px;"></div>
         </div>
 
         <!-- Table wrapper -->
-        <div x-ref="tableWrapper" @scroll="updateTopScroll()"
-            class="overflow-auto scrollbar-custom py-2">
-            <table class="w-full md:rounded-lg overflow-hidden outline -outline-offset-1 outline-gray-300 dark:outline-gray-700">
+        <div x-ref="tableWrapper" @scroll="updateTopScroll()" class="overflow-auto scrollbar-custom py-2">
+            <table
+                class="w-full md:rounded-lg overflow-hidden outline -outline-offset-1 outline-gray-300 dark:outline-gray-700">
                 <x-table.head :headers="$headers" />
                 {{ $slot }}
                 {{-- <x-table.body :data="$data" /> --}}

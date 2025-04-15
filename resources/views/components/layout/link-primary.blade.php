@@ -1,7 +1,7 @@
 @props(['route', 'icon', 'label'])
 
-{{-- <a href="{{ route($route) }}" --}}
-<a
+<a href="{{ route($route) }}"
+{{-- <a --}}
     class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold
         {{ request()->routeIs($route) ? 'bg-gray-100 text-blue-600 dark:bg-gray-700 dark:text-blue-300' : 'text-gray-700 hover:bg-gray-100 hover:text-blue-600 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-blue-300' }}">
     <x-dynamic-component :component="'heroicon-o-' . $icon"

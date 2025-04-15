@@ -2,17 +2,17 @@
     <li>
         <ul role="list" class="-mx-2 space-y-1">
             <li>
-                <x-layout.link-primary route="dashboard.index" icon="squares-2x2" label="Tableau de bord" />
+                <x-layout.link-primary route="dashboard" icon="squares-2x2" label="Tableau de bord" />
             </li>
-            <li>
-                <x-layout.link-primary route="collaborateurs.index" icon="users" label="Collaborateurs" />
-            </li>
-            <li>
+            {{-- <li>
+                <x-layout.link-primary route="collaborateurs.index" icon="user-group" label="Collaborateurs" />
+            </li> --}}
+            {{-- <li>
                 <x-layout.link-primary route="conges.index" icon="calendar" label="Congés" />
-            </li>
-            <li>
+            </li> --}}
+            {{-- <li>
                 <x-layout.link-primary route="documents-administratifs.index" icon="document-text" label="Documents" />
-            </li>
+            </li> --}}
         </ul>
     </li>
     <hr class="border-0.5 border-gray-200 dark:border-gray-700" />
@@ -30,7 +30,6 @@
                     ['route' => 'jours-feries.index', 'label' => 'Jours fériés', 'icon' => 'J'],
                     // ['route' => 'competences-techniques.index', 'label' => 'Compétences techniques', 'icon' => 'C'],
                     // ['route' => 'langues.index', 'label' => 'Langues', 'icon' => 'L'],
-
                 ];
             @endphp
 
@@ -44,13 +43,22 @@
     <hr class="border-0.5 border-gray-200 dark:border-gray-700" />
     <ul role="list" class="mt-auto -mx-2 space-y-1">
         <li>
-            <x-layout.link-primary route="admin.users.index" icon="user" label="Utilisateurs" />
+            <x-layout.link-primary route="profile" icon="user" label="Profile" />
+        </li>
+        @if (auth()->user()->isAdmin())
+            <li>
+                <x-layout.link-primary route="users.create" icon="user-plus" label="Ajouter un utilisateur" />
+            </li>
+
+        @endif
+        <li>
+            <x-layout.link-primary route="users.index" icon="users" label="Utilisateurs" />
         </li>
         <li>
             <x-layout.link-primary route="examples.ui" icon="paint-brush" label="Exemples UI" />
         </li>
         <li>
-            <x-layout.link-primary route="dashboard.settings" icon="wrench-screwdriver" label="Configurations" />
+            <x-layout.link-primary route="settings" icon="wrench-screwdriver" label="Configurations" />
         </li>
     </ul>
 </ul>

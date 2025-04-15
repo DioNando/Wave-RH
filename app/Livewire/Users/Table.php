@@ -49,8 +49,10 @@ class Table extends Component
     {
         // Vérifier si l'utilisateur n'est pas l'utilisateur actuel
         if (Auth::id() !== (int)$userId) {
+            $user = User::find($userId);
+            $userName = $user->prenom . ' ' . $user->nom;
             User::destroy($userId);
-            session()->flash('message', 'Utilisateur supprimé avec succès.');
+            session()->flash('message', "Utilisateur {$userName} supprimé avec succès.");
         } else {
             session()->flash('error', 'Vous ne pouvez pas supprimer votre propre compte.');
         }

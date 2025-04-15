@@ -16,16 +16,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public static function home(): string
     {
-        $userRole = Auth::user()?->role->value;
-        return route(match ($userRole) {
-            UserRole::ADMIN->value => 'admin.dashboard',
-            UserRole::USER->value => 'user.dashboard',
-            // UserRole::MANAGER->value => 'manager.dashboard',
-            // UserRole::RH->value => 'rh.dashboard',
-            // default => 'dashboard',
-        });
+        // Route unique pour le dashboard, le contrôleur gère la logique d'affichage
+        return route('dashboard');
     }
-
 
     /**
      * Define your route model bindings, pattern filters, etc.
