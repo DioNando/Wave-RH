@@ -10,12 +10,12 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    // * Route de redirection
+    // SECTION Route de redirection
     Route::get('/dashboard', function () {
         return redirect(RouteServiceProvider::home());
     })->name('dashboard');
 
-    // * Dashboard admin
+    // SECTION Dashboard admin
     Route::middleware('role:admin')->group(function () {
         Route::view('/admin/dashboard', 'pages.admin.dashboard')->name('admin.dashboard');
     });
@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/examples/ui', 'pages.examples-ui')->name('examples.ui');
 });
 
-// ANCHOR -  Routes pour la gestion des utilisateurs (admin)
+// SECTION -  Routes pour la gestion des utilisateurs (admin)
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('/users', UserController::class);
 });
@@ -37,5 +37,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 Route::view('profile', 'pages.user.profile')
     ->middleware(['auth'])
     ->name('profile');
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});
+
 
 require __DIR__ . '/auth.php';
