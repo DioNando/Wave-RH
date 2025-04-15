@@ -17,12 +17,8 @@
                         <x-badge.statut :statut="$row->statut" />
                     </x-table.cell>
                     <x-table.cell>
-                        <a href="{{ route('pays.edit', $row->id) }}"
-                            class="inline-flex items-center p-2 text-sm text-white rounded-lg bg-orange-600 hover:bg-orange-700 dark:bg-orange-700 dark:hover:bg-orange-800 active:bg-orange-800 dark:active:bg-orange-900">
-                            <x-heroicon-o-pencil-square class="size-4" />
-                        </a>
+                        <x-button.action route="pays.edit" :id="$row->id" icon="pencil-square" color="orange" />
                     </x-table.cell>
-
                 </tr>
             @empty
                 <tr>
