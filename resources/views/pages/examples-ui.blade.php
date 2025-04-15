@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container mx-auto py-8 px-4">
+    <div>
         <h1 class="text-3xl font-bold mb-8">Catalogue de composants UI</h1>
 
         <div class="space-y-12">
@@ -845,7 +845,7 @@ session()->flash('warning', 'Attention à cette action');</code></pre>
             <section id="usage-examples" class="scroll-mt-16 mt-12">
                 <h2 class="text-2xl font-bold mb-6 border-b pb-2">Exemples d'utilisation</h2>
 
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-8">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-8 overflow-auto">
                     <h3 class="text-lg font-medium mb-4">Tableau d'utilisateurs avec statuts</h3>
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead>
@@ -864,7 +864,7 @@ session()->flash('warning', 'Attention à cette action');</code></pre>
                                     Compétences</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
+                        <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800 ">
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
                                 <td class="px-6 py-4 whitespace-nowrap">

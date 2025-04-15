@@ -1,5 +1,5 @@
 @php
-    $headers = ['Nom', 'Rôle', 'Date de création', 'Actions'];
+    $headers = ['Nom', 'Rôle', 'Date de création', 'Statut', 'Actions'];
     $empty = 'Aucun utilisateur trouvé';
 @endphp
 
@@ -31,6 +31,9 @@
                         <div class="flex items-center">
                             <span>{{ \Carbon\Carbon::parse($user->created_at)->translatedFormat('d F Y') }}</span>
                         </div>
+                    </x-table.cell>
+                    <x-table.cell>
+                        <x-badge.statut :statut="$user->statut" />
                     </x-table.cell>
                     <x-table.cell class="w-fit px-5 text-sm">
                         <div class="flex gap-2">

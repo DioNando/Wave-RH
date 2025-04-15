@@ -41,7 +41,7 @@
         </ul>
     </li>
     <hr class="border-0.5 border-gray-200 dark:border-gray-700" />
-    <ul role="list" class="mt-auto -mx-2 space-y-1">
+    <ul role="list" class="-mx-2 space-y-1">
         <li>
             <x-layout.link-primary route="profile" icon="user" label="Profile" />
         </li>

@@ -29,7 +29,7 @@
     </script>
 </head>
 
-<body class="font-sans antialiased h-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-50">
+<body class="font-sans antialiased h-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-50 overflow-hidden">
     <div id="app" x-data="{ open: false }" class="flex h-full">
         {{-- <livewire:layout.navigation /> --}}
         <x-layout.sidebar />

@@ -1,16 +1,18 @@
 @props(['headers' => []])
 
-<div class="flow-root space-y-2" x-data="doubleScrollbar()">
+<div class="flow-root" x-data="doubleScrollbar()">
+    <div>
         @if (session('message'))
-            <x-alert.default type="success" :dismissable="false">
+            <x-alert.default class="mb-2" type="success" :dismissable="false">
                 {{ session('message') }}
             </x-alert.default>
         @endif
         @if (session('error'))
-            <x-alert.default type="error" :dismissable="false">
+            <x-alert.default class="mb-2" type="error" :dismissable="false">
                 {{ session('message') }}
             </x-alert.default>
         @endif
+    </div>
     <div>
         <!-- Top scrollbar wrapper -->
         <div x-ref="topScrollWrapper" @scroll="updateBottomScroll()" class="overflow-x-auto scrollbar-custom">
