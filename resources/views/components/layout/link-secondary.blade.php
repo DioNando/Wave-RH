@@ -1,6 +1,5 @@
 @props(['route' => '', 'label' => '', 'icon' => ''])
-{{-- <a href="{{ route($route) }}" --}}
-<a
+<a href="{{ route($route) }}"
     class="group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold
     text-gray-700 hover:bg-gray-50 hover:text-blue-600
     dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-blue-300">

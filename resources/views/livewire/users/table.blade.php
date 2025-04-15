@@ -99,8 +99,8 @@
         </x-table.body>
     </x-table.table>
 
-    <div class="mt-4">
+    <nav class="mt-4">
         {{ $users->links() }}
-    </div>
+    </nav>
 
 </div>
