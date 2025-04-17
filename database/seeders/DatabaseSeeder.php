@@ -3,10 +3,13 @@
 namespace Database\Seeders;
 
 use App\Enums\UserRole;
+use App\Models\Departement;
 use App\Models\Pays;
+use App\Models\Poste;
 use App\Models\Region;
 use App\Models\User;
 use App\Models\Ville;
+use Database\Seeders\Data\DepartementPosteData;
 use Database\Seeders\Data\GeographicData;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -31,6 +34,9 @@ class DatabaseSeeder extends Seeder
 
         // Créer des pays, régions et villes de manière cohérente
         $this->seedGeographicData();
+
+        // Créer des départements et postes de manière cohérente
+        $this->seedDepartementPosteData();
 
         // Créer 20 utilisateurs additionnels avec des rôles aléatoires
         // User::factory()->count(20)->create();
@@ -66,6 +72,30 @@ class DatabaseSeeder extends Seeder
                         'statut' => $villeData['statut'],
                     ]);
                 }
+            }
+        }
+    }
+
+        /**
+     * Seed les données de départements et postes de manière cohérente
+     */
+    private function seedDepartementPosteData(): void
+    {
+        // Récupérer les données depuis la classe DepartementPosteData
+        $departementPosteData = DepartementPosteData::getData();
+
+        foreach ($departementPosteData as $depData) {
+            // Créer le département
+            $departement = Departement::create($depData['departement']);
+
+            // Créer les postes liés au département
+            foreach ($depData['postes'] as $posteData) {
+                Poste::create([
+                    'nom' => $posteData['nom'],
+                    'description' => $posteData['description'],
+                    'departement_id' => $departement->id,
+                    'statut' => $posteData['statut'],
+                ]);
             }
         }
     }

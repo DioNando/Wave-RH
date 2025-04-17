@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\PaysController;
+use App\Http\Controllers\PosteController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VilleController;
@@ -29,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/pays', PaysController::class);
     Route::resource('/regions', RegionController::class);
     Route::resource('/villes', VilleController::class);
+    Route::resource('/departements', DepartementController::class);
+    Route::resource('/postes', PosteController::class);
 });
 
 // Gestion des erreurs personnalisée

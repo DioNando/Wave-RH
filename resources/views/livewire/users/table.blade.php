@@ -102,5 +102,4 @@
     <nav class="mt-3">
         {{ $users->onEachSide(1)->links('pagination::tailwind') }}
     </nav>
-
 </div>
