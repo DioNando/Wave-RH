@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\View\Components\Card\Card;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -34,5 +35,9 @@ class AppServiceProvider extends ServiceProvider
         // Blade::if('role', function ($role) {
         //    return auth()->check() && auth()->user()->role->value === $role;
         // });
+
+        // Paginator::defaultView('tailwind');
+
+        // Paginator::defaultSimpleView('simple-tailwind');
     }
 }

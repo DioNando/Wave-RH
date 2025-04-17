@@ -29,7 +29,7 @@
             @endforelse
         </x-table.body>
     </x-table.table>
-    <nav class="mt-4">
-        {{ $pays->links() }}
+    <nav class="mt-3">
+        {{ $pays->onEachSide(1)->links('pagination::tailwind') }}
     </nav>
 </div>

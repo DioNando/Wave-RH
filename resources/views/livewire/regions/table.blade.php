@@ -27,7 +27,7 @@
             @endforelse
         </x-table.body>
     </x-table.table>
-    <nav class="mt-4">
-        {{ $regions->links() }}
+    <nav class="mt-3">
+        {{ $regions->onEachSide(1)->links('pagination::tailwind') }}
     </nav>
 </div>

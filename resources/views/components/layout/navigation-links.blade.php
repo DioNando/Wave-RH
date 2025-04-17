@@ -17,8 +17,9 @@
     </li>
     <hr class="border-0.5 border-gray-200 dark:border-gray-700" />
     <li>
-        <div class="text-xs/6 font-semibold text-gray-400">Options</div>
-        <ul role="list" class="-mx-2 mt-2 space-y-1">
+        {{-- ? <div class="text-xs/6 font-semibold text-gray-400">Options</div> --}}
+        {{-- ? <ul role="list" class="-mx-2 mt-2 space-y-1"> --}}
+        <ul role="list" class="-mx-2 space-y-1">
             @php
                 $links = [
                     ['route' => 'villes.index', 'label' => 'Villes', 'icon' => 'V'],

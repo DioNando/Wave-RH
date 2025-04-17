@@ -99,8 +99,8 @@
         </x-table.body>
     </x-table.table>
 
-    <nav class="mt-4">
-        {{ $users->links() }}
+    <nav class="mt-3">
+        {{ $users->onEachSide(1)->links('pagination::tailwind') }}
     </nav>
 
 </div>
