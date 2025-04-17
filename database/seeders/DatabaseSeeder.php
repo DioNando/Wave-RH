@@ -7,10 +7,12 @@ use App\Models\Departement;
 use App\Models\Pays;
 use App\Models\Poste;
 use App\Models\Region;
+use App\Models\TypeDocument;
 use App\Models\User;
 use App\Models\Ville;
 use Database\Seeders\Data\DepartementPosteData;
 use Database\Seeders\Data\GeographicData;
+use Database\Seeders\Data\TypeDocumentData;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -37,6 +39,9 @@ class DatabaseSeeder extends Seeder
 
         // Créer des départements et postes de manière cohérente
         $this->seedDepartementPosteData();
+
+        // Créer les types de documents
+        $this->seedTypesDocuments();
 
         // Créer 20 utilisateurs additionnels avec des rôles aléatoires
         // User::factory()->count(20)->create();
@@ -76,7 +81,7 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-        /**
+    /**
      * Seed les données de départements et postes de manière cohérente
      */
     private function seedDepartementPosteData(): void
@@ -97,6 +102,18 @@ class DatabaseSeeder extends Seeder
                     'statut' => $posteData['statut'],
                 ]);
             }
+        }
+    }
+
+    /**
+     * Seed les données de type de documents
+     */
+    private function seedTypesDocuments(): void
+    {
+        $typesDocumentsData = TypeDocumentData::getData();
+
+        foreach ($typesDocumentsData as $typeDocumentData) {
+            TypeDocument::create($typeDocumentData);
         }
     }
 }

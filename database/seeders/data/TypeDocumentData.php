@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Data;
 
-class TypesDocumentData
+class TypeDocumentData
 {
     public static function getData(): array
     {
