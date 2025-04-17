@@ -29,14 +29,14 @@
     </script>
 </head>
 
-<body class="font-sans antialiased h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-50 overflow-hidden">
+<body class="font-sans antialiased h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-50">
     <div id="app" x-data="{ open: false }" class="h-full">
         <x-layout.sidebar />
         <livewire:layout.navbar />
         {{-- CONTENT --}}
         {{-- <main id="content" class="py-8 rounded-tl-3xl border-l border-t border-gray-200 dark:border-none bg-gray-100 dark:bg-gray-800 overflow-auto"> --}}
         <main id="content" class="py-8 rounded-tl-4xl bg-gray-100 dark:bg-gray-800 overflow-auto">
-            <div class="px-4 sm:px-6 lg:px-8">
+            <div class="px-4 sm:px-6 lg:px-8 relative">
                 <!-- Page Heading -->
                 @if (isset($header))
                 <header class="mb-4">

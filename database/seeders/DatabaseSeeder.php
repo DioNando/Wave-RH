@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
         $this->seedTypesDocuments();
 
         // Créer 20 utilisateurs additionnels avec des rôles aléatoires
-        // User::factory()->count(20)->create();
+        User::factory()->count(20)->create();
     }
 
     /**
