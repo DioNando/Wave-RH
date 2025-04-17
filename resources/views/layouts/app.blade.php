@@ -29,31 +29,26 @@
     </script>
 </head>
 
-<body class="font-sans antialiased h-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-50 overflow-hidden">
-    <div id="app" x-data="{ open: false }" class="flex h-full">
-        {{-- <livewire:layout.navigation /> --}}
+<body class="font-sans antialiased h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-50 overflow-hidden">
+    <div id="app" x-data="{ open: false }" class="h-full">
         <x-layout.sidebar />
-        <!-- Page Content -->
-        {{-- <div class="lg:pl-72"> --}}
-        {{-- <div class="lg:w-72">
-            Menu
-        </div> --}}
-        <div class="flex-1 overflow-auto">
-            <livewire:layout.navbar />
-            <main class="py-8">
-                <div class="px-4 sm:px-6 lg:px-8">
-                    <!-- Page Heading -->
-                    @if (isset($header))
-                        <header class="mb-4">
-                            {{ $header }}
-                        </header>
-                    @endif
-                    <div>
-                        {{ $slot }}
-                    </div>
+        <livewire:layout.navbar />
+        {{-- CONTENT --}}
+        {{-- <main id="content" class="py-8 rounded-tl-3xl border-l border-t border-gray-200 dark:border-none bg-gray-100 dark:bg-gray-800 overflow-auto"> --}}
+        <main id="content" class="py-8 rounded-tl-4xl bg-gray-100 dark:bg-gray-800 overflow-auto">
+            <div class="px-4 sm:px-6 lg:px-8">
+                <!-- Page Heading -->
+                @if (isset($header))
+                <header class="mb-4">
+                    {{ $header }}
+                </header>
+                @endif
+                <div>
+                    {{ $slot }}
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
+        {{-- CONTENT --}}
         <x-alert.notification />
     </div>
 </body>

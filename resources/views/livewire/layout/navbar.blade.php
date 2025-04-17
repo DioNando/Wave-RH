@@ -15,10 +15,10 @@ new class extends Component {
     }
 }; ?>
 
-<div
-    class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-xs
+<div id="navbar"
+    class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4  px-4 bg-white dark:bg-gray-900
         sm:gap-x-6 sm:px-6 lg:px-8
-        dark:border-gray-700 dark:bg-gray-800">
+        ">
 
     <button @click="open = true" type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden dark:text-gray-300">
         <span class="sr-only">Ouvrir</span>

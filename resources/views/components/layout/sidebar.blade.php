@@ -31,10 +31,9 @@
     <!-- Static sidebar for desktop -->
     {{-- <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col"> --}}
     {{-- <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex w-72 lg:flex-col"> --}}
-    <div class="hidden lg:z-50 lg:flex w-64 flex-shrink-0 lg:flex-col">
+    <div id="sidebar" class="hidden lg:z-50 lg:flex w-64">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
-        <div
-            class="flex grow flex-col gap-y-5 overflow-y-auto scrollbar-custom border-r border-gray-200 dark:border-0 dark:shadow-md bg-white dark:bg-gray-900 px-6 pb-6">
+        <div class="flex grow flex-col gap-y-5 overflow-y-auto scrollbar-custom bg-white dark:bg-gray-900 px-6 pb-6">
             <div class="flex h-16 shrink-0 items-center">
                 <x-application-logo class="h-8" />
             </div>

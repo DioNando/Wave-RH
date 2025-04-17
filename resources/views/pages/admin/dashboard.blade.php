@@ -283,7 +283,7 @@
     </section>
     {{-- * Activity feed  --}}
     <aside
-        class="dark:bg-gray-800 lg:fixed lg:top-16 lg:right-0 lg:bottom-0 lg:w-80 lg:overflow-y-auto lg:border-l lg:border-gray-200 dark:lg:border-gray-600">
+        class=" dark:bg-gray-800 lg:fixed lg:top-16 lg:right-0 lg:bottom-0 lg:w-80 lg:overflow-y-auto lg:border-l lg:border-gray-200 dark:lg:border-gray-600">
         <header
             class="flex items-center justify-between border-b border-gray-200 dark:border-gray-600 px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
             <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Flux d'activités</h2>
