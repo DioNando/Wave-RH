@@ -1,4 +1,4 @@
-@props(['name', 'options' => [], 'size' => 'md', 'class' => '', 'live' => true])
+@props(['name', 'options' => [], 'size' => 'md', 'class' => '', 'live' => false])
 
 @php
     $sizes = [
