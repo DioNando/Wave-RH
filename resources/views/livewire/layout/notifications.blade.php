@@ -14,7 +14,7 @@
     </button>
 
     <div x-show="open" x-cloak
-        class="fixed sm:absolute right-0 top-16 sm:top-5 p-3 sm:px-0 z-50 w-full sm:w-80 ">
+        class="fixed sm:absolute right-0 top-16 sm:top-5 p-3 sm:px-0 z-50 w-full sm:w-80">
         <div class="divide-y divide-gray-100 dark:divide-gray-700 overflow-y-auto scrollbar-none h-auto shadow-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl">
             <div class="px-4 py-3 bg-blue-200 dark:bg-gray-900">
                 <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Notifications</h3>

@@ -6,8 +6,7 @@
         <x-heroicon-o-chevron-left class="size-5 shrink-0" aria-hidden="true" />
         <span class="sr-only">Retour</span> Retour
     </a>
-    {{-- <span class="text-gray-500 dark:text-gray-600">|</span> --}}
-    <h3 class="flex items-center gap-2 text-lg font-bold text-blue-600 dark:text-blue-400">
+    <h3 class="flex items-center gap-2 text-2xl font-bold text-blue-600 dark:text-blue-400">
         @if ($icon)
             <x-dynamic-component :component="'heroicon-o-' . $icon" class="size-6 shrink-0" />
         @endif
@@ -19,7 +18,7 @@
 {{-- <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
     <a class="flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200"
        href="{{ $route ? route($route) : 'javascript:history.back()' }}">
-        <x-heroicon-o-arrow-left-circle class="size-5 shrink-0" aria-hidden="true" />
+        <x-heroicon-o-chevron-left class="size-4 shrink-0" aria-hidden="true" />
         <span>Retour</span>
     </a>
 

@@ -74,6 +74,12 @@
     -webkit-box-orient: vertical;
 }
 
+button,
+a {
+    &:hover {
+        cursor: pointer;
+    }
+}
 
 #app {
     display: grid;
