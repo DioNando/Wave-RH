@@ -138,8 +138,8 @@
             'active' => 'active:bg-indigo-100 dark:active:bg-indigo-900/20',
         ],
         'gray' => [
-            'default' => 'outline outline-gray-600 text-gray-600 hover:bg-gray-50',
-            'dark' => 'dark:border-gray-400 dark:text-gray-400 dark:hover:bg-gray-800/50',
+            'default' => 'outline outline-gray-400 text-gray-600 hover:bg-gray-50',
+            'dark' => 'dark:outline-gray-500 dark:text-gray-400 dark:hover:bg-gray-800/50',
             'active' => 'active:bg-gray-100 dark:active:bg-gray-800',
         ],
     ];
