@@ -34,7 +34,7 @@ class Collaborateur extends Model
         'matricule_interne',
         'solde_conge',
         // Compétences et qualifications
-        'document_cv',
+        // 'document_cv',
         'langues',
         'competences_techniques',
         // Informations santé
@@ -64,6 +64,11 @@ class Collaborateur extends Model
     public function pays()
     {
         return $this->belongsTo(Pays::class);
+    }
+
+    public function documentAdministratifs()
+    {
+        return $this->hasMany(DocumentAdministratif::class);
     }
 
     protected $casts = [

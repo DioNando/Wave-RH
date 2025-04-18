@@ -21,11 +21,11 @@
         </div>
         <div class="mt-6 flex items-center justify-between gap-x-3">
             {{-- @livewire('base.delete', [
-                'modelId' => $this->form->typesDocument->id,
+                'modelId' => $this->form->typeDocument->id,
                 'modelType' => 'types_document',
                 'redirectRoute' => 'types-documents',
                 'redirectType' => 'index',
-                'entity' => $this->form->typesDocument,
+                'entity' => $this->form->typeDocument,
             ]) --}}
             <x-button.primary type="submit" color="orange">Mettre à jour</x-button.primary>
         </div>

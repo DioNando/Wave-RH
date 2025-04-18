@@ -245,6 +245,42 @@ class GeographicData
                             ['nom' => 'Safi', 'statut' => true],
                         ]
                     ],
+                    [
+                        'nom' => 'Tanger-Tétouan-Al Hoceima',
+                        'statut' => true,
+                        'villes' => [
+                            ['nom' => 'Tanger', 'statut' => true],
+                            ['nom' => 'Tétouan', 'statut' => true],
+                            ['nom' => 'Al Hoceima', 'statut' => true],
+                        ]
+                    ],
+                    [
+                        'nom' => 'Souss-Massa',
+                        'statut' => true,
+                        'villes' => [
+                            ['nom' => 'Agadir', 'statut' => true],
+                            ['nom' => 'Taroudant', 'statut' => true],
+                            ['nom' => 'Tiznit', 'statut' => true],
+                        ]
+                    ],
+                    [
+                        'nom' => 'Fès-Meknès',
+                        'statut' => true,
+                        'villes' => [
+                            ['nom' => 'Fès', 'statut' => true],
+                            ['nom' => 'Meknès', 'statut' => true],
+                            ['nom' => 'Taza', 'statut' => true],
+                        ]
+                    ],
+                    [
+                        'nom' => 'Oriental',
+                        'statut' => true,
+                        'villes' => [
+                            ['nom' => 'Oujda', 'statut' => true],
+                            ['nom' => 'Nador', 'statut' => true],
+                            ['nom' => 'Berkane', 'statut' => true],
+                        ]
+                    ],
                 ]
             ],
             [

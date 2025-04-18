@@ -3,6 +3,7 @@
 use App\Http\Controllers\CollaborateurController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\DocumentAdministratifController;
 use App\Http\Controllers\PaysController;
 use App\Http\Controllers\PosteController;
 use App\Http\Controllers\RegionController;
@@ -37,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/postes', PosteController::class);
     Route::resource('/types-documents', TypeDocumentController::class);
     Route::resource('/collaborateurs', CollaborateurController::class);
+    Route::resource('/documents-administratifs', DocumentAdministratifController::class);
 });
 
 // Gestion des erreurs personnalisée

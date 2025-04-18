@@ -167,7 +167,7 @@
             <x-form.section-title title="Compétences et qualifications"
                 description="Documents et informations relatifs aux compétences professionnelles du collaborateur." />
             <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
-                <div class="sm:col-span-full">
+                {{-- <div class="sm:col-span-full">
                     <x-form.group name="form.document_cv" label="CV">
                         <x-form.file name="form.document_cv" accept=".pdf,.doc,.docx" placeholder="Télécharger un CV"
                             :file="$this->form->document_cv instanceof
@@ -177,7 +177,7 @@
                                     ? basename($this->form->document_cv)
                                     : 'Aucun fichier selectionné')" />
                     </x-form.group>
-                </div>
+                </div> --}}
 
                 <div class="sm:col-span-3">
                     <x-form.dynamic-list name="form.langues" label="Langues" :items="$this->form->langues"

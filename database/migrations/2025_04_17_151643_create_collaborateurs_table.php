@@ -35,7 +35,7 @@ return new class extends Migration
             $table->date('date_embauche')->nullable();
             $table->string('matricule_interne', 50)->unique()->nullable();
             $table->integer('solde_conge')->default(0);
-            $table->string('document_cv', 255)->nullable();
+            // $table->string('document_cv', 255)->nullable();
             $table->json('langues')->nullable();
             $table->json('competences_techniques')->nullable();
             $table->text('situation_medicale')->nullable();

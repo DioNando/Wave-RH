@@ -267,33 +267,12 @@ class Service extends Form
         $this->date_embauche = $collaborateur->date_embauche;
         $this->matricule_interne = $collaborateur->matricule_interne;
         $this->solde_conge = $collaborateur->solde_conge ?? 0;
-        $this->document_cv = $collaborateur->document_cv;
+        // $this->document_cv = $collaborateur->document_cv;
         $this->langues = $collaborateur->langues ? json_decode($collaborateur->langues, true) : [];
         $this->competences_techniques = $collaborateur->competences_techniques ? json_decode($collaborateur->competences_techniques, true) : [];
         $this->situation_medicale = $collaborateur->situation_medicale;
         $this->notes_diverses = $collaborateur->notes_diverses;
     }
-
-    // public function save()
-    // {
-    //     try {
-    //         $validated = $this->validate();
-    //     } catch (\Illuminate\Validation\ValidationException $e) {
-    //         // Option 1: Utiliser la session flash
-    //         session()->flash('error', 'Erreur de validation. Veuillez vérifier les champs.');
-
-    //         // Option 3: Utiliser le composant de notification Laravel
-    //         session()->flash('notification', [
-    //             'type' => 'error',
-    //             'message' => 'Erreur de validation. Veuillez vérifier les champs.'
-    //         ]);
-
-    //         return;
-    //     }
-
-    //     // Continuer le traitement si la validation réussit
-    //     // ...
-    // }
 
     public function store()
     {
@@ -310,10 +289,10 @@ class Service extends Form
         }
 
         // Gérer le CV
-        if ($this->document_cv && !is_string($this->document_cv)) {
-            $cvPath = $this->document_cv->storePubliclyAs('cv', 'cv_' . strtolower($this->nom) . '_' . $this->document_cv->hashName(), 'public');
-            $data['document_cv'] = $cvPath;
-        }
+        // if ($this->document_cv && !is_string($this->document_cv)) {
+        //     $cvPath = $this->document_cv->storePubliclyAs('cv', 'cv_' . strtolower($this->nom) . '_' . $this->document_cv->hashName(), 'public');
+        //     $data['document_cv'] = $cvPath;
+        // }
 
         // Encoder les tableaux en JSON
         $data['langues'] = json_encode($this->langues);
@@ -340,12 +319,12 @@ class Service extends Form
         }
 
         // Gérer le CV
-        if ($this->document_cv) {
-            if (!is_string($this->document_cv)) {
-                $cvPath = $this->document_cv->storePubliclyAs('cv', 'cv_' . strtolower($this->nom) . '_' . $this->document_cv->hashName(), 'public');
-                $data['document_cv'] = $cvPath;
-            }
-        }
+        // if ($this->document_cv) {
+        //     if (!is_string($this->document_cv)) {
+        //         $cvPath = $this->document_cv->storePubliclyAs('cv', 'cv_' . strtolower($this->nom) . '_' . $this->document_cv->hashName(), 'public');
+        //         $data['document_cv'] = $cvPath;
+        //     }
+        // }
 
         // Encoder les tableaux en JSON
         $data['langues'] = json_encode($this->langues);

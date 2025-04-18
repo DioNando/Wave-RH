@@ -12,4 +12,9 @@ class TypeDocument extends Model
         'couleur',
         'statut',
     ];
+
+    public function documentAdministratifs()
+    {
+        return $this->hasMany(DocumentAdministratif::class);
+    }
 }

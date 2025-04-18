@@ -10,9 +10,9 @@
             {{-- <li>
                 <x-layout.link-primary route="conges.index" icon="calendar" label="Congés" />
             </li> --}}
-            {{-- <li>
+            <li>
                 <x-layout.link-primary route="documents-administratifs.index" icon="document-text" label="Documents" />
-            </li> --}}
+            </li>
         </ul>
     </li>
     <hr class="border-0.5 border-gray-200 dark:border-gray-700" />
