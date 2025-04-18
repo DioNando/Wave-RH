@@ -4,9 +4,9 @@
             <li>
                 <x-layout.link-primary route="dashboard" icon="squares-2x2" label="Tableau de bord" />
             </li>
-            {{-- <li>
+            <li>
                 <x-layout.link-primary route="collaborateurs.index" icon="user-group" label="Collaborateurs" />
-            </li> --}}
+            </li>
             {{-- <li>
                 <x-layout.link-primary route="conges.index" icon="calendar" label="Congés" />
             </li> --}}

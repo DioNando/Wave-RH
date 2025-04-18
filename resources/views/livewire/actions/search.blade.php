@@ -4,13 +4,13 @@
             wire:model.live.debounce.250ms="search" placeholder="Recherche"
             class="col-start-1 row-start-1 block size-full bg-white pl-8 text-base text-gray-900 outline-hidden
                 placeholder:text-gray-400 sm:text-sm/6
-                dark:bg-gray-800 dark:text-gray-200 dark:placeholder:text-gray-500">
+                dark:bg-gray-900 dark:text-gray-200 dark:placeholder:text-gray-500">
         </svg>
         <x-heroicon-o-magnifying-glass
             class="pointer-events-none col-start-1 row-start-1 size-6 self-center text-gray-400 dark:text-gray-500" />
     </div>
 
-    <div x-show="open" x-cloak class="p-3 z-10 fixed top-16 left-0 lg:left-77 w-full md:max-w-2xl">
+    <div x-show="open" x-cloak class="p-3 z-10 fixed top-16 left-0 lg:left-72 w-full md:max-w-2xl">
         @if ($collaborateurs->count())
             <ul role="list"
                 class="divide-y divide-gray-100 dark:divide-gray-700 overflow-y-auto h-auto shadow-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl">
@@ -37,11 +37,8 @@
                                         {{ $collaborateur->nom . ' ' . $collaborateur->prenom }}
                                     </a>
                                 </p>
-                                <p class="text-xs/5">
+                                {{-- ! <p class="text-xs/5">
                                     {{ $collaborateur->historiques_postes->first()?->poste->nom ?? 'Non assigné' }}
-                                </p>
-                                {{-- <p class="text-xs/5">
-                                    {{ $collaborateur->historiques_postes->first()?->poste->departement->nom ?? 'Non assigné' }}
                                 </p> --}}
                                 <p class="flex text-xs/5">
                                     <a

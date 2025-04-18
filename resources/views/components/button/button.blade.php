@@ -103,42 +103,42 @@
     // Configuration des couleurs pour les variantes outlined
     $outlinedColors = [
         'red' => [
-            'default' => 'border border-red-600 text-red-600 hover:bg-red-50',
-            'dark' => 'dark:border-red-500 dark:text-red-400 dark:hover:bg-red-900/10',
+            'default' => 'outline outline-red-600 text-red-600 hover:bg-red-50',
+            'dark' => 'dark:outline-red-500 dark:text-red-400 dark:hover:bg-red-900/10',
             'active' => 'active:bg-red-100 dark:active:bg-red-900/20',
         ],
         'blue' => [
-            'default' => 'border border-blue-600 text-blue-600 hover:bg-blue-50',
-            'dark' => 'dark:border-blue-500 dark:text-blue-400 dark:hover:bg-blue-900/10',
+            'default' => 'outline outline-blue-600 text-blue-600 hover:bg-blue-50',
+            'dark' => 'dark:outline-blue-500 dark:text-blue-400 dark:hover:bg-blue-900/10',
             'active' => 'active:bg-blue-100 dark:active:bg-blue-900/20',
         ],
         'green' => [
-            'default' => 'border border-green-600 text-green-600 hover:bg-green-50',
-            'dark' => 'dark:border-green-500 dark:text-green-400 dark:hover:bg-green-900/10',
+            'default' => 'outline outline-green-600 text-green-600 hover:bg-green-50',
+            'dark' => 'dark:outline-green-500 dark:text-green-400 dark:hover:bg-green-900/10',
             'active' => 'active:bg-green-100 dark:active:bg-green-900/20',
         ],
         'orange' => [
-            'default' => 'border border-orange-600 text-orange-600 hover:bg-orange-50',
-            'dark' => 'dark:border-orange-500 dark:text-orange-400 dark:hover:bg-orange-900/10',
+            'default' => 'outline outline-orange-600 text-orange-600 hover:bg-orange-50',
+            'dark' => 'dark:outline-orange-500 dark:text-orange-400 dark:hover:bg-orange-900/10',
             'active' => 'active:bg-orange-100 dark:active:bg-orange-900/20',
         ],
         'yellow' => [
-            'default' => 'border border-yellow-600 text-yellow-600 hover:bg-yellow-50',
-            'dark' => 'dark:border-yellow-500 dark:text-yellow-400 dark:hover:bg-yellow-900/10',
+            'default' => 'outline outline-yellow-600 text-yellow-600 hover:bg-yellow-50',
+            'dark' => 'dark:outline-yellow-500 dark:text-yellow-400 dark:hover:bg-yellow-900/10',
             'active' => 'active:bg-yellow-100 dark:active:bg-yellow-900/20',
         ],
         'purple' => [
-            'default' => 'border border-purple-600 text-purple-600 hover:bg-purple-50',
-            'dark' => 'dark:border-purple-500 dark:text-purple-400 dark:hover:bg-purple-900/10',
+            'default' => 'outline outline-purple-600 text-purple-600 hover:bg-purple-50',
+            'dark' => 'dark:outline-purple-500 dark:text-purple-400 dark:hover:bg-purple-900/10',
             'active' => 'active:bg-purple-100 dark:active:bg-purple-900/20',
         ],
         'indigo' => [
-            'default' => 'border border-indigo-600 text-indigo-600 hover:bg-indigo-50',
-            'dark' => 'dark:border-indigo-500 dark:text-indigo-400 dark:hover:bg-indigo-900/10',
+            'default' => 'outline outline-indigo-600 text-indigo-600 hover:bg-indigo-50',
+            'dark' => 'dark:outline-indigo-500 dark:text-indigo-400 dark:hover:bg-indigo-900/10',
             'active' => 'active:bg-indigo-100 dark:active:bg-indigo-900/20',
         ],
         'gray' => [
-            'default' => 'border border-gray-600 text-gray-600 hover:bg-gray-50',
+            'default' => 'outline outline-gray-600 text-gray-600 hover:bg-gray-50',
             'dark' => 'dark:border-gray-400 dark:text-gray-400 dark:hover:bg-gray-800/50',
             'active' => 'active:bg-gray-100 dark:active:bg-gray-800',
         ],
@@ -164,7 +164,7 @@
     <a href="{{ $disabled ? '#' : $href }}"
         {{ $disabled ? '' : ($attributes->get('wire:navigate') !== false ? 'wire:navigate' : '') }}
         class="cursor-pointer flex shrink-0 items-center gap-x-1.5 rounded-md {{ $colors[$color]['default'] }} {{ $colors[$color]['dark'] }} {{ $colors[$color]['active'] }} {{ $padding }}
-               font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2
+               font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 -outline-offset-1
                {{ $disabledClasses }} {{ $class }}">
         @if ($icon)
             <x-dynamic-component :component="$icon" class="size-5 flex-shrink-0" />
@@ -174,7 +174,7 @@
 @else
     <button {{ $attributes }} type="{{ $type }}" {{ $disabled ? 'disabled' : '' }}
         class="cursor-pointer flex shrink-0 items-center gap-x-1.5 rounded-md {{ $colors[$color]['default'] }} {{ $colors[$color]['dark'] }} {{ $colors[$color]['active'] }} {{ $padding }}
-               font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2
+               font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 -outline-offset-1
                {{ $disabledClasses }} {{ $class }}">
         @if ($icon)
             <x-dynamic-component :component="$icon" class="size-5 flex-shrink-0" />

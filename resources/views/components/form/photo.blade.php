@@ -34,7 +34,7 @@
         <label for="{{ $name }}" class="{{ $buttonClasses }}">
             {{-- <x-heroicon-o-photo class="size-5" /> --}}
             <span>{{ $placeholder }}</span>
-            <input wire:model.live="{{ $name }}" type="file" name="{{ $name }}" id="{{ $name }}"
+            <input wire:model.live.250ms="{{ $name }}" type="file" name="{{ $name }}" id="{{ $name }}"
                 class="sr-only" @if ($required) required @endif
                 @if ($disabled) disabled @endif
                 @if ($accept) accept="{{ $accept }}" @endif>

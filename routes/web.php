@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CollaborateurController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\PaysController;
@@ -35,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/departements', DepartementController::class);
     Route::resource('/postes', PosteController::class);
     Route::resource('/types-documents', TypeDocumentController::class);
+    Route::resource('/collaborateurs', CollaborateurController::class);
 });
 
 // Gestion des erreurs personnalisée
