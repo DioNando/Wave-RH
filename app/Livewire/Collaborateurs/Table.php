@@ -13,7 +13,7 @@ class Table extends Component
     public $search = '';
     public $sortField = 'nom';
     public $sortDirection = 'asc';
-    public $visibleColumns = ['nom', 'poste', 'contact', 'ville', 'statut'];
+    public $visibleColumns = ['nom', 'contact', 'ville', 'statut'];
     public $filters = [];
 
     public $allColumns = [

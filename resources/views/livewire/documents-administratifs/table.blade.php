@@ -25,7 +25,7 @@
                     $headers = ['Type de document', 'Date d\'émission', 'Date d\'expiration', 'Statut', 'Actions'];
                     $empty = 'Aucun document trouvé';
                 @endphp
-                <div>
+                <div class="overflow-auto scrollbar-custom">
                     <table class="w-full overflow-hidden">
                         <x-table.head :headers="$headers" />
                         <x-table.body class="bg-white dark:bg-gray-900">
@@ -39,8 +39,10 @@
                                             </span>
                                         </div>
                                     </x-table.cell>
-                                    <x-table.cell content="{{ \Carbon\Carbon::parse($row->date_emission)->translatedFormat('d F Y') }}" />
-                                    <x-table.cell content="{{ \Carbon\Carbon::parse($row->date_expiration)->translatedFormat('d F Y') }}" />
+                                    <x-table.cell
+                                        content="{{ \Carbon\Carbon::parse($row->date_emission)->translatedFormat('d F Y') }}" />
+                                    <x-table.cell
+                                        content="{{ \Carbon\Carbon::parse($row->date_expiration)->translatedFormat('d F Y') }}" />
                                     <x-table.cell>
                                         <x-badge.statut :statut="$row->statut" />
                                     </x-table.cell>
@@ -56,5 +58,8 @@
             </div>
         </div>
     @empty
+        <div class="px-5 py-5 text-sm text-center text-gray-500">
+            Aucun document administratif disponible.
+        </div>
     @endforelse
 </div>

@@ -12,7 +12,7 @@
             <fieldset class="sm:col-span-full border-b pb-4 border-gray-200 dark:border-gray-700 ">
                 <legend class="text-sm/6 font-semibold text-gray-900 dark:text-gray-100">Ordre</legend>
                 <div class="mt-4 flex gap-6">
-                    <x-form.radio name="sortDirection" value="asc" label="Croissant" direction="asc" checked />
+                    <x-form.radio name="sortDirection" value="asc" label="Croissant" direction="asc" />
                     <x-form.radio name="sortDirection" value="desc" label="Décroissant" direction="desc" />
                 </div>
 
@@ -20,16 +20,18 @@
             <fieldset class="sm:col-span-full">
                 <legend class="text-sm/6 font-semibold text-gray-900 dark:text-gray-100">Colonnes à afficher</legend>
                 <div class="mt-4 space-y-4 flex flex-col w-full">
-                    <x-form.checkbox name="filterFields" value="nom" label="Nom" />
-                    <x-form.checkbox name="filterFields" value="poste" label="Poste" />
-                    <x-form.checkbox name="filterFields" value="matricule_interne" label="Matricule Interne" />
-                    <x-form.checkbox name="filterFields" value="informations_bancaires"
-                        label="Informations Bancaires" />
-                    <x-form.checkbox name="filterFields" value="contact" label="Contact" />
-                    <x-form.checkbox name="filterFields" value="ville" label="Ville" />
-                    <x-form.checkbox name="filterFields" value="date_embauche" label="Date d'embauche" />
-                    <x-form.checkbox name="filterFields" value="created_at" label="Création" />
-                    <x-form.checkbox name="filterFields" value="updated_at" label="Modification" />
+                    <x-form.checkbox name="filterFields" value="nom" label="Nom" :live="true" />
+                    <x-form.checkbox name="filterFields" value="poste" label="Poste" :live="true" />
+                    <x-form.checkbox name="filterFields" value="matricule_interne" label="Matricule Interne"
+                        :live="true" />
+                    <x-form.checkbox name="filterFields" value="informations_bancaires" label="Informations Bancaires"
+                        :live="true" />
+                    <x-form.checkbox name="filterFields" value="contact" label="Contact" :live="true" />
+                    <x-form.checkbox name="filterFields" value="ville" label="Ville" :live="true" />
+                    <x-form.checkbox name="filterFields" value="date_embauche" label="Date d'embauche"
+                        :live="true" />
+                    <x-form.checkbox name="filterFields" value="created_at" label="Création" :live="true" />
+                    <x-form.checkbox name="filterFields" value="updated_at" label="Modification" :live="true" />
                 </div>
             </fieldset>
 

@@ -43,7 +43,7 @@ class Card extends Component
             'warning' => 'bg-amber-50 dark:bg-amber-900/20 border-amber-100 dark:border-amber-800',
             'danger' => 'bg-red-50 dark:bg-red-900/20 border-red-100 dark:border-red-800',
             'purple' => 'bg-purple-50 dark:bg-purple-900/20 border-purple-100 dark:border-purple-800',
-            default => 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700',
+            default => 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700',
         };
     }
 }
