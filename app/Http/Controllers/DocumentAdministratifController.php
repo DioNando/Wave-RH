@@ -42,8 +42,9 @@ class DocumentAdministratifController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DocumentAdministratif $documentAdministratif)
+    public function edit(String $id)
     {
+        $documentAdministratif = DocumentAdministratif::findOrFail($id);
         return view('pages.documents-administratifs.edit', compact('documentAdministratif'));
     }
 

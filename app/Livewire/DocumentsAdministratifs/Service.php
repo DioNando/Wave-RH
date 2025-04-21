@@ -32,8 +32,8 @@ class Service extends Form
     protected function rules()
     {
         return [
-            'type_document_id' => ['required', Rule::exists('types_documents', 'id')],
-            'date_emission' => 'date',
+            'type_document_id' => ['required', Rule::exists('type_documents', 'id')],
+            'date_emission' => 'nullable|date',
             'date_expiration' => 'required|date|after:date_emission',
             'document_path' => [
                 Rule::when(!is_string($this->document_path), [
