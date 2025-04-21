@@ -3,8 +3,7 @@
 @endphp
 
 <div>
-    {{-- <x-table :headers="['', ...$headers, '']"> --}}
-    <x-table :headers="['', ...$headers]">
+    <x-table :headers="['', ...$headers, '']">
         <x-table.body class="bg-white dark:bg-gray-900">
             @forelse ($collaborateurs as $collaborateur)
                 <tr>
@@ -54,6 +53,17 @@
                     @endif
                     <x-table.cell>
                         <x-badge.statut :statut="$collaborateur->statut" style="badge" />
+                    </x-table.cell>
+                    {{-- <x-table.cell>
+                        <x-button.action route="departements.edit" :id="$row->id" icon="pencil-square" color="orange" />
+                    </x-table.cell> --}}
+                    <x-table.cell>
+                        <div class="space-x-1">
+                            <x-button.action route="collaborateurs.show" :id="$collaborateur->id" icon="eye"
+                                color="blue" />
+                            <x-button.action route="collaborateurs.edit" :id="$collaborateur->id" icon="pencil-square"
+                                color="orange" />
+                        </div>
                     </x-table.cell>
                 </tr>
             @empty

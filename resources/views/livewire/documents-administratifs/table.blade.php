@@ -22,7 +22,7 @@
             <div x-show="open" x-cloak>
                 {{-- TABLE CONTENT --}}
                 @php
-                    $headers = ['Type de document', 'Date d\'émission', 'Date d\'expiration', 'Statut', 'Actions'];
+                    $headers = ['Type de document', 'Date d\'émission', 'Date d\'expiration', 'Statut', ''];
                     $empty = 'Aucun document trouvé';
                 @endphp
                 <div class="overflow-auto scrollbar-custom">

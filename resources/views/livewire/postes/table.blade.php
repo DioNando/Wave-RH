@@ -1,5 +1,5 @@
 @php
-    $headers = ['Nom', 'Description', 'Département', 'Statut', 'Actions'];
+    $headers = ['Nom', 'Description', 'Département', 'Statut', ''];
     $empty = 'Aucun poste trouvé';
 @endphp
 

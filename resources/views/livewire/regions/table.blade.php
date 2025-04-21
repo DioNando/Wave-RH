@@ -1,5 +1,5 @@
 @php
-    $headers = ['Nom', 'Pays', 'Nombre de villes', 'Statut', 'Actions'];
+    $headers = ['Nom', 'Pays', 'Nombre de villes', 'Statut', ''];
     $empty = 'Aucunne région trouvée';
 @endphp
 

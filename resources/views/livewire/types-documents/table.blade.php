@@ -1,5 +1,5 @@
 @php
-    $headers = ['Libellé', 'Description', 'Statut', 'Actions'];
+    $headers = ['Libellé', 'Description', 'Statut', ''];
     $empty = 'Aucun type de document trouvé';
 @endphp
 

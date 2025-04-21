@@ -1,5 +1,5 @@
 @php
-    $headers = ['Nom', 'Rôle', 'Date de création', 'Statut', 'Actions'];
+    $headers = ['Nom', 'Rôle', 'Date de création', 'Statut', ''];
     $empty = 'Aucun utilisateur trouvé';
 @endphp
 
