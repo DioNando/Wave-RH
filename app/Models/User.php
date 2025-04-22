@@ -53,6 +53,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function collaborateurs()
+    {
+        return $this->hasMany(Collaborateur::class);
+    }
+
     /**
      * Vérifie si l'utilisateur est un administrateur.
      *

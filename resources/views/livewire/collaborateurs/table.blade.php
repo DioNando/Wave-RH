@@ -8,14 +8,14 @@
             @forelse ($collaborateurs as $collaborateur)
                 <tr>
                     <x-table.cell class="w-0 pr-0">
-                        <div x-data="{ getInitial(nom) { return nom.charAt(0).toUpperCase(); } }"
-                            class="relative size-11 overflow-hidden bg-gray-400 dark:bg-gray-700 rounded-full text-gray-100 dark:text-gray-200 text-xl flex items-center justify-center">
+                        <div x-data="{ getInitial(nom, prenom) { return nom.charAt(0).toUpperCase() + prenom.charAt(0).toUpperCase() ; } }"
+                            class="relative size-11 overflow-hidden bg-gray-400 dark:bg-gray-700 rounded-full text-gray-100 dark:text-gray-200 text-lg font-mono flex items-center justify-center">
                             @if ($collaborateur->photo_profil && Storage::disk('public')->exists($collaborateur->photo_profil))
                                 <img class="h-full w-full object-cover"
                                     src="{{ Storage::url($collaborateur->photo_profil) }}"
                                     alt="{{ $collaborateur->nom }}">
                             @else
-                                <span x-text="getInitial('{{ $collaborateur->prenom }}')"></span>
+                                <span x-text="getInitial('{{ $collaborateur->nom }}', '{{ $collaborateur->prenom }}')"></span>
                             @endif
                         </div>
                     </x-table.cell>

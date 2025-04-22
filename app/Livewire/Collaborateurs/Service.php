@@ -12,6 +12,7 @@ use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Auth;
 
 class Service extends Form
 {
@@ -277,7 +278,7 @@ class Service extends Form
     public function store()
     {
         $this->validate();
-        $this->user_id = User::inRandomOrder()->first()->id;
+        $this->user_id = Auth::user()->id;
 
         // Préparer les données
         $data = $this->all();
@@ -305,7 +306,7 @@ class Service extends Form
     public function update()
     {
         $this->validate();
-        $this->user_id = User::inRandomOrder()->first()->id;
+        $this->user_id = Auth::user()->id;
 
         // Préparer les données
         $data = $this->all();

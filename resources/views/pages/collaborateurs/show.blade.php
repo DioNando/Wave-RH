@@ -2,6 +2,7 @@
     <x-slot name="header">
         <x-label.page-title label="Détail d'un collaborateur" />
     </x-slot>
+    <x-collaborateur.banner :collaborateur="$collaborateur" />
 
     <x-collaborateur.tabs>
         <x-collaborateur.profil-personnel :collaborateur="$collaborateur" />

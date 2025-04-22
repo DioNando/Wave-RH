@@ -1,6 +1,6 @@
 @props(['items' => [], 'color' => 'blue', 'emptyText' => 'Aucun élément disponible'])
 
-<div class="flex flex-wrap">
+<div class="flex flex-wrap gap-2">
     @if (count($items) > 0)
         @foreach ($items as $item)
             <x-badge.item :text="ucfirst($item)" :color="$color" />

@@ -44,16 +44,16 @@
     <hr class="border-0.5 border-gray-200 dark:border-gray-700" />
     <ul role="list" class="-mx-2 space-y-1">
         <li>
-            <x-layout.link-primary route="profile" icon="user" label="Profile" />
+            <x-layout.link-primary route="profile" icon="user" label="Profil" />
         </li>
         @admin
             <li>
                 <x-layout.link-primary route="users.index" icon="users" label="Utilisateurs" />
             </li>
         @endadmin
-        <li>
+        {{-- <li>
             <x-layout.link-primary route="examples.ui" icon="paint-brush" label="Exemples UI" />
-        </li>
+        </li> --}}
         <li>
             <x-layout.link-primary route="settings" icon="wrench-screwdriver" label="Configurations" />
         </li>

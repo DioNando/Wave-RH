@@ -81,6 +81,27 @@
                                             <div>Expire le :
                                                 {{ \Carbon\Carbon::parse($row->date_expiration)->translatedFormat('d F Y') }}
                                             </div>
+                                            @php
+                                                $daysLeft = round(
+                                                    now()->diffInDays(
+                                                        \Carbon\Carbon::parse($row->date_expiration),
+                                                        false,
+                                                    ),
+                                                );
+                                                $textColor =
+                                                    $daysLeft < 0
+                                                        ? 'text-red-500'
+                                                        : ($daysLeft < 30
+                                                            ? 'text-amber-500'
+                                                            : 'text-green-500');
+                                            @endphp
+                                            <div class="{{ $textColor }}">
+                                                @if ($daysLeft < 0)
+                                                    Expiré depuis {{ abs($daysLeft) }} jour(s)
+                                                @else
+                                                    Expire dans {{ $daysLeft }} jour(s)
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

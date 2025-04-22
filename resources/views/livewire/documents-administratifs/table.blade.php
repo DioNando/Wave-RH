@@ -39,16 +39,47 @@
                                             </span>
                                         </div>
                                     </x-table.cell>
-                                    <x-table.cell
-                                        content="{{ \Carbon\Carbon::parse($row->date_emission)->translatedFormat('d F Y') }}" />
-                                    <x-table.cell
-                                        content="{{ \Carbon\Carbon::parse($row->date_expiration)->translatedFormat('d F Y') }}" />
+                                    <x-table.cell>
+                                        {{ $row->date_emission ? \Carbon\Carbon::parse($row->date_emission)->translatedFormat('d F Y') : 'N/A' }}
+                                    </x-table.cell>
+                                    <x-table.cell>
+                                        <div class="flex flex-col">
+                                            <span>{{ \Carbon\Carbon::parse($row->date_expiration)->translatedFormat('d F Y') }}</span>
+                                            @php
+                                                $daysLeft = round(
+                                                    now()->diffInDays(
+                                                        \Carbon\Carbon::parse($row->date_expiration),
+                                                        false,
+                                                    ),
+                                                );
+                                                $textColor =
+                                                    $daysLeft < 0
+                                                        ? 'text-red-500'
+                                                        : ($daysLeft < 30
+                                                            ? 'text-amber-500'
+                                                            : 'text-green-500');
+                                            @endphp
+                                            <span class="text-xs {{ $textColor }}">
+                                                @if ($daysLeft < 0)
+                                                    Expiré depuis {{ abs($daysLeft) }} jour(s)
+                                                @else
+                                                    Expire dans {{ $daysLeft }} jour(s)
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </x-table.cell>
                                     <x-table.cell>
                                         <x-badge.statut :statut="$row->statut" />
                                     </x-table.cell>
                                     <x-table.cell>
-                                        <x-button.action href="{{ route('documents-administratifs.edit', $row->id) }}"
-                                            icon="pencil-square" color="orange" />
+                                        <div class="space-x-1">
+                                            <x-button.action target="_blank"
+                                                href="{{ Storage::url($row->document_path) }}" icon="document"
+                                                color="green" />
+                                            <x-button.action
+                                                href="{{ route('documents-administratifs.edit', $row->id) }}"
+                                                icon="pencil-square" color="orange" />
+                                        </div>
                                     </x-table.cell>
                                 </tr>
                             @endforeach

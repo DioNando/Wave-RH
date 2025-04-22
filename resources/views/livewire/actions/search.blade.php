@@ -15,18 +15,19 @@
             <ul role="list"
                 class="divide-y divide-gray-100 dark:divide-gray-700 overflow-y-auto h-auto shadow-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl">
                 @foreach ($collaborateurs as $collaborateur)
-                    <li x-data="{ getInitial(nom) { return nom.charAt(0).toUpperCase(); } }"
+                    <li x-data="{ getInitial(nom, prenom) { return nom.charAt(0).toUpperCase() + prenom.charAt(0).toUpperCase(); } }"
                         class="relative flex justify-between gap-x-6 px-3 py-4 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 sm:px-6">
                         <div class="flex min-w-0 gap-x-4">
                             <div>
-                                <div x-data="{ getInitial(nom) { return nom.charAt(0).toUpperCase(); } }"
-                                    class="size-11 overflow-hidden bg-gray-400 dark:bg-gray-700 rounded-full text-gray-100 dark:text-gray-200 text-2xl flex items-center justify-center">
+                                <div x-data="{ getInitial(nom, prenom) { return nom.charAt(0).toUpperCase() + prenom.charAt(0).toUpperCase() ; } }"
+                                    class="size-11 overflow-hidden bg-gray-400 dark:bg-gray-700 rounded-full text-gray-100 dark:text-gray-200 text-lg font-mono flex items-center justify-center">
                                     @if ($collaborateur->photo_profil && Storage::disk('public')->exists($collaborateur->photo_profil))
                                         <img class="h-full w-full object-cover"
                                             src="{{ Storage::url($collaborateur->photo_profil) }}"
                                             alt="{{ $collaborateur->nom }}">
                                     @else
-                                        <span x-text="getInitial('{{ $collaborateur->prenom }}')"></span>
+                                        <span
+                                            x-text="getInitial('{{ $collaborateur->nom }}', '{{ $collaborateur->prenom }}')"></span>
                                     @endif
                                 </div>
                             </div>

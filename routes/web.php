@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\CertificationController;
 use App\Http\Controllers\CollaborateurController;
+use App\Http\Controllers\ContactUrgenceController;
+use App\Http\Controllers\ContratTravailController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartementController;
+use App\Http\Controllers\DiplomeController;
 use App\Http\Controllers\DocumentAdministratifController;
 use App\Http\Controllers\PaysController;
 use App\Http\Controllers\PosteController;
@@ -39,6 +43,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/types-documents', TypeDocumentController::class);
     Route::resource('/collaborateurs', CollaborateurController::class);
     Route::resource('/documents-administratifs', DocumentAdministratifController::class);
+    Route::resource('/diplomes', DiplomeController::class);
+    Route::resource('/certifications', CertificationController::class);
+    Route::resource('/contacts-urgences', ContactUrgenceController::class);
+    Route::resource('/contrats-travails', ContratTravailController::class);
 });
 
 // Gestion des erreurs personnalisée

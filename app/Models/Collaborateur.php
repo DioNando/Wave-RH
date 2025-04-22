@@ -66,10 +66,45 @@ class Collaborateur extends Model
         return $this->belongsTo(Pays::class);
     }
 
-    public function documentAdministratifs()
+    public function document_administratifs()
     {
         return $this->hasMany(DocumentAdministratif::class);
     }
+
+    public function contact_urgences()
+    {
+        return $this->hasMany(ContactUrgence::class);
+    }
+
+    public function contrat_travails()
+    {
+        return $this->hasMany(ContratTravail::class);
+    }
+
+    public function information_bancaires()
+    {
+        return $this->hasMany(InformationBancaire::class);
+    }
+
+    public function diplomes()
+    {
+        return $this->hasMany(Diplome::class);
+    }
+
+    public function certifications()
+    {
+        return $this->hasMany(Certification::class);
+    }
+
+    // public function competences()
+    // {
+    //     return $this->hasMany(Competence::class);
+    // }
+
+    // public function langues()
+    // {
+    //     return $this->hasMany(Langue::class);
+    // }
 
     protected $casts = [
         'genre' => CollaborateurGenre::class,
