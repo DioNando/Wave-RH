@@ -33,14 +33,14 @@
                             </div>
                             <div class="min-w-0 flex-auto">
                                 <p class="text-sm/6 font-semibold">
-                                    <a href="{{ route('collaborateurs.show', $collaborateur) }}">
+                                    <a class="text-blue-700" href="{{ route('collaborateurs.show', $collaborateur) }}">
                                         <span class="absolute inset-x-0 -top-px bottom-0"></span>
                                         {{ $collaborateur->nom . ' ' . $collaborateur->prenom }}
                                     </a>
                                 </p>
-                                {{-- ! <p class="text-xs/5">
-                                    {{ $collaborateur->historiques_postes->first()?->poste->nom ?? 'Non assigné' }}
-                                </p> --}}
+                                <p class="text-xs/5">
+                                    {{ $collaborateur->historique_postes->first()?->poste->nom ?? 'Non assigné' }}
+                                </p>
                                 <p class="flex text-xs/5">
                                     <a
                                         class="relative truncate hover:underline text-gray-400">{{ $collaborateur->email_professionnel }}</a>

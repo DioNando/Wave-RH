@@ -41,7 +41,7 @@ return new class extends Migration
             $table->text('situation_medicale')->nullable();
             $table->text('notes_diverses')->nullable();
             $table->boolean('statut')->default(1);
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

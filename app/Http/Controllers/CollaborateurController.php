@@ -36,6 +36,14 @@ class CollaborateurController extends Controller
      */
     public function show(Collaborateur $collaborateur)
     {
+        // Récupérer le poste actuel (le plus récent) du collaborateur
+        $poste_actuel = $collaborateur->historique_postes()
+            ->orderBy('date_debut', 'desc')
+            ->first();
+
+        // Assigner le poste actuel au collaborateur
+        $collaborateur->poste_actuel = $poste_actuel;
+
         return view('pages.collaborateurs.show', compact('collaborateur'));
     }
 

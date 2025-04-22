@@ -96,6 +96,31 @@ class Collaborateur extends Model
         return $this->hasMany(Certification::class);
     }
 
+    public function historique_postes()
+    {
+        return $this->hasMany(HistoriquePoste::class);
+    }
+
+    public function historique_augmentations()
+    {
+        return $this->hasMany(HistoriqueAugmentation::class);
+    }
+
+    public function historique_conges()
+    {
+        return $this->hasMany(HistoriqueConge::class);
+    }
+
+    public function historique_formations()
+    {
+        return $this->hasMany(HistoriqueFormation::class);
+    }
+
+    public function historique_primes()
+    {
+        return $this->hasMany(HistoriquePrime::class);
+    }
+
     // public function competences()
     // {
     //     return $this->hasMany(Competence::class);

@@ -8,12 +8,15 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\DiplomeController;
 use App\Http\Controllers\DocumentAdministratifController;
+use App\Http\Controllers\HistoriqueCongeController;
+use App\Http\Controllers\JourFerieController;
 use App\Http\Controllers\PaysController;
 use App\Http\Controllers\PosteController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\TypeDocumentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VilleController;
+use App\Models\HistoriqueConge;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +50,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/certifications', CertificationController::class);
     Route::resource('/contacts-urgences', ContactUrgenceController::class);
     Route::resource('/contrats-travails', ContratTravailController::class);
+    Route::resource('/conges', HistoriqueCongeController::class);
+    Route::resource('jours-feries', JourFerieController::class);
 });
 
 // Gestion des erreurs personnalisée

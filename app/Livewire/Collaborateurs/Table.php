@@ -13,14 +13,14 @@ class Table extends Component
     public $search = '';
     public $sortField = 'nom';
     public $sortDirection = 'asc';
-    public $visibleColumns = ['nom', 'contact', 'ville', 'statut'];
+    public $visibleColumns = ['nom', 'poste', 'contact', 'ville', 'statut'];
     public $filters = [];
 
     public $allColumns = [
         'nom' => 'Nom',
         'poste' => 'Poste',
         'matricule_interne' => 'Matricule Interne',
-        'informations_bancaires' => 'Informations Bancaires',
+        'information_bancaires' => 'Informations Bancaires',
         'contact' => 'Contact',
         'ville' => 'Ville',
         'statut' => 'Statut',
@@ -77,16 +77,16 @@ class Table extends Component
 
     public function render()
     {
-        // $query = Collaborateur::query()
-        //     ->with(['ville.pays', 'user', 'informations_bancaires'])
-        //     ->with(['historiques_postes' => function ($query) {
-        //         $query->latest()->limit(1)
-        //             ->with(['poste' => function ($query) {
-        //                 $query->with('departement');
-        //             }]);
-        //     }]);
         $query = Collaborateur::query()
-            ->with(['ville.pays', 'user']);
+            ->with(['ville.pays', 'user', 'information_bancaires'])
+            ->with(['historique_postes' => function ($query) {
+                $query->latest()->limit(1)
+                    ->with(['poste' => function ($query) {
+                        $query->with('departement');
+                    }]);
+            }]);
+        // $query = Collaborateur::query()
+        //     ->with(['ville.pays', 'user']);
 
         // 🔍 Recherche par nom, prénom ou email
         if (!empty($this->search)) {

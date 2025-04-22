@@ -26,6 +26,8 @@ use Database\Seeders\Data\DepartementPosteData;
 use Database\Seeders\Data\DiplomeData;
 use Database\Seeders\Data\DocumentAdministratifData;
 use Database\Seeders\Data\GeographicData;
+use Database\Seeders\Data\HistoriqueCongesData;
+use Database\Seeders\Data\HistoriquePostesData;
 use Database\Seeders\Data\InformationBancaireData;
 use Database\Seeders\Data\TypeDocumentData;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -61,8 +63,10 @@ class DatabaseSeeder extends Seeder
         // Créer les collaborateurs avec leurs relations
         $this->seedCollaborateurs();
 
-        // Créer 20 utilisateurs additionnels avec des rôles aléatoires
-        User::factory()->count(20)->create();
+        $this->call([
+            HistoriquePostesData::class,
+            HistoriqueCongesData::class,
+        ]);
     }
 
     /**
@@ -149,10 +153,10 @@ class DatabaseSeeder extends Seeder
         $documentsAdministratifsData = DocumentAdministratifData::getData();
 
         foreach ($collaborateursData as $collaborateurData) {
-             // Créer le collaborateur
-             $collaborateur = Collaborateur::create($collaborateurData);
+            // Créer le collaborateur
+            $collaborateur = Collaborateur::create($collaborateurData);
 
-             // Créer 1 à 3 contacts d'urgence pour le collaborateur
+            // Créer 1 à 3 contacts d'urgence pour le collaborateur
             $nbContacts = rand(1, 3);
             for ($i = 0; $i < $nbContacts; $i++) {
                 $contactData = $contactsUrgencesData[array_rand($contactsUrgencesData)];
@@ -194,7 +198,7 @@ class DatabaseSeeder extends Seeder
                 InformationBancaire::create($infoBancaireData);
             }
 
-             // Créer 3 à 6 documents administratifs pour le collaborateur
+            // Créer 3 à 6 documents administratifs pour le collaborateur
             $nbDocuments = rand(3, 6);
             for ($i = 0; $i < $nbDocuments; $i++) {
                 $documentData = $documentsAdministratifsData[array_rand($documentsAdministratifsData)];
@@ -213,7 +217,7 @@ class DatabaseSeeder extends Seeder
 
                 // Générer une date d'expiration en fonction du type de document
                 if ($dateEmission) {
-                    $dateExpiration = match($typeDocument->libelle) {
+                    $dateExpiration = match ($typeDocument->libelle) {
                         'CV' => $dateEmission->copy()->addYear(),
                         'CIN' => $dateEmission->copy()->addYears(5),
                         'CNSS' => $dateEmission->copy()->addYear(),

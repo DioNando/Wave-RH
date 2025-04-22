@@ -7,9 +7,9 @@
             <li>
                 <x-layout.link-primary route="collaborateurs.index" icon="user-group" label="Collaborateurs" />
             </li>
-            {{-- <li>
+            <li>
                 <x-layout.link-primary route="conges.index" icon="calendar" label="Congés" />
-            </li> --}}
+            </li>
             <li>
                 <x-layout.link-primary route="documents-administratifs.index" icon="document-text" label="Documents" />
             </li>
@@ -28,7 +28,7 @@
                     ['route' => 'postes.index', 'label' => 'Postes', 'icon' => 'P'],
                     ['route' => 'departements.index', 'label' => 'Départements', 'icon' => 'D'],
                     ['route' => 'types-documents.index', 'label' => 'Types de documents', 'icon' => 'T'],
-                    // ['route' => 'jours-feries.index', 'label' => 'Jours fériés', 'icon' => 'J'],
+                    ['route' => 'jours-feries.index', 'label' => 'Jours fériés', 'icon' => 'J'],
                     // ['route' => 'competences-techniques.index', 'label' => 'Compétences techniques', 'icon' => 'C'],
                     // ['route' => 'langues.index', 'label' => 'Langues', 'icon' => 'L'],
                 ];

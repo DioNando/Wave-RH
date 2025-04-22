@@ -4,6 +4,9 @@
     <x-card defaultOpen="false">
         <x-card.card-header :dropdown="true" title="Informations professionnelles" type="primary" />
         <x-card.card-body divider>
+            <x-card.card-row label="Poste actuel" value="{{ $collaborateur->poste_actuel->poste->nom ?? '' }}" />
+            <x-card.card-row label="Département"
+                value="{{ $collaborateur->poste_actuel->poste->departement->nom ?? '' }}" />
             <x-card.card-row label="Matricule" value="{{ $collaborateur->matricule_interne }}" />
             <x-card.card-row label="Date d'embauche"
                 value="{{ \Carbon\Carbon::parse($collaborateur->date_embauche)->translatedFormat('d F Y') }}" />

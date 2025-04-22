@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum TypeJoursFerie: string
+enum TypeJourFerie: string
 {
     case NATIONAL = 'national';
     case RELIGIEUX = 'religieux';

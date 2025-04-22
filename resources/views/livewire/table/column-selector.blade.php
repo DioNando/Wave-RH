@@ -24,7 +24,7 @@
                     <x-form.checkbox name="filterFields" value="poste" label="Poste" :live="true" />
                     <x-form.checkbox name="filterFields" value="matricule_interne" label="Matricule Interne"
                         :live="true" />
-                    <x-form.checkbox name="filterFields" value="informations_bancaires" label="Informations Bancaires"
+                    <x-form.checkbox name="filterFields" value="information_bancaires" label="Informations Bancaires"
                         :live="true" />
                     <x-form.checkbox name="filterFields" value="contact" label="Contact" :live="true" />
                     <x-form.checkbox name="filterFields" value="ville" label="Ville" :live="true" />
