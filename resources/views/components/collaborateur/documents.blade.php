@@ -22,8 +22,20 @@
                                         </span>
                                     </div>
                                 </x-table.cell>
-                                <x-table.cell
-                                    content="{{ \Carbon\Carbon::parse($row->date_emission)->translatedFormat('d F Y') }}" />
+                                @if ($row->date_emission)
+                                    <x-table.cell>
+                                        <div class="flex flex-col">
+                                            <span>
+                                                {{ \Carbon\Carbon::parse($row->date_emission)->translatedFormat('d F Y') }}
+                                            </span>
+                                            <span
+                                                class="text-xs text-gray-500 dark:text-gray-400">{{ \Carbon\Carbon::parse($row->date_emission)->diffForHumans() }}
+                                            </span>
+                                        </div>
+                                    </x-table.cell>
+                                @else
+                                    <x-table.cell />
+                                @endif
                                 <x-table.cell>
                                     <div class="flex flex-col">
                                         <span>{{ \Carbon\Carbon::parse($row->date_expiration)->translatedFormat('d F Y') }}</span>
@@ -51,11 +63,14 @@
                                     <x-badge.statut :statut="$row->statut" />
                                 </x-table.cell>
                                 <x-table.cell>
-                                    <div class="space-x-1">
-                                        <x-button.action target="_blank" href="{{ Storage::url($row->document_path) }}"
-                                            icon="document" color="green" />
-                                        <x-button.action href="{{ route('documents-administratifs.edit', $row->id) }}"
-                                            icon="pencil-square" color="orange" />
+                                    <div class="flex gap-1 items-center justify-end">
+                                        <x-button.action simple="true" target="_blank"
+                                            href="{{ Storage::url($row->document_path) }}" icon="document"
+                                            color="blue">Voir</x-button.action>
+                                        <x-label.divide-vertical />
+                                        <x-button.action simple="true"
+                                            href="{{ route('documents-administratifs.edit', $row->id) }}"
+                                            icon="pencil-square" color="orange">Editer</x-button.action>
                                     </div>
                                 </x-table.cell>
                             </tr>
@@ -75,6 +90,9 @@
     <x-card defaultOpen="false">
         <x-card.card-header :dropdown="true" title="Diplômes" subtitle="Liste des diplômes obtenus" type="primary" />
         <x-card.card-body>
+            <div class="mb-2">
+                @livewire('collaborateurs.diplomes.create', ['collaborateur' => $collaborateur])
+            </div>
             <div>
                 @php
                     $headers = ['Titre', 'Établissement', 'Niveau', 'Date d\'obtention', 'Statut', ''];
@@ -93,11 +111,13 @@
                                     <x-badge.statut :statut="$row->statut" />
                                 </x-table.cell>
                                 <x-table.cell>
-                                    <div class="space-x-1">
-                                        <x-button.action target="_blank" href="{{ Storage::url($row->document_path) }}"
-                                            icon="document" color="green" />
-                                        <x-button.action href="{{ route('diplomes.edit', $row->id) }}"
-                                            icon="pencil-square" color="orange" />
+                                    <div class="flex gap-1 items-center justify-end">
+                                        <x-button.action simple="true" target="_blank"
+                                            href="{{ Storage::url($row->document_path) }}" icon="document"
+                                            color="blue">Voir</x-button.action>
+                                        <x-label.divide-vertical />
+                                        <x-button.action simple="true" href="{{ route('diplomes.edit', $row->id) }}"
+                                            icon="pencil-square" color="orange">Editer</x-button.action>
                                     </div>
                                 </x-table.cell>
                             </tr>
@@ -118,17 +138,12 @@
         <x-card.card-header :dropdown="true" title="Certifications" subtitle="Liste des certifications obtenues"
             type="primary" />
         <x-card.card-body>
+            <div class="mb-2">
+                @livewire('collaborateurs.certifications.create', ['collaborateur' => $collaborateur])
+            </div>
             <div>
                 @php
-                    $headers = [
-                        'Titre',
-                        'Organisme',
-                        'Pays',
-                        'Date d\'obtention',
-                        'Date d\'expiration',
-                        'Statut',
-                        '',
-                    ];
+                    $headers = ['Titre', 'Organisme', 'Pays', 'Date d\'obtention', 'Date d\'expiration', 'Statut', ''];
                     $empty = 'Aucune certification disponible';
                 @endphp
                 <x-table :headers="$headers">
@@ -167,11 +182,14 @@
                                     <x-badge.statut :statut="$row->statut" />
                                 </x-table.cell>
                                 <x-table.cell>
-                                    <div class="space-x-1">
-                                        <x-button.action target="_blank" href="{{ Storage::url($row->document_path) }}"
-                                            icon="document" color="green" />
-                                        <x-button.action href="{{ route('documents-administratifs.edit', $row->id) }}"
-                                            icon="pencil-square" color="orange" />
+                                    <div class="flex gap-1 items-center justify-end">
+                                        <x-button.action simple="true" target="_blank"
+                                            href="{{ Storage::url($row->document_path) }}" icon="document"
+                                            color="blue">Voir</x-button.action>
+                                        <x-label.divide-vertical />
+                                        <x-button.action simple="true"
+                                            href="{{ route('certifications.edit', $row->id) }}" icon="pencil-square"
+                                            color="orange">Editer</x-button.action>
                                     </div>
                                 </x-table.cell>
                             </tr>

@@ -1,7 +1,7 @@
 @props(['collaborateur'])
 
 <section x-show="activeTab === 'profil-personnel'" x-cloak class="space-y-4">
-    <x-card defaultOpen="false">
+    <x-card defaultOpen="true">
         <x-card.card-header :dropdown="true" title="Informations personnelles" type="primary" />
         <x-card.card-body divider>
             <x-card.card-row label="Nom" value="{{ $collaborateur->nom }}" />
@@ -42,6 +42,9 @@
     <x-card defaultOpen="false">
         <x-card.card-header :dropdown="true" title="Contacts d'urgences" type="primary" />
         <x-card.card-body>
+            <div class="mb-2">
+                @livewire('collaborateurs.contacts-urgences.create', ['collaborateur' => $collaborateur])
+            </div>
             <div>
                 @php
                     $headers = ['Nom', 'Relation', 'Téléphone', 'Email', 'Adresse complète', 'Ville', 'Statut'];

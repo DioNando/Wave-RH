@@ -18,7 +18,7 @@
     ];
 @endphp
 
-<li class="px-4 py-4 sm:px-6 lg:px-8">
+<li class="px-4 py-4">
     <div class="flex items-center gap-x-3">
         @if($user['avatar'])
             <img src="{{ $user['avatar'] }}" alt="" class="size-6 flex-none rounded-full bg-gray-700">

@@ -1,7 +1,7 @@
 @props(['collaborateur'])
 
 <section x-show="activeTab === 'profil-professionnel'" x-cloak class="space-y-4">
-    <x-card defaultOpen="false">
+    <x-card defaultOpen="true">
         <x-card.card-header :dropdown="true" title="Informations professionnelles" type="primary" />
         <x-card.card-body divider>
             <x-card.card-row label="Poste actuel" value="{{ $collaborateur->poste_actuel->poste->nom ?? '' }}" />
@@ -9,7 +9,7 @@
                 value="{{ $collaborateur->poste_actuel->poste->departement->nom ?? '' }}" />
             <x-card.card-row label="Matricule" value="{{ $collaborateur->matricule_interne }}" />
             <x-card.card-row label="Date d'embauche"
-                value="{{ \Carbon\Carbon::parse($collaborateur->date_embauche)->translatedFormat('d F Y') }}" />
+                value="{{ \Carbon\Carbon::parse($collaborateur->date_embauche)->translatedFormat('d F Y') }} ({{ \Carbon\Carbon::parse($collaborateur->date_embauche)->diffForHumans() }})" />
         </x-card.card-body>
     </x-card>
 
@@ -27,6 +27,9 @@
     <x-card defaultOpen="false">
         <x-card.card-header :dropdown="true" title="Historique des contrats de travail" type="primary" />
         <x-card.card-body>
+            <div class="mb-2">
+                @livewire('collaborateurs.contrats-travails.create', ['collaborateur' => $collaborateur])
+            </div>
             <div>
                 @php
                     $headers = ['Type', 'Date début', 'Date fin', 'Durée', 'Salaire', 'Statut', 'Document', ''];

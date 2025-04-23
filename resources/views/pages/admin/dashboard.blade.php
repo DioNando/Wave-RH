@@ -24,8 +24,8 @@
         </div>
         {{-- * Dashboard content --}}
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <x-card>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <x-card class="col-span-1 md:col-span-2">
                 <x-card.card-body>
                     <h3 class="text-lg font-semibold mb-3 text-gray-900 dark:text-gray-100">Statistiques globales</h3>
                     <div class="grid grid-cols-2 gap-4">
@@ -41,7 +41,7 @@
                 </x-card.card-body>
             </x-card>
 
-            <x-card>
+            <x-card class="col-span-1">
                 <x-card.card-body>
 
                     <h3 class="text-lg font-semibold mb-3 text-gray-900 dark:text-gray-100">Actions rapides</h3>
@@ -86,7 +86,7 @@
                     </div>
                 </x-card.card-body>
             </x-card>
-            <x-card>
+            <x-card class="col-span-1">
                 <x-card.card-body>
                     <header
                         class="flex items-center justify-between border-b border-gray-200 dark:border-gray-600 pb-4">

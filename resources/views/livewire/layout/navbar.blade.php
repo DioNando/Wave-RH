@@ -33,7 +33,7 @@ new class extends Component {
 
     <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
         <livewire:actions.search />
-        <div class="flex-1"></div>
+        <div class="hidden lg:block flex-1"></div>
         <div class="flex items-center gap-x-4 lg:gap-x-6">
             <div x-data="{ theme: localStorage.getItem('theme') || 'system' }"
                 class="p-4 relative flex items-center justify-center text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-100">

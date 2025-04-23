@@ -4,6 +4,9 @@
     <x-card defaultOpen="true">
         <x-card.card-header :dropdown="true" title="Informations bancaires" type="primary" />
         <x-card.card-body>
+            <div class="mb-2">
+                @livewire('collaborateurs.informations-bancaires.create', ['collaborateur' => $collaborateur])
+            </div>
             <div>
                 @php
                     $headers = ['Nom de la banque', 'Titulaire', 'IBAN', 'SWIFT', 'Statut'];
@@ -23,7 +26,8 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center text-gray-500 dark:text-gray-400">
+                                <td colspan="{{ count($headers) }}"
+                                    class="text-center py-5 text-gray-500 dark:text-gray-400">
                                     {{ $empty }}
                                 </td>
                             </tr>

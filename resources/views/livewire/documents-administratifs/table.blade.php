@@ -39,16 +39,20 @@
                                             </span>
                                         </div>
                                     </x-table.cell>
-                                    <x-table.cell>
-                                        <div class="flex flex-col">
-                                            <span>
-                                                {{ $row->date_emission ? \Carbon\Carbon::parse($row->date_emission)->translatedFormat('d F Y') : 'N/A' }}
-                                            </span>
-                                            <span
-                                                class="text-xs text-gray-500 dark:text-gray-400">{{ $row->date_emission ? \Carbon\Carbon::parse($row->date_emission)->diffForHumans() : '' }}
-                                            </span>
-                                        </div>
-                                    </x-table.cell>
+                                    @if ($row->date_emission)
+                                        <x-table.cell>
+                                            <div class="flex flex-col">
+                                                <span>
+                                                    {{ \Carbon\Carbon::parse($row->date_emission)->translatedFormat('d F Y') }}
+                                                </span>
+                                                <span
+                                                    class="text-xs text-gray-500 dark:text-gray-400">{{ \Carbon\Carbon::parse($row->date_emission)->diffForHumans() }}
+                                                </span>
+                                            </div>
+                                        </x-table.cell>
+                                    @else
+                                        <x-table.cell />
+                                    @endif
                                     <x-table.cell>
                                         <div class="flex flex-col">
                                             <span>{{ \Carbon\Carbon::parse($row->date_expiration)->translatedFormat('d F Y') }}</span>

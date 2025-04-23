@@ -31,7 +31,7 @@
                 <label for="{{ $name }}"
                     class="relative cursor-pointer rounded-md font-semibold text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
                     <span>{{ $placeholder }}</span>
-                    <input wire:model.live="{{ $name }}" id="{{ $name }}" name="{{ $name }}"
+                    <input wire:model.live.250ms="{{ $name }}" id="{{ $name }}" name="{{ $name }}"
                         type="file" class="sr-only" @if ($required) required @endif
                         @if ($disabled) disabled @endif
                         @if ($multiple) multiple @endif
