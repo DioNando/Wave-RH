@@ -42,7 +42,7 @@
     <x-card defaultOpen="false">
         <x-card.card-header :dropdown="true" title="Contacts d'urgences" type="primary" />
         <x-card.card-body>
-            <div class="mb-2">
+            <div class="mb-6">
                 @livewire('collaborateurs.contacts-urgences.create', ['collaborateur' => $collaborateur])
             </div>
             <div>
@@ -50,7 +50,8 @@
                     $headers = ['Nom', 'Relation', 'Téléphone', 'Email', 'Adresse complète', 'Ville', 'Statut'];
                     $empty = 'Aucun contact d\'urgence disponible';
                 @endphp
-                <x-table :headers="$headers">
+                <table class="w-full">
+                    <x-table.head :headers="$headers" :background="false" />
                     <x-table.body>
                         @forelse ($collaborateur->contact_urgences as $row)
                             <tr>
@@ -73,7 +74,7 @@
                             </tr>
                         @endforelse
                     </x-table.body>
-                </x-table>
+                </table>
             </div>
         </x-card.card-body>
     </x-card>

@@ -27,7 +27,8 @@
                     ];
                     $empty = 'Aucun historique de poste disponible';
                 @endphp
-                <x-table :headers="$headers">
+                <table class="w-full">
+                    <x-table.head :headers="$headers" :background="false" />
                     <x-table.body>
                         @forelse ($collaborateur->historique_postes as $row)
                             <tr>
@@ -52,7 +53,7 @@
                             </tr>
                         @endforelse
                     </x-table.body>
-                </x-table>
+                </table>
             </div>
         </x-card.card-body>
     </x-card>
@@ -66,7 +67,8 @@
                     $headers = ['Type de congé', 'Date début', 'Date fin', 'Durée', 'Motif', 'Commentaires', 'Statut'];
                     $empty = 'Aucun historique de congé disponible';
                 @endphp
-                <x-table :headers="$headers">
+                <table class="w-full">
+                    <x-table.head :headers="$headers" :background="false" />
                     <x-table.body>
                         @forelse ($collaborateur->historique_conges as $row)
                             <tr>
@@ -91,7 +93,7 @@
                             </tr>
                         @endforelse
                     </x-table.body>
-                </x-table>
+                </table>
             </div>
         </x-card.card-body>
     </x-card>
@@ -113,7 +115,8 @@
                     ];
                     $empty = 'Aucun historique d\'augmentation disponible';
                 @endphp
-                <x-table :headers="$headers">
+                <table class="w-full">
+                    <x-table.head :headers="$headers" :background="false" />
                     <x-table.body>
                         @forelse ($collaborateur->historique_augmentations as $row)
                             <tr>
@@ -136,7 +139,7 @@
                             </tr>
                         @endforelse
                     </x-table.body>
-                </x-table>
+                </table>
             </div>
         </x-card.card-body>
     </x-card>
@@ -158,7 +161,8 @@
                     ];
                     $empty = 'Aucun historique de prime disponible';
                 @endphp
-                <x-table :headers="$headers">
+                <table class="w-full">
+                    <x-table.head :headers="$headers" :background="false" />
                     <x-table.body>
                         @forelse ($collaborateur->historique_primes as $row)
                             <tr>
@@ -182,7 +186,7 @@
                             </tr>
                         @endforelse
                     </x-table.body>
-                </x-table>
+                </table>
             </div>
         </x-card.card-body>
     </x-card>
@@ -205,7 +209,8 @@
                     ];
                     $empty = 'Aucun historique de formation disponible';
                 @endphp
-                <x-table :headers="$headers">
+                <table class="w-full">
+                    <x-table.head :headers="$headers" :background="false" />
                     <x-table.body>
                         @forelse ($collaborateur->historique_formations as $row)
                             <tr>
@@ -231,7 +236,7 @@
                             </tr>
                         @endforelse
                     </x-table.body>
-                </x-table>
+                </table>
             </div>
         </x-card.card-body>
     </x-card>

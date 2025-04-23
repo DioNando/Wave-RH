@@ -4,7 +4,7 @@
     <x-card defaultOpen="true">
         <x-card.card-header :dropdown="true" title="Informations bancaires" type="primary" />
         <x-card.card-body>
-            <div class="mb-2">
+            <div class="mb-6">
                 @livewire('collaborateurs.informations-bancaires.create', ['collaborateur' => $collaborateur])
             </div>
             <div>
@@ -12,7 +12,8 @@
                     $headers = ['Nom de la banque', 'Titulaire', 'IBAN', 'SWIFT', 'Statut'];
                     $empty = 'Aucune information bancaire disponible';
                 @endphp
-                <x-table :headers="$headers">
+                <table class="w-full">
+                    <x-table.head :headers="$headers" :background="false" />
                     <x-table.body>
                         @forelse ($collaborateur->information_bancaires as $row)
                             <tr>
@@ -33,7 +34,7 @@
                             </tr>
                         @endforelse
                     </x-table.body>
-                </x-table>
+                </table>
             </div>
         </x-card.card-body>
     </x-card>

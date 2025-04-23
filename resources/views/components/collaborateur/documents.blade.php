@@ -10,7 +10,8 @@
                     $headers = ['Type de document', 'Date d\'émission', 'Date d\'expiration', 'Statut', ''];
                     $empty = 'Aucun document trouvé';
                 @endphp
-                <x-table :headers="$headers">
+                <table class="w-full">
+                    <x-table.head :headers="$headers" :background="false" />
                     <x-table.body>
                         @forelse ($collaborateur->document_administratifs as $row)
                             <tr>
@@ -83,14 +84,14 @@
                             </tr>
                         @endforelse
                     </x-table.body>
-                </x-table>
+                </table>
             </div>
         </x-card.card-body>
     </x-card>
     <x-card defaultOpen="false">
         <x-card.card-header :dropdown="true" title="Diplômes" subtitle="Liste des diplômes obtenus" type="primary" />
         <x-card.card-body>
-            <div class="mb-2">
+            <div class="mb-6">
                 @livewire('collaborateurs.diplomes.create', ['collaborateur' => $collaborateur])
             </div>
             <div>
@@ -98,7 +99,8 @@
                     $headers = ['Titre', 'Établissement', 'Niveau', 'Date d\'obtention', 'Statut', ''];
                     $empty = 'Aucun diplôme disponible';
                 @endphp
-                <x-table :headers="$headers">
+                <table class="w-full">
+                    <x-table.head :headers="$headers" :background="false" />
                     <x-table.body>
                         @forelse ($collaborateur->diplomes as $row)
                             <tr>
@@ -130,7 +132,7 @@
                             </tr>
                         @endforelse
                     </x-table.body>
-                </x-table>
+                </table>
             </div>
         </x-card.card-body>
     </x-card>
@@ -138,7 +140,7 @@
         <x-card.card-header :dropdown="true" title="Certifications" subtitle="Liste des certifications obtenues"
             type="primary" />
         <x-card.card-body>
-            <div class="mb-2">
+            <div class="mb-6">
                 @livewire('collaborateurs.certifications.create', ['collaborateur' => $collaborateur])
             </div>
             <div>
@@ -146,7 +148,8 @@
                     $headers = ['Titre', 'Organisme', 'Pays', 'Date d\'obtention', 'Date d\'expiration', 'Statut', ''];
                     $empty = 'Aucune certification disponible';
                 @endphp
-                <x-table :headers="$headers">
+                <table class="w-full">
+                    <x-table.head :headers="$headers" :background="false" />
                     <x-table.body>
                         @forelse ($collaborateur->certifications as $row)
                             <tr>
@@ -202,7 +205,7 @@
                             </tr>
                         @endforelse
                     </x-table.body>
-                </x-table>
+                </table>
             </div>
         </x-card.card-body>
     </x-card>

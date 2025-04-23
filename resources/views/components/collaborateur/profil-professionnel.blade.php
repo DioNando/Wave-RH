@@ -27,7 +27,7 @@
     <x-card defaultOpen="false">
         <x-card.card-header :dropdown="true" title="Historique des contrats de travail" type="primary" />
         <x-card.card-body>
-            <div class="mb-2">
+            <div class="mb-6">
                 @livewire('collaborateurs.contrats-travails.create', ['collaborateur' => $collaborateur])
             </div>
             <div>
@@ -35,7 +35,8 @@
                     $headers = ['Type', 'Date début', 'Date fin', 'Durée', 'Salaire', 'Statut', 'Document', ''];
                     $empty = 'Aucun contrat de travail disponible';
                 @endphp
-                <x-table :headers="$headers">
+                <table class="w-full">
+                    <x-table.head :headers="$headers" :background="false" />
                     <x-table.body>
                         @forelse ($collaborateur->contrat_travails as $row)
                             <tr>
@@ -71,7 +72,7 @@
                             </tr>
                         @endforelse
                     </x-table.body>
-                </x-table>
+                </table>
             </div>
         </x-card.card-body>
     </x-card>
