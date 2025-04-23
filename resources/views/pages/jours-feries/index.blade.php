@@ -9,7 +9,13 @@
                 {{ __('Ajouter un jour férié') }}
             </x-button.primary>
         </div> --}}
-        <livewire:jours-feries.calendar />
-        <livewire:jours-feries.table />
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            <div class="col-span-4">
+                <livewire:jours-feries.calendar />
+            </div>
+            <div class="col-span-1">
+                <livewire:jours-feries.grid />
+            </div>
+        </div>
     </div>
 </x-app-layout>
