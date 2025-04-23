@@ -48,7 +48,7 @@ new #[Layout('layouts.guest')] class extends Component {
                 <x-form.label name="form.remember" :label="__('Se souvenir de moi')" />
             </div>
         </div>
-        <div class="mt-5 flex flex-col items-center gap-4 justify-end ">
+        <div class="mt-5 flex flex-col items-center gap-4 justify-end">
             @if (Route::has('password.request'))
                 <a class="self-end text-sm font-semibold text-blue-600 hover:text-blue-500"
                     href="{{ route('password.request') }}" wire:navigate>

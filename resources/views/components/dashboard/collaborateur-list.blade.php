@@ -60,7 +60,7 @@
                             <dd class="truncate">{{ $collaborateur->email_professionnel }}</dd>
                         </div>
                     </dl>
-                    <div class="mt-3 flex flex-wrap">
+                    <div class="mt-3 flex flex-wrap gap-2">
                         @foreach (json_decode($collaborateur->competences_techniques) as $competence)
                             <x-badge.item :text="$competence" color="blue" />
                         @endforeach

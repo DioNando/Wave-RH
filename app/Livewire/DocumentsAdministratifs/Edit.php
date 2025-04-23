@@ -22,7 +22,10 @@ class Edit extends Component
     public function update()
     {
         $this->form->update();
-        return redirect()->route('documents-administratifs.index')->with('success', 'Document mis à jour avec succès');
+        // return redirect()->route('documents-administratifs.index')->with('success', 'Document mis à jour avec succès');
+        return $this->redirectRoute('documents-administratifs.index', [
+            'success' => 'Document mis à jour avec succès'
+        ]);
     }
 
     public function render()
