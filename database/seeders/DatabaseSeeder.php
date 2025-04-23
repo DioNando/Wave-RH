@@ -11,6 +11,7 @@ use App\Models\Departement;
 use App\Models\Diplome;
 use App\Models\DocumentAdministratif;
 use App\Models\InformationBancaire;
+use App\Models\JourFerie;
 use App\Models\Pays;
 use App\Models\Poste;
 use App\Models\Region;
@@ -29,6 +30,7 @@ use Database\Seeders\Data\GeographicData;
 use Database\Seeders\Data\HistoriqueCongesData;
 use Database\Seeders\Data\HistoriquePostesData;
 use Database\Seeders\Data\InformationBancaireData;
+use Database\Seeders\Data\JourFerieData;
 use Database\Seeders\Data\TypeDocumentData;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -62,6 +64,9 @@ class DatabaseSeeder extends Seeder
 
         // Créer les collaborateurs avec leurs relations
         $this->seedCollaborateurs();
+
+        // Créer les jours fériés
+        $this->seedJoursFeries();
 
         $this->call([
             HistoriquePostesData::class,
@@ -241,6 +246,18 @@ class DatabaseSeeder extends Seeder
 
                 DocumentAdministratif::create($documentData);
             }
+        }
+    }
+
+    /**
+     * Seed les jours fériés
+     */
+    public function seedJoursFeries(): void
+    {
+        $joursFeriesData = JourFerieData::getData();
+
+        foreach ($joursFeriesData as $jourFerieData) {
+            JourFerie::create($jourFerieData);
         }
     }
 }

@@ -51,15 +51,22 @@ $currentCells = count($month['days']);
                                 $isWeekend = $dayData['date']->isWeekend();
 
                                 // Classes dynamiques
-                                $buttonClasses = [
-                                    'py-2 focus:z-10 hover:bg-gray-100 dark:hover:bg-gray-600',
-                                    $isCurrentMonth
+                                $buttonClasses = ['py-2 focus:z-10 hover:bg-blue-100 dark:hover:bg-blue-600'];
+
+                                // Ajouter d'abord la classe pour les jours fériés pour qu'elle ait priorité
+                                if ($hasHoliday) {
+                                    $buttonClasses[] = 'bg-blue-500 text-white';
+                                } else {
+                                    // Sinon, appliquer les styles standards
+                                    $buttonClasses[] = $isCurrentMonth
                                         ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200'
-                                        : 'bg-gray-50 dark:bg-gray-900 text-gray-400 dark:text-gray-500',
-                                    $isWeekend && $isCurrentMonth
-                                        ? 'text-indigo-600 dark:text-indigo-400 font-medium'
-                                        : '',
-                                ];
+                                        : 'bg-gray-50 dark:bg-gray-900 text-gray-400 dark:text-gray-500';
+                                }
+
+                                // Ajouter les autres classes
+                                if ($isWeekend && $isCurrentMonth) {
+                                    $buttonClasses[] = 'text-orange-600 dark:text-orange-400 font-medium';
+                                }
 
                                 // Ajouter les classes pour les coins arrondis
                                 $index = $loop->index;
@@ -78,9 +85,8 @@ $currentCells = count($month['days']);
 
                                 // Classes pour l'affichage de la date
 $timeClasses = [
-    'mx-auto flex h-6 w-6 items-center justify-center rounded-full',
-    $isToday ? 'bg-primary-600 font-semibold text-gray-800 dark:text-white' : '',
-    $hasHoliday ? 'bg-red-500 text-white' : '',
+    'mx-auto flex h-6 w-6 items-center justify-center',
+    $isToday ? 'text-green-600 font-semibold rounded-full' : '',
                                 ];
                             @endphp
 
