@@ -12,7 +12,7 @@ class JourFerieController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.jours-feries.index');
     }
 
     /**

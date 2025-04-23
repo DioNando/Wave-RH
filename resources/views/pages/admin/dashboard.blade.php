@@ -33,10 +33,10 @@
                             trendType="up" color="blue" />
                         <x-dashboard.stat-card title="Départements" :value="$departementsCount" trend="1.5%" trendType="up"
                             color="green" />
-                        <x-dashboard.stat-card title="Salaires versés ce mois" :value="number_format($salairesVerses, 0, ',', ' ') . ' Dh'" trend="2.1%"
+                        {{-- <x-dashboard.stat-card title="Salaires versés ce mois" :value="number_format($salairesVerses, 0, ',', ' ') . ' Dh'" trend="2.1%"
                             trendType="up" color="default" />
                         <x-dashboard.stat-card title="Heures supplémentaires" :value="$heuresSupplementaires . 'h'" trend="5.7%"
-                            trendType="up" color="default" />
+                            trendType="up" color="default" /> --}}
                     </div>
                 </x-card.card-body>
             </x-card>
@@ -49,7 +49,7 @@
                         <a href="#"
                             class="block w-full py-2 px-3 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 rounded-lg border border-blue-100 dark:border-blue-800 transition">
                             <div class="flex items-center">
-                                <span class="flex-1 font-medium">Ajouter un utilisateur</span>
+                                <span class="flex-1 font-medium">Ajouter un collaborateur</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500"
                                     viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd"

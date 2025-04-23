@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/contacts-urgences', ContactUrgenceController::class);
     Route::resource('/contrats-travails', ContratTravailController::class);
     Route::resource('/conges', HistoriqueCongeController::class);
-    Route::resource('jours-feries', JourFerieController::class);
+    Route::resource('/jours-feries', JourFerieController::class);
 });
 
 // Gestion des erreurs personnalisée
