@@ -35,58 +35,49 @@
                     <x-table.cell>
                         <x-badge.statut :statut="$user->statut" />
                     </x-table.cell>
-                    <x-table.cell class="w-fit px-5 text-sm">
-                        <div class="flex gap-2">
-                            {{-- <a href="{{ route('admin.users.edit', $user->id) }}"
-                                class="inline-flex items-center p-2 text-sm text-white rounded-lg bg-orange-600 hover:bg-orange-700 dark:bg-orange-700 dark:hover:bg-orange-800 active:bg-orange-800 dark:active:bg-orange-900">
-                                <x-heroicon-o-pencil-square class="size-4" />
-                            </a> --}}
-                            @if (auth()->id() !== $user->id)
-                                <button
-                                    x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion-{{ $user->id }}')"
-                                    class="inline-flex items-center p-2 text-sm text-white rounded-lg bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-800 active:bg-red-800 dark:active:bg-red-900">
-                                    <x-heroicon-o-trash class="size-4" />
-                                </button>
-                                <x-modal name="confirm-user-deletion-{{ $user->id }}" :show="$errors->isNotEmpty()">
+                    <x-table.cell align="right">
+                        @if (auth()->id() !== $user->id)
+                            <x-button.action type="button" simple="true"
+                                x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion-{{ $user->id }}')" color="red">
+                                Supprimer </x-button.action>
+                            <x-modal name="confirm-user-deletion-{{ $user->id }}" :show="$errors->isNotEmpty()">
 
-                                    <div class="sm:p-6 p-4">
+                                <div class="sm:p-6 p-4">
 
-                                        <!-- Header -->
-                                        <div class="flex items-center gap-4">
-                                            <div
-                                                class="flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:size-10">
-                                                <x-heroicon-o-exclamation-triangle class="size-6 text-red-600" />
-                                            </div>
-                                            <h3 id="modal-title"
-                                                class="text-base font-semibold text-gray-900 dark:text-white">
-                                                Supprimer
-                                                {{ $user->nom . ' ' . $user->prenom }}
-                                            </h3>
+                                    <!-- Header -->
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:size-10">
+                                            <x-heroicon-o-exclamation-triangle class="size-6 text-red-600" />
                                         </div>
-
-                                        <!-- Body -->
-                                        <div class="mt-3 text-sm text-gray-700 dark:text-gray-300">
-                                            <p>Êtes-vous sûr de vouloir supprimer cet utilisateur ?
-                                                Cette action est irréversible.</p>
-                                        </div>
-
-                                        <!-- Actions -->
-                                        <div class="mt-5 sm:mt-4 flex flex-row-reverse gap-3">
-                                            <x-button.primary type="button"
-                                                wire:click="deleteUser({{ $user->id }})"
-                                                x-on:click="$dispatch('close-modal', 'confirm-user-deletion-{{ $user->id }}')"
-                                                color="red">
-                                                {{ __('Supprimer compte') }}
-                                            </x-button.primary>
-                                            <x-button.primary type="button" color="gray"
-                                                x-on:click="$dispatch('close-modal', 'confirm-user-deletion-{{ $user->id }}')">
-                                                {{ __('Annuler') }}
-                                            </x-button.primary>
-                                        </div>
+                                        <h3 id="modal-title"
+                                            class="text-base font-semibold text-gray-900 dark:text-white">
+                                            Supprimer
+                                            {{ $user->nom . ' ' . $user->prenom }}
+                                        </h3>
                                     </div>
-                                </x-modal>
-                            @endif
-                        </div>
+
+                                    <!-- Body -->
+                                    <div class="mt-3 text-sm text-gray-700 dark:text-gray-300">
+                                        <p>Êtes-vous sûr de vouloir supprimer cet utilisateur ?
+                                            Cette action est irréversible.</p>
+                                    </div>
+
+                                    <!-- Actions -->
+                                    <div class="mt-5 sm:mt-4 flex flex-row-reverse gap-3">
+                                        <x-button.primary type="button" wire:click="deleteUser({{ $user->id }})"
+                                            x-on:click="$dispatch('close-modal', 'confirm-user-deletion-{{ $user->id }}')"
+                                            color="red">
+                                            {{ __('Supprimer compte') }}
+                                        </x-button.primary>
+                                        <x-button.primary type="button" color="gray"
+                                            x-on:click="$dispatch('close-modal', 'confirm-user-deletion-{{ $user->id }}')">
+                                            {{ __('Annuler') }}
+                                        </x-button.primary>
+                                    </div>
+                                </div>
+                            </x-modal>
+                        @endif
                     </x-table.cell>
                 </tr>
             @empty

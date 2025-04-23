@@ -19,8 +19,8 @@
                     <x-table.cell>
                         <x-badge.statut :statut="$row->statut" />
                     </x-table.cell>
-                    <x-table.cell>
-                        <x-button.action route="postes.edit" :id="$row->id" icon="pencil-square" color="orange" />
+                    <x-table.cell align="right">
+                        <x-button.action simple="true" route="postes.edit" :id="$row->id" icon="pencil-square" color="orange">Editer</x-button.action>
                     </x-table.cell>
                 </tr>
             @empty

@@ -127,11 +127,12 @@
                         <x-badge.statut :statut="$collaborateur->statut" style="badge" />
                     </x-table.cell>
                     <x-table.cell>
-                        <div class="space-x-1">
-                            <x-button.action route="collaborateurs.show" :id="$collaborateur->id" icon="eye"
-                                color="blue" />
-                            <x-button.action route="collaborateurs.edit" :id="$collaborateur->id" icon="pencil-square"
-                                color="orange" />
+                        <div class="flex gap-1 items-center justify-end">
+                            <x-button.action simple="true" route="collaborateurs.show" :id="$collaborateur->id" icon="eye"
+                                color="blue">Consulter</x-button.action>
+                            <x-label.divide-vertical />
+                            <x-button.action simple="true" route="collaborateurs.edit" :id="$collaborateur->id"
+                                icon="pencil-square" color="orange">Editer</x-button.action>
                         </div>
                     </x-table.cell>
                 </tr>

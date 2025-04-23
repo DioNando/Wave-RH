@@ -40,7 +40,14 @@
                                         </div>
                                     </x-table.cell>
                                     <x-table.cell>
-                                        {{ $row->date_emission ? \Carbon\Carbon::parse($row->date_emission)->translatedFormat('d F Y') : 'N/A' }}
+                                        <div class="flex flex-col">
+                                            <span>
+                                                {{ $row->date_emission ? \Carbon\Carbon::parse($row->date_emission)->translatedFormat('d F Y') : 'N/A' }}
+                                            </span>
+                                            <span
+                                                class="text-xs text-gray-500 dark:text-gray-400">{{ $row->date_emission ? \Carbon\Carbon::parse($row->date_emission)->diffForHumans() : '' }}
+                                            </span>
+                                        </div>
                                     </x-table.cell>
                                     <x-table.cell>
                                         <div class="flex flex-col">
@@ -72,13 +79,14 @@
                                         <x-badge.statut :statut="$row->statut" />
                                     </x-table.cell>
                                     <x-table.cell>
-                                        <div class="space-x-1">
-                                            <x-button.action target="_blank"
+                                        <div class="flex gap-1 items-center justify-end">
+                                            <x-button.action simple="true" target="_blank"
                                                 href="{{ Storage::url($row->document_path) }}" icon="document"
-                                                color="green" />
-                                            <x-button.action
+                                                color="blue">Voir</x-button.action>
+                                            <x-label.divide-vertical />
+                                            <x-button.action simple="true"
                                                 href="{{ route('documents-administratifs.edit', $row->id) }}"
-                                                icon="pencil-square" color="orange" />
+                                                icon="pencil-square" color="orange">Editer</x-button.action>
                                         </div>
                                     </x-table.cell>
                                 </tr>

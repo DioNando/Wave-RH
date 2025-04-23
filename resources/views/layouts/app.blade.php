@@ -34,8 +34,8 @@
         <x-layout.sidebar />
         <livewire:layout.navbar />
         {{-- CONTENT --}}
-        {{-- <main id="content" class="py-8 rounded-tl-3xl border-l border-t border-gray-200 dark:border-none bg-gray-100 dark:bg-gray-800 overflow-auto"> --}}
-        <main id="content" class="py-8 rounded-tl-4xl bg-gray-100 dark:bg-gray-800 overflow-auto">
+        <main id="content" class="py-8 rounded-tl-3xl border-l border-t border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 overflow-auto">
+        {{-- <main id="content" class="py-8 rounded-tl-4xl bg-gray-100 dark:bg-gray-800 overflow-auto"> --}}
             <div class="px-4 sm:px-6 lg:px-8 relative">
                 <!-- Page Heading -->
                 @if (isset($header))

@@ -23,9 +23,9 @@
                     <x-table.cell>
                         <x-badge.statut :statut="$row->statut" />
                     </x-table.cell>
-                    <x-table.cell>
-                        <x-button.action href="{{ route('types-documents.edit', $row) }}" icon="pencil-square"
-                            color="orange" />
+                    <x-table.cell align="right">
+                        <x-button.action simple="true" href="{{ route('types-documents.edit', $row) }}" icon="pencil-square"
+                            color="orange" >Editer</x-button.action>
                     </x-table.cell>
                 </tr>
             @empty

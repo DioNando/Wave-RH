@@ -22,7 +22,7 @@
         <!-- Table wrapper -->
         <div x-ref="tableWrapper" @scroll="updateTopScroll()" class="overflow-auto scrollbar-custom py-2">
             <table
-                class="w-full md:rounded-lg overflow-hidden outline -outline-offset-1 outline-gray-300 dark:outline-gray-700">
+                class="w-full md:rounded-lg overflow-hidden outline -outline-offset-1 outline-gray-200 dark:outline-gray-700">
                 <x-table.head :headers="$headers" />
                 {{ $slot }}
                 {{-- <x-table.body :data="$data" /> --}}
