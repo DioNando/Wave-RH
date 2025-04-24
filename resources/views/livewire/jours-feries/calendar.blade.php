@@ -1,17 +1,16 @@
 <div>
     <x-card>
         <x-card.card-body>
-            <div class="flex items-center justify-end">
+            <div class="flex items-center justify-between">
+                <h2 class="text-3xl font-semibold text-blue-900 dark:text-white">
+                    {{ $year }}
+                </h2>
                 <div class="flex items-center gap-3">
                     <x-button.action wire:click="prevYear" type="button" color="blue" icon="chevron-left" />
-
                     {{-- <input type="number" wire:model="year"
                         class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md w-24 text-center focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400 dark:focus:border-blue-400" /> --}}
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        {{ $year }}
-                    </h2>
-                    <x-button.action wire:click="nextYear" type="button" color="blue" icon="chevron-right" />
 
+                    <x-button.action wire:click="nextYear" type="button" color="blue" icon="chevron-right" />
                 </div>
             </div>
             <div class="mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 3xl:grid-cols-4">
@@ -31,7 +30,7 @@
                                 <div>D</div>
                             </div>
                             <div
-                                class="isolate grid grid-cols-7 gap-px rounded-lg bg-gray-200 dark:bg-gray-700 text-sm shadow-md outline-1 -outline-offset-1 outline-gray-200 dark:outline-gray-700 flex-grow">
+                                class="isolate grid grid-cols-7 gap-px rounded-lg bg-gray-200 dark:bg-gray-700 text-sm shadow-md outline-1 outline-gray-200 dark:outline-gray-700 flex-grow">
                                 @php
                                     // Cette variable permet d'avoir 6 lignes pour chaque mois (42 jours)
 $totalCells = 42;
