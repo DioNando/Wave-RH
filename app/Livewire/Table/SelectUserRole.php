@@ -3,6 +3,7 @@
 namespace App\Livewire\Table;
 
 use Livewire\Component;
+use Spatie\Permission\Models\Role;
 
 class SelectUserRole extends Component
 {
@@ -20,6 +21,11 @@ class SelectUserRole extends Component
 
     public function render()
     {
-        return view('livewire.table.select-user-role');
+        // Récupérer tous les rôles disponibles pour les options du sélecteur
+        $roles = Role::all()->pluck('name');
+
+        return view('livewire.table.select-user-role', [
+            'roles' => $roles
+        ]);
     }
 }

@@ -25,13 +25,12 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $role = $user->role;
 
         // Données communes pour tous les utilisateurs
         $data = [];
 
         // Statistiques - uniquement pour les administrateurs
-        if ($role === UserRole::ADMIN) {
+        if ($user->hasRole(UserRole::ADMIN->value)) {
             $data['totalCollaborateurs'] = Collaborateur::count();
             $data['salairesVerses'] = ContratTravail::whereMonth('date_debut', Carbon::now()->month)
                 ->whereYear('date_debut', Carbon::now()->year)
@@ -88,12 +87,11 @@ class DashboardController extends Controller
         ];
 
         // Retourner la vue appropriée en fonction du rôle
-        return match ($role) {
-            UserRole::ADMIN => view('pages.admin.dashboard', $data),
-            UserRole::USER => view('pages.user.dashboard', $data),
-            // Ajoutez d'autres cas au besoin
-            default => view('pages.user.dashboard', $data),
-        };
+        if ($user->hasRole(UserRole::ADMIN->value)) {
+            return view('pages.admin.dashboard', $data);
+        } else {
+            return view('pages.user.dashboard', $data);
+        }
     }
 
     /**
@@ -101,12 +99,7 @@ class DashboardController extends Controller
      */
     public function settings()
     {
-        $user = Auth::user();
-        $role = $user->role;
-
-        return match ($role) {
-            default => view('pages.settings'),
-        };
+        return view('pages.settings');
     }
 
     /**

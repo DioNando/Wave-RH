@@ -23,24 +23,20 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Définition d'une gate pour vérifier si l'utilisateur est admin
-        Gate::define('admin', function (User $user) {
-            return $user->role === UserRole::ADMIN;
-        });
-
-        // Vous pouvez ajouter d'autres gates pour d'autres fonctionnalités
         Gate::define('manage-users', function (User $user) {
-            return $user->role === UserRole::ADMIN;
+            return $user->hasPermissionTo('manage users');
         });
 
-        // Gate générique pour vérifier n'importe quel rôle
-        Gate::define('has-role', function (User $user, string $role) {
-            return $user->role->value === $role;
+        Gate::define('manage-collaborateurs', function (User $user) {
+            return $user->hasPermissionTo('manage collaborateurs');
         });
 
-        // Si vous avez besoin d'autres autorisations spécifiques
-        // Gate::define('edit-settings', function (User $user) {
-        //     return $user->role === UserRole::ADMIN;
+        Gate::define('check-role', function (User $user, string $role) {
+            return $user->hasRole($role);
+        });
+
+        // Gate::define('manage-something-else', function (User $user) {
+        //     return $user->hasRole('admin');
         // });
     }
 }

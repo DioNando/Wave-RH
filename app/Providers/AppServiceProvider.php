@@ -35,14 +35,9 @@ class AppServiceProvider extends ServiceProvider
             return Auth::check() && Auth::user()->isAdmin();
         });
 
-        // Vous pouvez ajouter d'autres directives pour d'autres rôles
-        // Exemple:
-        // Blade::if('role', function ($role) {
-        //    return auth()->check() && auth()->user()->role->value === $role;
-        // });
-
-        // Paginator::defaultView('tailwind');
-
-        // Paginator::defaultSimpleView('simple-tailwind');
+        // Directive pour vérifier si l'utilisateur est un utilisateur
+        Blade::if('user', function () {
+            return Auth::check() && Auth::user()->isUser();
+        });
     }
 }

@@ -6,6 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Table extends Component
 {
@@ -60,17 +61,23 @@ class Table extends Component
 
     public function render()
     {
-        $users = User::query()
+        $usersQuery = User::query()
             ->when($this->search, function ($query) {
                 $query->where(function ($q) {
                     $q->where('nom', 'like', '%' . $this->search . '%')
                         ->orWhere('prenom', 'like', '%' . $this->search . '%')
                         ->orWhere('email', 'like', '%' . $this->search . '%');
                 });
-            })
-            ->when($this->role, function ($query) {
-                $query->where('role', $this->role);
-            })
+            });
+
+        // Filtre par rôle en utilisant Spatie Permission
+        if ($this->role) {
+            $usersQuery = $usersQuery->whereHas('roles', function ($query) {
+                $query->where('name', $this->role);
+            });
+        }
+
+        $users = $usersQuery
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(10);
 

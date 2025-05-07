@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\Data;
+namespace Database\Seeders;
 
 use App\Enums\TypeConge;
 use App\Models\Collaborateur;
@@ -8,12 +8,15 @@ use App\Models\HistoriqueConge;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
-class HistoriqueCongesData extends Seeder
+class HistoriqueCongeSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
         $collaborateurs = Collaborateur::all();
-        $typesConges = TypeConge::all();
+        $typesConges = TypeConge::cases();
 
         foreach ($collaborateurs as $collaborateur) {
             // Générer 2 à 5 congés par collaborateur

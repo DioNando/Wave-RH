@@ -1,3 +1,6 @@
+@php
+    use App\Enums\UserRole;
+@endphp
 <x-app-layout>
     {{-- * Dashboard header --}}
     <div>
@@ -8,12 +11,17 @@
                 </h3>
                 <div class="flex items-center">
                     @php
-                        $roleColor = match (auth()->user()->role->value) {
-                            \App\Enums\UserRole::ADMIN->value => 'red',
-                            \App\Enums\UserRole::USER->value => 'blue',
+
+                        $roleColor = match (true) {
+                            auth()->user()->hasRole(UserRole::ADMIN->value) => 'red',
+                            auth()->user()->hasRole(UserRole::USER->value) => 'blue',
                             default => 'gray',
                         };
-                        $roleLabel = auth()->user()->role->label();
+                        $roleLabel = match (true) {
+                            auth()->user()->hasRole(UserRole::ADMIN->value) => UserRole::ADMIN->label(),
+                            auth()->user()->hasRole(UserRole::USER->value) => UserRole::USER->label(),
+                            default => 'Invité',
+                        };
                     @endphp
                     <x-badge.item :text="$roleLabel" :color="$roleColor" />
                 </div>

@@ -8,11 +8,12 @@ use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +25,7 @@ class User extends Authenticatable
         'prenom',
         'email',
         'password',
-        'role',
+        // 'role' - Supprimé car maintenant géré par Spatie
         'statut',
     ];
 
@@ -48,7 +49,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'role' => UserRole::class,
+            // 'role' => UserRole::class, - Supprimé car maintenant géré par Spatie
             'statut' => 'boolean',
         ];
     }
@@ -65,6 +66,7 @@ class User extends Authenticatable
      */
     public function isAdmin(): bool
     {
-        return $this->role === UserRole::ADMIN;
+        // Utilisation de Spatie pour vérifier le rôle
+        return $this->hasRole('admin');
     }
 }

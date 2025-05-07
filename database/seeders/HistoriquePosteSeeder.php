@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\Data;
+namespace Database\Seeders;
 
 use App\Models\Collaborateur;
 use App\Models\HistoriquePoste;
@@ -8,8 +8,11 @@ use App\Models\Poste;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
-class HistoriquePostesData extends Seeder
+class HistoriquePosteSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
         $collaborateurs = Collaborateur::all();
