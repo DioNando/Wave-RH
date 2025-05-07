@@ -21,3 +21,5 @@
     --color-blue-900: oklch(0.3 0.1 250);
     --color-blue-950: oklch(0.22 0.08 250);
 }
+
+[x-cloak] { display: none !important; }

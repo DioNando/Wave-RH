@@ -5,16 +5,11 @@
         </x-card.card-header>
     </x-card>
 
-    <div class="space-y-3 overflow-auto">
+    <div class="space-y-3 h-screen overflow-y-auto snap-y snap-mandatory rounded-lg scrollbar-none">
         @forelse ($joursFeries as $jourFerie)
-            <x-card class="overflow-hidden hover:shadow-md transition-shadow duration-200">
+            <x-card class="snap-start overflow-hidden hover:shadow-md transition-shadow duration-200">
+                <!-- Le contenu de la carte reste inchangé -->
                 <div class="relative">
-                    {{-- @if ($jourFerie->est_recurrent)
-                        <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs px-2 py-1 rounded-bl">
-                            Récurrent
-                        </div>
-                    @endif --}}
-
                     <div class="p-4">
                         <div class="flex items-center justify-between mb-2">
                             <h4 class="font-semibold text-md">{{ $jourFerie->nom }}</h4>

@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </x-slot>
-        </div>
+        </div>w
         {{-- * Dashboard content --}}
 
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
