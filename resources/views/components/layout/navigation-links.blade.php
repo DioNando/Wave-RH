@@ -51,9 +51,12 @@
                 <x-layout.link-primary route="users.index" icon="users" label="Utilisateurs" />
             </li>
         @endadmin
-        {{-- <li>
+        <li>
             <x-layout.link-primary route="examples.ui" icon="paint-brush" label="Exemples UI" />
-        </li> --}}
+        </li>
+        <li>
+            <x-layout.link-primary route="examples.diagrams" icon="chart-bar" label="Diagrammes" />
+        </li>
         <li>
             <x-layout.link-primary route="settings" icon="wrench-screwdriver" label="Configurations" />
         </li>

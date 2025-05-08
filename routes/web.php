@@ -28,7 +28,29 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/settings', [DashboardController::class, 'settings'])->name('settings');
     Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
-    Route::get('/examples/ui', [DashboardController::class, 'example'])->name('examples.ui');
+    Route::get('/ui', [DashboardController::class, 'example'])->name('examples.ui');
+    Route::get('/diagrams', function () {
+        return view('pages.diagrams.index');
+    })->name('examples.diagrams');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Diagrammes
+    Route::get('/diagrammes/classes', function () {
+        return view('pages.diagrams.classes');
+    })->name('examples.diagrams.classes');
+
+    Route::get('/diagrammes/sequences', function () {
+        return view('pages.diagrams.sequences');
+    })->name('examples.diagrams.sequences');
+
+    Route::get('/diagrammes/packages', function () {
+        return view('pages.diagrams.packages');
+    })->name('examples.diagrams.packages');
+
+    Route::get('/diagrammes/use-cases', function () {
+        return view('pages.diagrams.use-cases');
+    })->name('examples.diagrams.use-cases');
 });
 
 // Routes pour la gestion des utilisateurs (admin)

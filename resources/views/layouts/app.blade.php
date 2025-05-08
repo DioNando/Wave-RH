@@ -27,6 +27,9 @@
             document.documentElement.setAttribute("data-theme", theme);
         })();
     </script>
+
+    <!-- Additional Scripts -->
+    @stack('scripts')
 </head>
 
 <body class="font-sans antialiased h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-50">
