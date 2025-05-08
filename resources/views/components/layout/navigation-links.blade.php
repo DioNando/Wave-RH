@@ -55,7 +55,7 @@
             <x-layout.link-primary route="examples.ui" icon="paint-brush" label="Exemples UI" />
         </li>
         <li>
-            <x-layout.link-primary route="examples.diagrams" icon="chart-bar" label="Diagrammes" />
+            <x-layout.link-primary route="examples.diagrams" icon="square-3-stack-3d" label="Diagrammes" />
         </li>
         <li>
             <x-layout.link-primary route="settings" icon="wrench-screwdriver" label="Configurations" />
