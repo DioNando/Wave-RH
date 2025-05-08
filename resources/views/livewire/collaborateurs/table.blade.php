@@ -3,10 +3,21 @@
 @endphp
 
 <div>
-    <x-table :headers="['', ...$headers, '']">
+    <x-table>
+        <x-table.head>
+            <th>
+                {{-- CHECKBOX --}}
+            </th>
+            @foreach ($headers as $header)
+                <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+            @endforeach
+        </x-table.head>
         <x-table.body class="bg-white dark:bg-gray-900">
             @forelse ($collaborateurs as $collaborateur)
                 <tr>
+                    <td>
+                        {{-- CHECKBOX --}}
+                    </td>
                     <x-table.cell class="w-0 pr-0">
                         <div x-data="{ getInitial(nom, prenom) { return nom.charAt(0).toUpperCase() + prenom.charAt(0).toUpperCase(); } }"
                             class="relative size-11 overflow-hidden bg-gray-400 dark:bg-gray-700 rounded-full text-gray-100 dark:text-gray-200 text-lg font-mono flex items-center justify-center">
@@ -44,7 +55,7 @@
                     @endif
                     @if (in_array('matricule_interne', $visibleColumns))
                         <x-table.cell class="text-gray-500">
-                            <div class="text-gray-600 dark:text-gray-200">
+                            <div class="text-gray-600 dark:text-gray-200 font-mono">
                                 {{ $collaborateur->matricule_interne }}</div>
                         </x-table.cell>
                     @endif
@@ -52,7 +63,7 @@
                         <x-table.cell>
                             <div class="flex flex-col gap-1">
                                 @forelse ($collaborateur->information_bancaires as $info)
-                                    <span class="text-gray-500 text-xs">
+                                    <span class="text-gray-500 text-xs font-mono">
                                         IBAN : {{ $info->iban }}
                                     </span>
                                 @empty
@@ -123,7 +134,7 @@
                             </div>
                         </x-table.cell>
                     @endif
-                    <x-table.cell>
+                    <x-table.cell align="center">
                         <x-badge.statut :statut="$collaborateur->statut" style="badge" />
                     </x-table.cell>
                     <x-table.cell>
@@ -148,4 +159,49 @@
     <nav class="mt-3">
         {{ $collaborateurs->onEachSide(1)->links('pagination::tailwind') }}
     </nav>
+
+    @push('scripts')
+        <script>
+            function usersTable() {
+                return {
+                    toggleAll(event) {
+                        const checkboxes = document.querySelectorAll('.user-checkbox');
+                        const isChecked = event.target.checked;
+
+                        // Vider ou remplir la liste des utilisateurs sélectionnés
+                        this.selectedUsers = [];
+
+                        if (isChecked) {
+                            // Sélectionner tous les utilisateurs
+                            checkboxes.forEach(checkbox => {
+                                checkbox.checked = true;
+                                this.selectedUsers.push(parseInt(checkbox.value));
+                            });
+                        } else {
+                            // Désélectionner tous les utilisateurs
+                            checkboxes.forEach(checkbox => {
+                                checkbox.checked = false;
+                            });
+                        }
+                    },
+                    toggleUser(userId) {
+                        const index = this.selectedUsers.indexOf(userId);
+
+                        if (index === -1) {
+                            // Ajouter à la liste des sélectionnés
+                            this.selectedUsers.push(userId);
+                        } else {
+                            // Retirer de la liste des sélectionnés
+                            this.selectedUsers.splice(index, 1);
+                        }
+
+                        // Mettre à jour la case "Select All"
+                        const checkboxes = document.querySelectorAll('.user-checkbox');
+                        const selectAllCheckbox = document.getElementById('select-all-users');
+                        selectAllCheckbox.checked = this.selectedUsers.length === checkboxes.length;
+                    }
+                }
+            }
+        </script>
+    @endpush
 </div>

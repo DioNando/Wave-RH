@@ -17,16 +17,16 @@ class Table extends Component
     public $filters = [];
 
     public $allColumns = [
-        'nom' => 'Nom',
-        'poste' => 'Poste',
-        'matricule_interne' => 'Matricule Interne',
-        'information_bancaires' => 'Informations Bancaires',
-        'contact' => 'Contact',
-        'ville' => 'Ville',
-        'statut' => 'Statut',
-        'date_embauche' => 'Date d\'embauche',
-        'created_at' => 'Création',
-        'updated_at' => 'Modification',
+        'nom' => ['content' => 'Nom', 'align' => 'text-left'],
+        'poste' => ['content' => 'Poste', 'align' => 'text-left'],
+        'matricule_interne' => ['content' => 'Matricule Interne', 'align' => 'text-left'],
+        'information_bancaires' => ['content' => 'Informations Bancaires', 'align' => 'text-left'],
+        'contact' => ['content' => 'Contact', 'align' => 'text-left'],
+        'ville' => ['content' => 'Ville', 'align' => 'text-left'],
+        'statut' => ['content' => 'Statut', 'align' => 'text-center'],
+        'date_embauche' => ['content' => 'Date d\'embauche', 'align' => 'text-left'],
+        'created_at' => ['content' => 'Création', 'align' => 'text-left'],
+        'updated_at' => ['content' => 'Modification', 'align' => 'text-left'],
     ];
 
     protected $updatesQueryString = ['search', 'sortField', 'sortDirection'];
@@ -133,10 +133,26 @@ class Table extends Component
         // 📜 Pagination
         $collaborateurs = $query->paginate(10);
 
+        // Préparer les headers selon le nouveau format
+        $headers = [];
+
+        // Ajouter une colonne d'actions vide alignée à gauche au début
+        $headers[] = ['content' => '', 'align' => 'text-left'];
+
+        // Ajouter les colonnes visibles
+        foreach($this->visibleColumns as $column) {
+            if(isset($this->allColumns[$column])) {
+                $headers[] = $this->allColumns[$column];
+            }
+        }
+
+        // Ajouter une colonne d'actions vide alignée à droite à la fin
+        $headers[] = ['content' => '', 'align' => 'text-right'];
+
         return view('livewire.collaborateurs.table', [
             'collaborateurs' => $collaborateurs,
             'visibleColumns' => $this->visibleColumns,
-            'headers' => collect($this->allColumns)->only($this->visibleColumns)->values()->toArray()
+            'headers' => $headers
         ]);
     }
 }
