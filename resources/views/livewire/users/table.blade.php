@@ -1,12 +1,23 @@
 @php
     use App\Enums\UserRole;
 
-    $headers = ['Nom', 'Rôle', 'Date de création', 'Statut', ''];
+    $headers = [
+        ['content' => 'Nom', 'align' => 'text-left'],
+        ['content' => 'Rôle', 'align' => 'text-left'],
+        ['content' => 'Date de création', 'align' => 'text-left'],
+        ['content' => 'Statut', 'align' => 'text-left'],
+        ['content' => '', 'align' => 'text-right'],
+    ];
     $empty = 'Aucun utilisateur trouvé';
 @endphp
 
 <div>
     <x-table.table :headers="$headers">
+        <x-table.head>
+            @foreach ($headers as $header)
+                <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+            @endforeach
+        </x-table.head>
         <x-table.body class="bg-white dark:bg-gray-900">
             @forelse($users as $user)
                 <tr>

@@ -33,10 +33,17 @@
 <thead class="{{ $colorClass() }} {{ $background ? $bgClass() : '' }} border-b border-gray-200 dark:border-gray-700">
     <tr>
         @foreach ($headers as $header)
-            <th scope="col"
-                class="uppercase px-5 py-3.5 {{ $align }} text-xs font-semibold">
-                {{ $header }}
-            </th>
+            @if (is_array($header) && isset($header['label']))
+                <th scope="col"
+                    class="uppercase px-5 py-3.5 {{ $header['align'] ?? 'text-left' }} text-xs font-semibold">
+                    {{ $header['label'] }}
+                </th>
+            @elseif (is_string($header))
+                <th scope="col" class="uppercase px-5 py-3.5 text-left text-xs font-semibold">
+                    {{ $header }}
+                </th>
+            @endif
         @endforeach
+        {{ $slot }}
     </tr>
 </thead>
