@@ -20,7 +20,7 @@ class Create extends Component
     public function store()
     {
         $this->form->store();
-        return redirect()->route('collaborateurs.show', $this->form->collaborateur->id)->with('success', 'Contact d\'urgence ajouté avec succès');
+        return redirect()->route('collaborateurs.show', ['collaborateur' => $this->form->collaborateur->id, 'tab' => 'profil-personnel'])->with('success', 'Contact d\'urgence ajouté avec succès');
     }
 
     public function render()

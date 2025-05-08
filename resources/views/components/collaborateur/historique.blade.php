@@ -17,18 +17,22 @@
             <div>
                 @php
                     $headers = [
-                        'Poste',
-                        'Département',
-                        'Date début',
-                        'Date fin',
-                        'Commentaires',
-                        'Raison fin',
-                        'Statut',
+                        ['content' => 'Poste', 'align' => 'text-left'],
+                        ['content' => 'Département', 'align' => 'text-left'],
+                        ['content' => 'Date début', 'align' => 'text-left'],
+                        ['content' => 'Date fin', 'align' => 'text-left'],
+                        ['content' => 'Commentaires', 'align' => 'text-left'],
+                        ['content' => 'Raison fin', 'align' => 'text-left'],
+                        ['content' => 'Statut', 'align' => 'text-left'],
                     ];
                     $empty = 'Aucun historique de poste disponible';
                 @endphp
                 <table class="w-full">
-                    <x-table.head :headers="$headers" :background="false" />
+                    <x-table.head :background="false">
+                        @foreach ($headers as $header)
+                            <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+                        @endforeach
+                    </x-table.head>
                     <x-table.body>
                         @forelse ($collaborateur->historique_postes as $row)
                             <tr>
@@ -64,11 +68,23 @@
         <x-card.card-body>
             <div>
                 @php
-                    $headers = ['Type de congé', 'Date début', 'Date fin', 'Durée', 'Motif', 'Commentaires', 'Statut'];
+                    $headers = [
+                        ['content' => 'Type de congé', 'align' => 'text-left'],
+                        ['content' => 'Date début', 'align' => 'text-left'],
+                        ['content' => 'Date fin', 'align' => 'text-left'],
+                        ['content' => 'Durée', 'align' => 'text-left'],
+                        ['content' => 'Motif', 'align' => 'text-left'],
+                        ['content' => 'Commentaires', 'align' => 'text-left'],
+                        ['content' => 'Statut', 'align' => 'text-left'],
+                    ];
                     $empty = 'Aucun historique de congé disponible';
                 @endphp
                 <table class="w-full">
-                    <x-table.head :headers="$headers" :background="false" />
+                    <x-table.head :background="false">
+                        @foreach ($headers as $header)
+                            <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+                        @endforeach
+                    </x-table.head>
                     <x-table.body>
                         @forelse ($collaborateur->historique_conges as $row)
                             <tr>
@@ -105,23 +121,27 @@
             <div>
                 @php
                     $headers = [
-                        'Ancien salaire',
-                        'Nouveau salaire',
-                        'Monnaie',
-                        'Pourcentage',
-                        'Motif',
-                        'Commentaires',
-                        'Statut',
+                        ['content' => 'Ancien salaire', 'align' => 'text-right'],
+                        ['content' => 'Nouveau salaire', 'align' => 'text-right'],
+                        ['content' => 'Monnaie', 'align' => 'text-left'],
+                        ['content' => 'Pourcentage', 'align' => 'text-left'],
+                        ['content' => 'Motif', 'align' => 'text-left'],
+                        ['content' => 'Commentaires', 'align' => 'text-left'],
+                        ['content' => 'Statut', 'align' => 'text-left'],
                     ];
                     $empty = 'Aucun historique d\'augmentation disponible';
                 @endphp
                 <table class="w-full">
-                    <x-table.head :headers="$headers" :background="false" />
+                    <x-table.head :background="false">
+                        @foreach ($headers as $header)
+                            <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+                        @endforeach
+                    </x-table.head>
                     <x-table.body>
                         @forelse ($collaborateur->historique_augmentations as $row)
                             <tr>
-                                <x-table.cell content="{{ $row->ancien_salaire }}" />
-                                <x-table.cell content="{{ $row->nouveau_salaire }}" />
+                                <x-table.cell align="right" content="{{ $row->ancien_salaire }}" />
+                                <x-table.cell align="right" content="{{ $row->nouveau_salaire }}" />
                                 <x-table.cell content="{{ $row->monnaie->name }}" />
                                 <x-table.cell content="{{ $row->pourcentage }}%" />
                                 <x-table.cell content="{{ $row->motif }}" />
@@ -151,24 +171,28 @@
             <div>
                 @php
                     $headers = [
-                        'Date de prime',
-                        'Montant',
-                        'Monnaie',
-                        'Type de prime',
-                        'Motif',
-                        'Commentaires',
-                        'Statut',
+                        ['content' => 'Date de prime', 'align' => 'text-left'],
+                        ['content' => 'Montant', 'align' => 'text-right'],
+                        ['content' => 'Monnaie', 'align' => 'text-left'],
+                        ['content' => 'Type de prime', 'align' => 'text-left'],
+                        ['content' => 'Motif', 'align' => 'text-left'],
+                        ['content' => 'Commentaires', 'align' => 'text-left'],
+                        ['content' => 'Statut', 'align' => 'text-left'],
                     ];
                     $empty = 'Aucun historique de prime disponible';
                 @endphp
                 <table class="w-full">
-                    <x-table.head :headers="$headers" :background="false" />
+                    <x-table.head :background="false">
+                        @foreach ($headers as $header)
+                            <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+                        @endforeach
+                    </x-table.head>
                     <x-table.body>
                         @forelse ($collaborateur->historique_primes as $row)
                             <tr>
                                 <x-table.cell
                                     content="{{ \Carbon\Carbon::parse($row->date_prime)->translatedFormat('d F Y') }}" />
-                                <x-table.cell content="{{ $row->montant }}" />
+                                <x-table.cell align="right" content="{{ $row->montant }}" />
                                 <x-table.cell content="{{ $row->monnaie->name }}" />
                                 <x-table.cell content="{{ $row->type_prime->name }}" />
                                 <x-table.cell content="{{ $row->motif }}" />
@@ -198,19 +222,23 @@
             <div>
                 @php
                     $headers = [
-                        'Titre',
-                        'Organisme',
-                        'Type de formation',
-                        'Date début',
-                        'Date fin',
-                        'Résultat',
-                        'Commentaires',
-                        'Statut',
+                        ['content' => 'Titre', 'align' => 'text-left'],
+                        ['content' => 'Organisme', 'align' => 'text-left'],
+                        ['content' => 'Type de formation', 'align' => 'text-left'],
+                        ['content' => 'Date début', 'align' => 'text-left'],
+                        ['content' => 'Date fin', 'align' => 'text-left'],
+                        ['content' => 'Résultat', 'align' => 'text-left'],
+                        ['content' => 'Commentaires', 'align' => 'text-left'],
+                        ['content' => 'Statut', 'align' => 'text-left'],
                     ];
                     $empty = 'Aucun historique de formation disponible';
                 @endphp
                 <table class="w-full">
-                    <x-table.head :headers="$headers" :background="false" />
+                    <x-table.head :background="false">
+                        @foreach ($headers as $header)
+                            <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+                        @endforeach
+                    </x-table.head>
                     <x-table.body>
                         @forelse ($collaborateur->historique_formations as $row)
                             <tr>

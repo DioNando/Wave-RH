@@ -18,7 +18,7 @@ class Create extends Component
     public function store()
     {
         $this->form->store();
-        return redirect()->route('collaborateurs.show', $this->form->collaborateur->id)->with('success', 'Information bancaire ajoutée avec succès');
+        return redirect()->route('collaborateurs.show', ['collaborateur' => $this->form->collaborateur->id, 'tab' => 'finances'])->with('success', 'Information bancaire ajoutée avec succès');
     }
 
     public function render()

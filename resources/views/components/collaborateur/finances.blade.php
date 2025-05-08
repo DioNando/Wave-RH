@@ -9,17 +9,27 @@
             </div>
             <div>
                 @php
-                    $headers = ['Nom de la banque', 'Titulaire', 'IBAN', 'SWIFT', 'Statut'];
+                    $headers = [
+                        ['content' => 'Nom de la banque', 'align' => 'text-left'],
+                        ['content' => 'Titulaire', 'align' => 'text-left'],
+                        ['content' => 'IBAN', 'align' => 'text-left'],
+                        ['content' => 'SWIFT', 'align' => 'text-left'],
+                        ['content' => 'Statut', 'align' => 'text-left'],
+                    ];
                     $empty = 'Aucune information bancaire disponible';
                 @endphp
                 <table class="w-full">
-                    <x-table.head :headers="$headers" :background="false" />
+                    <x-table.head :background="false">
+                        @foreach ($headers as $header)
+                            <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+                        @endforeach
+                    </x-table.head>
                     <x-table.body>
                         @forelse ($collaborateur->information_bancaires as $row)
                             <tr>
                                 <x-table.cell content="{{ $row->nom_banque }}" />
                                 <x-table.cell content="{{ $row->titulaire_compte }}" />
-                                <x-table.cell class="font-medium" content="{{ $row->iban }}" />
+                                <x-table.cell class="font-medium font-mono" content="{{ $row->iban }}" />
                                 <x-table.cell content="{{ $row->code_swift }}" />
                                 <x-table.cell>
                                     <x-badge.statut :statut="$row->statut" />

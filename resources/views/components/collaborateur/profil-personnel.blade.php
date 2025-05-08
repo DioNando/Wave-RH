@@ -47,17 +47,29 @@
             </div>
             <div>
                 @php
-                    $headers = ['Nom', 'Relation', 'Téléphone', 'Email', 'Adresse complète', 'Ville', 'Statut'];
+                    $headers = [
+                        ['content' => 'Nom', 'align' => 'text-left'],
+                        ['content' => 'Relation', 'align' => 'text-left'],
+                        ['content' => 'Téléphone', 'align' => 'text-right'],
+                        ['content' => 'Email', 'align' => 'text-left'],
+                        ['content' => 'Adresse complète', 'align' => 'text-left'],
+                        ['content' => 'Ville', 'align' => 'text-left'],
+                        ['content' => 'Statut', 'align' => 'text-left'],
+                    ];
                     $empty = 'Aucun contact d\'urgence disponible';
                 @endphp
                 <table class="w-full">
-                    <x-table.head :headers="$headers" :background="false" />
+                    <x-table.head :background="false">
+                        @foreach ($headers as $header)
+                            <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+                        @endforeach
+                    </x-table.head>
                     <x-table.body>
                         @forelse ($collaborateur->contact_urgences as $row)
                             <tr>
                                 <x-table.cell content="{{ $row->nom }}" />
                                 <x-table.cell content="{{ $row->relation }}" />
-                                <x-table.cell content="{{ $row->telephone }}" />
+                                <x-table.cell align="right" content="{{ $row->telephone }}" />
                                 <x-table.cell content="{{ $row->email }}" />
                                 <x-table.cell content="{{ $row->adresse_complete }}" />
                                 <x-table.cell content="{{ $row->ville->nom }}" />

@@ -32,11 +32,24 @@
             </div>
             <div>
                 @php
-                    $headers = ['Type', 'Date début', 'Date fin', 'Durée', 'Salaire', 'Statut', 'Document', ''];
+                    $headers = [
+                        ['content' => 'Type', 'align' => 'text-left'],
+                        ['content' => 'Date début', 'align' => 'text-left'],
+                        ['content' => 'Date fin', 'align' => 'text-left'],
+                        ['content' => 'Durée', 'align' => 'text-left'],
+                        ['content' => 'Salaire', 'align' => 'text-right'],
+                        ['content' => 'Statut', 'align' => 'text-left'],
+                        ['content' => 'Document', 'align' => 'text-left'],
+                        ['content' => '', 'align' => 'text-left'],
+                    ];
                     $empty = 'Aucun contrat de travail disponible';
                 @endphp
                 <table class="w-full">
-                    <x-table.head :headers="$headers" :background="false" />
+                    <x-table.head :background="false">
+                        @foreach ($headers as $header)
+                            <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+                        @endforeach
+                    </x-table.head>
                     <x-table.body>
                         @forelse ($collaborateur->contrat_travails as $row)
                             <tr>
@@ -47,7 +60,7 @@
                                     content="{{ \Carbon\Carbon::parse($row->date_fin)->translatedFormat('d F Y') }}" />
                                 <x-table.cell
                                     content="{{ $row->date_fin ? \Carbon\Carbon::parse($row->date_debut)->diffInDays($row->date_fin) . ' jours' : '' }}" />
-                                <x-table.cell content="{{ $row->salaire }}" />
+                                <x-table.cell align="right" content="{{ $row->salaire }}" />
 
                                 <x-table.cell>
                                     <x-badge.statut :statut="$row->statut" />

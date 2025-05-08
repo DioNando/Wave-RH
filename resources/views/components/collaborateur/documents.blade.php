@@ -7,11 +7,21 @@
         <x-card.card-body>
             <div>
                 @php
-                    $headers = ['Type de document', 'Date d\'émission', 'Date d\'expiration', 'Statut', ''];
+                    $headers = [
+                        ['content' => 'Type de document', 'align' => 'text-left'],
+                        ['content' => 'Date d\'émission', 'align' => 'text-left'],
+                        ['content' => 'Date d\'expiration', 'align' => 'text-left'],
+                        ['content' => 'Statut', 'align' => 'text-left'],
+                        ['content' => '', 'align' => 'text-right'],
+                    ];
                     $empty = 'Aucun document trouvé';
                 @endphp
                 <table class="w-full">
-                    <x-table.head :headers="$headers" :background="false" />
+                    <x-table.head :background="false">
+                        @foreach ($headers as $header)
+                            <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+                        @endforeach
+                    </x-table.head>
                     <x-table.body>
                         @forelse ($collaborateur->document_administratifs as $row)
                             <tr>
@@ -63,7 +73,7 @@
                                 <x-table.cell>
                                     <x-badge.statut :statut="$row->statut" />
                                 </x-table.cell>
-                                <x-table.cell>
+                                <x-table.cell align="right">
                                     <div class="flex gap-1 items-center justify-end">
                                         <x-button.action simple="true" target="_blank"
                                             href="{{ Storage::url($row->document_path) }}" icon="document"
@@ -96,11 +106,22 @@
             </div>
             <div>
                 @php
-                    $headers = ['Titre', 'Établissement', 'Niveau', 'Date d\'obtention', 'Statut', ''];
+                    $headers = [
+                        ['content' => 'Titre', 'align' => 'text-left'],
+                        ['content' => 'Établissement', 'align' => 'text-left'],
+                        ['content' => 'Niveau', 'align' => 'text-left'],
+                        ['content' => 'Date d\'obtention', 'align' => 'text-left'],
+                        ['content' => 'Statut', 'align' => 'text-left'],
+                        ['content' => '', 'align' => 'text-right'],
+                    ];
                     $empty = 'Aucun diplôme disponible';
                 @endphp
                 <table class="w-full">
-                    <x-table.head :headers="$headers" :background="false" />
+                    <x-table.head :background="false">
+                        @foreach ($headers as $header)
+                            <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+                        @endforeach
+                    </x-table.head>
                     <x-table.body>
                         @forelse ($collaborateur->diplomes as $row)
                             <tr>
@@ -112,7 +133,7 @@
                                 <x-table.cell>
                                     <x-badge.statut :statut="$row->statut" />
                                 </x-table.cell>
-                                <x-table.cell>
+                                <x-table.cell align="right">
                                     <div class="flex gap-1 items-center justify-end">
                                         <x-button.action simple="true" target="_blank"
                                             href="{{ Storage::url($row->document_path) }}" icon="document"
@@ -145,11 +166,23 @@
             </div>
             <div>
                 @php
-                    $headers = ['Titre', 'Organisme', 'Pays', 'Date d\'obtention', 'Date d\'expiration', 'Statut', ''];
+                    $headers = [
+                        ['content' => 'Titre', 'align' => 'text-left'],
+                        ['content' => 'Organisme', 'align' => 'text-left'],
+                        ['content' => 'Pays', 'align' => 'text-left'],
+                        ['content' => 'Date d\'obtention', 'align' => 'text-left'],
+                        ['content' => 'Date d\'expiration', 'align' => 'text-left'],
+                        ['content' => 'Statut', 'align' => 'text-left'],
+                        ['content' => '', 'align' => 'text-right'],
+                    ];
                     $empty = 'Aucune certification disponible';
                 @endphp
                 <table class="w-full">
-                    <x-table.head :headers="$headers" :background="false" />
+                    <x-table.head :background="false">
+                        @foreach ($headers as $header)
+                            <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+                        @endforeach
+                    </x-table.head>
                     <x-table.body>
                         @forelse ($collaborateur->certifications as $row)
                             <tr>
@@ -184,7 +217,7 @@
                                 <x-table.cell>
                                     <x-badge.statut :statut="$row->statut" />
                                 </x-table.cell>
-                                <x-table.cell>
+                                <x-table.cell align="right">
                                     <div class="flex gap-1 items-center justify-end">
                                         <x-button.action simple="true" target="_blank"
                                             href="{{ Storage::url($row->document_path) }}" icon="document"
