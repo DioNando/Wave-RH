@@ -254,46 +254,46 @@ class Enums enumsPackage;
                 <h2 class="text-xl font-semibold mb-4">Architecture Frontend</h2>
 
                 <x-diagram.mermaid caption="Architecture de la couche Frontend (Livewire)">
-flowchart TB
-subgraph Client["Navigateur"]
-View["Vue Blade"]
-LivewireJS["Livewire.js"]
-end
+                    flowchart TB
+                    subgraph Client["Navigateur"]
+                    View["Vue Blade"]
+                    LivewireJS["Livewire.js"]
+                    end
 
-subgraph Server["Serveur"]
-subgraph Livewire["Composants Livewire"]
-LivewireComponent["Composant Livewire"]
-LivewireController["Controller Logique"]
-end
+                    subgraph Server["Serveur"]
+                    subgraph Livewire["Composants Livewire"]
+                    LivewireComponent["Composant Livewire"]
+                    LivewireController["Controller Logique"]
+                    end
 
-subgraph Models["Modèles"]
-Eloquent["Modèles Eloquent"]
-end
+                    subgraph Models["Modèles"]
+                    Eloquent["Modèles Eloquent"]
+                    end
 
-subgraph Blade["Templates"]
-TemplateView["Vue Blade"]
-Component["Composants Blade"]
-end
-end
+                    subgraph Blade["Templates"]
+                    TemplateView["Vue Blade"]
+                    Component["Composants Blade"]
+                    end
+                    end
 
-View <--"AJAX"--> LivewireJS
-LivewireJS <--"WebSockets /AJAX"--> LivewireComponent
-LivewireComponent <--> LivewireController
-LivewireController <--> Eloquent
-LivewireComponent --> TemplateView
-TemplateView --> Component
+                    View <--"AJAX"--> LivewireJS
+                    LivewireJS <--"WebSockets /AJAX"--> LivewireComponent
+                    LivewireComponent <--> LivewireController
+                    LivewireController <--> Eloquent
+                    LivewireComponent --> TemplateView
+                    TemplateView --> Component
 
-classDef clientSide fill:#bbf,stroke:#333,stroke-width:1px;
-classDef serverSide fill:#fbb,stroke:#333,stroke-width:1px;
-classDef livewireClass fill:#fbf,stroke:#333,stroke-width:1px;
-classDef modelsClass fill:#bfb,stroke:#333,stroke-width:1px;
-classDef viewClass fill:#bff,stroke:#333,stroke-width:1px;
+                    classDef clientSide fill:#bbf,stroke:#333,stroke-width:1px;
+                    classDef serverSide fill:#fbb,stroke:#333,stroke-width:1px;
+                    classDef livewireClass fill:#fbf,stroke:#333,stroke-width:1px;
+                    classDef modelsClass fill:#bfb,stroke:#333,stroke-width:1px;
+                    classDef viewClass fill:#bff,stroke:#333,stroke-width:1px;
 
-class Client,View,LivewireJS clientSide;
-class Server serverSide;
-class Livewire,LivewireComponent,LivewireController livewireClass;
-class Models,Eloquent modelsClass;
-class Blade,TemplateView,Component viewClass;
+                    class Client,View,LivewireJS clientSide;
+                    class Server serverSide;
+                    class Livewire,LivewireComponent,LivewireController livewireClass;
+                    class Models,Eloquent modelsClass;
+                    class Blade,TemplateView,Component viewClass;
                 </x-diagram.mermaid>
             </x-card.card-body>
         </x-card>

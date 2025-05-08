@@ -1,7 +1,8 @@
 <x-app-layout>
+    <x-slot name="header">
+        <x-label.page-title label="Catalogue de composants UI" />
+    </x-slot>
     <div>
-        <h1 class="text-3xl font-bold mb-8">Catalogue de composants UI</h1>
-
         <div class="space-y-12">
             <!-- Table des matières -->
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
@@ -420,7 +421,8 @@
                             </div>
                         </div>
                         <div class="mt-5 flex flex-col items-center gap-4 justify-end">
-                            <a class="self-end text-sm font-semibold text-blue-600 hover:text-blue-500" href="#">
+                            <a class="self-end text-sm font-semibold text-blue-600 hover:text-blue-500"
+                                href="#">
                                 {{ __('Mot de passe oublié ?') }}
                             </a>
                             <x-button.primary class="w-full justify-center">
@@ -490,7 +492,8 @@
                         </div>
 
                         <div class="mt-5 flex flex-col items-center gap-4 justify-end">
-                            <a class="self-end text-sm font-semibold text-blue-600 hover:text-blue-500" href="#">
+                            <a class="self-end text-sm font-semibold text-blue-600 hover:text-blue-500"
+                                href="#">
                                 {{ __('Déjà inscrit ?') }}
                             </a>
                             <x-button.primary class="w-full justify-center">
@@ -523,7 +526,8 @@
                             <h4 class="text-md font-medium mb-3">Types d'input</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <x-form.group name="input_email" :label="__('Type email')">
-                                    <x-form.input name="input_email" type="email" placeholder="email@exemple.com" />
+                                    <x-form.input name="input_email" type="email"
+                                        placeholder="email@exemple.com" />
                                 </x-form.group>
 
                                 <x-form.group name="input_number" :label="__('Type nombre')">
@@ -574,7 +578,8 @@
                         <div>
                             <h4 class="text-md font-medium mb-3">Textarea</h4>
                             <x-form.group name="textarea" :label="__('Description')">
-                                <x-form.textarea name="textarea" placeholder="Entrez une description détaillée..." rows="4" />
+                                <x-form.textarea name="textarea" placeholder="Entrez une description détaillée..."
+                                    rows="4" />
                             </x-form.group>
                         </div>
 

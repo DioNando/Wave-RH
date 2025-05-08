@@ -1,8 +1,8 @@
 <x-app-layout>
-    <div>
-        <h1 class="text-3xl font-bold mb-8">Diagrammes de Cas d'Utilisation</h1>
-
-        <div class="space-y-12">
+    <x-slot name="header">
+        <x-label.page-title label="Diagrammes de Cas d'Utilisation" />
+    </x-slot>
+        <div class="space-y-6">
             <!-- Diagramme de cas d'utilisation principal -->
             <x-card>
                 <x-card.card-body>
@@ -290,5 +290,4 @@ class UC1,UC2,UC3,UC4,UC5,UC6,UC7,UC8,UC9,UC10,UC11,UC12,UC13,UC14 usecase;
                 </x-card.card-body>
             </x-card>
         </div>
-    </div>
 </x-app-layout>

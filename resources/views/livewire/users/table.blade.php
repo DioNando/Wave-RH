@@ -1,4 +1,6 @@
 @php
+    use App\Enums\UserRole;
+
     $headers = ['Nom', 'Rôle', 'Date de création', 'Statut', ''];
     $empty = 'Aucun utilisateur trouvé';
 @endphp
@@ -17,12 +19,18 @@
                     <x-table.cell>
                         <div class="flex items-center">
                             @php
-                                $roleColor = match ($user->role->value) {
-                                    \App\Enums\UserRole::ADMIN->value => 'red',
-                                    \App\Enums\UserRole::USER->value => 'blue',
-                                    default => 'gray',
-                                };
-                                $roleLabel = $user->role->label();
+                                $roleColor = 'gray';
+                                $roleLabel = UserRole::USER->label();
+
+                                $userRoles = $user->roles;
+
+                                if ($userRoles->contains('name', UserRole::ADMIN->value)) {
+                                    $roleColor = 'red';
+                                    $roleLabel = UserRole::ADMIN->label();
+                                } elseif ($userRoles->contains('name', UserRole::USER->value)) {
+                                    $roleColor = 'blue';
+                                    $roleLabel = UserRole::USER->label();
+                                }
                             @endphp
                             <x-badge.item :text="$roleLabel" :color="$roleColor" />
                         </div>
@@ -38,7 +46,8 @@
                     <x-table.cell align="right">
                         @if (auth()->id() !== $user->id)
                             <x-button.action type="button" simple="true"
-                                x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion-{{ $user->id }}')" color="red">
+                                x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion-{{ $user->id }}')"
+                                color="red">
                                 Supprimer </x-button.action>
                             <x-modal name="confirm-user-deletion-{{ $user->id }}" :show="$errors->isNotEmpty()">
 
