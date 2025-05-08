@@ -1,10 +1,21 @@
 @php
-    $headers = ['Nom', 'Région', 'Pays', 'Statut', ''];
+    $headers = [
+        ['content' => 'Nom', 'align' => 'text-left'],
+        ['content' => 'Région', 'align' => 'text-left'],
+        ['content' => 'Pays', 'align' => 'text-left'],
+        ['content' => 'Statut', 'align' => 'text-left'],
+        ['content' => '', 'align' => 'text-right'],
+    ];
     $empty = 'Aucunne ville trouvée';
 @endphp
 
 <div>
     <x-table.table :headers="$headers">
+        <x-table.head>
+            @foreach ($headers as $header)
+                <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+            @endforeach
+        </x-table.head>
         <x-table.body class="bg-white dark:bg-gray-900">
             @forelse ($villes as $row)
                 <tr>

@@ -1,10 +1,20 @@
 @php
-    $headers = ['Libellé', 'Description', 'Statut', ''];
+    $headers = [
+        ['content' => 'Libellé', 'align' => 'text-left'],
+        ['content' => 'Description', 'align' => 'text-left'],
+        ['content' => 'Statut', 'align' => 'text-left'],
+        ['content' => '', 'align' => 'text-right'],
+    ];
     $empty = 'Aucun type de document trouvé';
 @endphp
 
 <div>
     <x-table.table :headers="$headers">
+        <x-table.head>
+            @foreach ($headers as $header)
+                <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+            @endforeach
+        </x-table.head>
         <x-table.body class="bg-white dark:bg-gray-900">
             @forelse ($typesDocuments as $row)
                 <tr>

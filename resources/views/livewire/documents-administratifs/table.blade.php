@@ -22,12 +22,22 @@
             <div x-show="open" x-cloak>
                 {{-- TABLE CONTENT --}}
                 @php
-                    $headers = ['Type de document', 'Date d\'émission', 'Date d\'expiration', 'Statut', ''];
+                    $headers = [
+                        ['content' => 'Type de document', 'align' => 'text-left'],
+                        ['content' => 'Date d\'émission', 'align' => 'text-left'],
+                        ['content' => 'Date d\'expiration', 'align' => 'text-left'],
+                        ['content' => 'Statut', 'align' => 'text-left'],
+                        ['content' => '', 'align' => 'text-right'],
+                    ];
                     $empty = 'Aucun document trouvé';
                 @endphp
                 <div class="overflow-auto scrollbar-custom">
                     <table class="w-full overflow-hidden">
-                        <x-table.head :headers="$headers" />
+                        <x-table.head>
+                            @foreach ($headers as $header)
+                                <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+                            @endforeach
+                        </x-table.head>
                         <x-table.body class="bg-white dark:bg-gray-900">
                             @foreach ($documents as $row)
                                 <tr>
