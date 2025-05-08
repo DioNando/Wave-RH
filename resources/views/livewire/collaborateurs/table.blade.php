@@ -2,11 +2,13 @@
     $empty = 'Aucun collaborateur trouvé';
 @endphp
 
-<div>
+<div x-data="usersTable()">
     <x-table>
         <x-table.head>
             <th>
-                {{-- CHECKBOX --}}
+                <div class="flex justify-center">
+                    <input type="checkbox" id="select-all-users" class="checkbox-custom" x-data x-on:click="toggleAll($event)">
+                </div>
             </th>
             @foreach ($headers as $header)
                 <x-table.head-cell :content="$header['content']" :align="$header['align']" />
@@ -14,11 +16,13 @@
         </x-table.head>
         <x-table.body class="bg-white dark:bg-gray-900">
             @forelse ($collaborateurs as $collaborateur)
-                <tr>
-                    <td>
-                        {{-- CHECKBOX --}}
+                <tr x-bind:class="{ 'bg-blue-50 dark:bg-blue-900/20': selectedUsers.includes({{ $collaborateur->id }}) }">
+                    <td class="px-4">
+                        <div class="flex justify-center">
+                            <input type="checkbox" value="{{ $collaborateur->id }}" class="user-checkbox checkbox-custom" x-data x-on:click="toggleUser({{ $collaborateur->id }})">
+                        </div>
                     </td>
-                    <x-table.cell class="w-0 pr-0">
+                    <x-table.cell class="w-0 pl-0 pr-0">
                         <div x-data="{ getInitial(nom, prenom) { return nom.charAt(0).toUpperCase() + prenom.charAt(0).toUpperCase(); } }"
                             class="relative size-11 overflow-hidden bg-gray-400 dark:bg-gray-700 rounded-full text-gray-100 dark:text-gray-200 text-lg font-mono flex items-center justify-center">
                             @if ($collaborateur->photo_profil && Storage::disk('public')->exists($collaborateur->photo_profil))
@@ -148,11 +152,9 @@
                     </x-table.cell>
                 </tr>
             @empty
-                <tr>
-                    <td colspan="{{ count($headers) + 2 }}" class="text-center py-5 text-gray-500 dark:text-gray-400">
-                        {{ $empty }}
-                    </td>
-                </tr>
+                <td colspan="{{ count($headers) + 2 }}" class="text-center py-5 text-gray-500 dark:text-gray-400">
+                    {{ $empty }}
+                </td>
             @endforelse
         </x-table.body>
     </x-table>
@@ -164,6 +166,7 @@
         <script>
             function usersTable() {
                 return {
+                    selectedUsers: [],
                     toggleAll(event) {
                         const checkboxes = document.querySelectorAll('.user-checkbox');
                         const isChecked = event.target.checked;
