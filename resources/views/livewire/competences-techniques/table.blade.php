@@ -1,3 +1,13 @@
+@php
+    $headers = [
+        ['content' => 'Nom', 'align' => 'text-left'],
+        ['content' => 'Catégorie', 'align' => 'text-left'],
+        ['content' => 'Description', 'align' => 'text-left'],
+        ['content' => '', 'align' => 'text-right'],
+    ];
+    $empty = 'Aucune compétence technique trouvée';
+@endphp
+
 <div>
     <div class="mb-4">
         <div class="flex flex-wrap items-center gap-4">
@@ -14,46 +24,38 @@
         </div>
     </div>
 
-    <div class="overflow-hidden bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-200 dark:ring-gray-800 sm:rounded-lg">
-        <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
-            <thead>
+    <x-table.table :headers="$headers">
+        <x-table.head>
+            @foreach ($headers as $header)
+                <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+            @endforeach
+        </x-table.head>
+        <x-table.body class="bg-white dark:bg-gray-900">
+            @forelse ($competencesTechniques as $row)
                 <tr>
-                    <th scope="col"
-                        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-200 sm:pl-6">
-                        Nom</th>
-                    <th scope="col"
-                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
-                        Catégorie</th>
-                    <th scope="col"
-                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-200">
-                        Description</th>
-                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                        <span class="sr-only">Actions</span>
-                    </th>
+                    <x-table.cell class="font-medium" :content="$row->nom" />
+                    <x-table.cell :content="$row->categorie" />
+                    <x-table.cell>
+                        <div class="flex items-center">
+                            <span
+                                class="truncate max-w-[200px] text-gray-700 dark:text-gray-400">{{ $row->description }}</span>
+                        </div>
+                    </x-table.cell>
+                    <x-table.cell align="right">
+                        <x-button.action simple="true" href="{{ route('competences-techniques.edit', $row->id) }}"
+                            icon="pencil-square" color="orange">Editer</x-button.action>
+                    </x-table.cell>
                 </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
-                @foreach ($competencesTechniques as $competence)
-                    <tr>
-                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-white sm:pl-6">
-                            {{ $competence->nom }}</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-400">
-                            {{ $competence->categorie }}</td>
-                        <td class="px-3 py-4 text-sm text-gray-500 dark:text-gray-400 max-w-md truncate">
-                            {{ $competence->description }}</td>
-                        <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                            <div class="flex justify-end gap-2">
-                                <a href="{{ route('competences-techniques.edit', $competence) }}"
-                                    class="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300">
-                                    Modifier</a>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-    <div class="mt-4">
-        {{ $competencesTechniques->links() }}
-    </div>
+            @empty
+                <tr>
+                    <td colspan="{{ count($headers) }}" class="text-center py-5 text-gray-500 dark:text-gray-400">
+                        {{ $empty }}
+                    </td>
+                </tr>
+            @endforelse
+        </x-table.body>
+    </x-table.table>
+    <nav class="mt-3">
+        {{ $competencesTechniques->onEachSide(1)->links('pagination::tailwind') }}
+    </nav>
 </div>
