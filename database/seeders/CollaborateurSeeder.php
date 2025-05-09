@@ -9,7 +9,10 @@ use App\Models\ContratTravail;
 use App\Models\Diplome;
 use App\Models\DocumentAdministratif;
 use App\Models\InformationBancaire;
+use App\Models\Langue;
+use App\Models\CompetenceTechnique;
 use App\Models\TypeDocument;
+use App\Enums\LangueNiveau;
 use Carbon\Carbon;
 use Database\Seeders\Data\CertificationData;
 use Database\Seeders\Data\CollaborateurData;
@@ -19,6 +22,7 @@ use Database\Seeders\Data\DiplomeData;
 use Database\Seeders\Data\DocumentAdministratifData;
 use Database\Seeders\Data\InformationBancaireData;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 
 class CollaborateurSeeder extends Seeder
 {
@@ -34,10 +38,50 @@ class CollaborateurSeeder extends Seeder
         $certificationsData = CertificationData::getData();
         $informationsBancairesData = InformationBancaireData::getData();
         $documentsAdministratifsData = DocumentAdministratifData::getData();
+        $faker = Faker::create();
 
         foreach ($collaborateursData as $collaborateurData) {
+            // Sauvegarder les langues et compétences techniques avant de créer le collaborateur
+            $languesNoms = json_decode($collaborateurData['langues'] ?? '[]', true);
+            $competencesNoms = json_decode($collaborateurData['competences_techniques'] ?? '[]', true);
+
+            // Supprimer les colonnes langues et competences_techniques des données (elles sont maintenant gérées par les relations)
+            unset($collaborateurData['langues']);
+            unset($collaborateurData['competences_techniques']);
+
             // Créer le collaborateur
             $collaborateur = Collaborateur::create($collaborateurData);
+
+            // Associer les langues au collaborateur
+            if (!empty($languesNoms)) {
+                foreach ($languesNoms as $langueNom) {
+                    $langue = \App\Models\Langue::where('nom', 'like', "%$langueNom%")->first();
+                    if ($langue) {
+                        $collaborateur->langues()->attach($langue->id, [
+                            'niveau' => fake()->randomElement([
+                                LangueNiveau::DEBUTANT->value,
+                                LangueNiveau::INTERMEDIAIRE->value,
+                                LangueNiveau::AVANCE->value,
+                                LangueNiveau::COURANT->value,
+                                LangueNiveau::NATIF->value
+                            ])
+                        ]);
+                    }
+                }
+            }
+
+            // Associer les compétences techniques au collaborateur
+            if (!empty($competencesNoms)) {
+                foreach ($competencesNoms as $competenceNom) {
+                    $competence = \App\Models\CompetenceTechnique::where('nom', 'like', "%$competenceNom%")->first();
+                    if ($competence) {
+                        $collaborateur->competencesTechniques()->attach($competence->id, [
+                            'niveau' => fake()->numberBetween(1, 5),
+                            'notes' => fake()->optional(0.3)->sentence()
+                        ]);
+                    }
+                }
+            }
 
             // Créer 1 à 3 contacts d'urgence pour le collaborateur
             $nbContacts = rand(1, 3);

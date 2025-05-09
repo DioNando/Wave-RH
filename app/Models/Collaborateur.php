@@ -35,8 +35,6 @@ class Collaborateur extends Model
         'solde_conge',
         // Compétences et qualifications
         // 'document_cv',
-        'langues',
-        'competences_techniques',
         // Informations santé
         'situation_medicale',
         // Autre informations
@@ -121,15 +119,25 @@ class Collaborateur extends Model
         return $this->hasMany(HistoriquePrime::class);
     }
 
-    // public function competences()
-    // {
-    //     return $this->hasMany(Competence::class);
-    // }
+    /**
+     * Les langues maîtrisées par le collaborateur
+     */
+    public function langues()
+    {
+        return $this->belongsToMany(Langue::class, 'collaborateur_langues', 'collaborateur_id', 'langue_id', 'id', 'id', 'collab_lang_collab_id_foreign')
+            ->withPivot('niveau')
+            ->withTimestamps();
+    }
 
-    // public function langues()
-    // {
-    //     return $this->hasMany(Langue::class);
-    // }
+    /**
+     * Les compétences techniques du collaborateur
+     */
+    public function competencesTechniques()
+    {
+        return $this->belongsToMany(CompetenceTechnique::class, 'collaborateur_competence_techniques', 'collaborateur_id', 'competence_technique_id', 'id', 'id', 'collab_comp_tech_collab_id_foreign')
+            ->withPivot('niveau', 'notes')
+            ->withTimestamps();
+    }
 
     protected $casts = [
         'genre' => CollaborateurGenre::class,

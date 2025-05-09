@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('collaborateur_competence_techniques', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('collaborateur_id')
+                ->constrained('collaborateurs')
+                ->onDelete('cascade')
+                ->name('collab_comp_tech_collab_id_foreign');
+            $table->foreignId('competence_technique_id')
+                ->constrained('competence_techniques')
+                ->onDelete('cascade')
+                ->name('collab_comp_tech_comp_id_foreign');
+            $table->integer('niveau')->default(1)->comment('Niveau de 1 à 5');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }
