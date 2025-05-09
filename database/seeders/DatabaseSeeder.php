@@ -30,6 +30,12 @@ class DatabaseSeeder extends Seeder
             // Seeder des collaborateurs et leurs relations
             CollaborateurSeeder::class,
 
+            // Seeder des langues
+            LangueSeeder::class,
+
+            // Seeder des compétences techniques
+            CompetenceTechniqueSeeder::class,
+
             // Seeder des jours fériés
             JourFerieSeeder::class,
 
