@@ -15,13 +15,14 @@ class UserSeeder extends Seeder
     {
         // Créer un utilisateur pour chaque rôle
         foreach (UserRole::all() as $role) {
-            User::factory()->create([
-                'nom' => 'User ' . $role->value,
-                'prenom' => ucfirst($role->value),
-                'email' => $role->value . '@wave.com',
-                'statut' => true,
+            $user = User::factory()->create([
+            'nom' => 'User ' . $role->value,
+            'prenom' => ucfirst($role->value),
+            'email' => $role->value . '@wave.com',
+            'statut' => true,
             ]);
-            User::find(1)->assignRole($role->value);
+            
+            $user->assignRole($role->value);
         }
     }
 }

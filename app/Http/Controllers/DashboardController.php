@@ -20,24 +20,13 @@ class DashboardController extends Controller
     }
 
     /**
-     * Affiche le dashboard correspondant au rôle de l'utilisateur
+     * Récupère les données communes pour tous les utilisateurs
+     *
+     * @return array
      */
-    public function index()
+    protected static function getCommonData()
     {
-        $user = Auth::user();
-
-        // Données communes pour tous les utilisateurs
         $data = [];
-
-        // Statistiques - uniquement pour les administrateurs
-        if ($user->hasRole(UserRole::ADMIN->value)) {
-            $data['totalCollaborateurs'] = Collaborateur::count();
-            $data['salairesVerses'] = ContratTravail::whereMonth('date_debut', Carbon::now()->month)
-                ->whereYear('date_debut', Carbon::now()->year)
-                ->sum('salaire');
-            $data['departementsCount'] = Departement::count();
-            $data['heuresSupplementaires'] = 312; // À remplacer par une vraie logique de calcul
-        }
 
         // Liste des collaborateurs - pour tous les utilisateurs
         $collaborateurs = Collaborateur::with(['ville.pays'])
@@ -86,11 +75,51 @@ class DashboardController extends Controller
             ],
         ];
 
-        // Retourner la vue appropriée en fonction du rôle
+        return $data;
+    }
+
+    /**
+     * Récupère les statistiques pour les administrateurs
+     *
+     * @return array
+     */
+    protected static function getAdminStats()
+    {
+        return [
+            'totalCollaborateurs' => Collaborateur::count(),
+            'salairesVerses' => ContratTravail::whereMonth('date_debut', Carbon::now()->month)
+                ->whereYear('date_debut', Carbon::now()->year)
+                ->sum('salaire'),
+            'departementsCount' => Departement::count(),
+            'heuresSupplementaires' => 312, // À remplacer par une vraie logique de calcul
+        ];
+    }
+
+    /**
+     * Affiche le dashboard correspondant au rôle de l'utilisateur
+     */
+    public function index()
+    {
+        $user = Auth::user();
+
+        // Récupération des données communes
+        $data = self::getCommonData();
+
+        // Ajout des statistiques pour les administrateurs
         if ($user->hasRole(UserRole::ADMIN->value)) {
-            return view('pages.admin.dashboard', $data);
-        } else {
-            return view('pages.user.dashboard', $data);
+            $data = array_merge($data, self::getAdminStats());
+        }
+
+        // Retourner la vue appropriée en fonction du rôle
+        switch (true) {
+            case $user->hasRole(UserRole::ADMIN->value):
+                return view('pages.admin.dashboard', $data);
+
+            case $user->hasRole(UserRole::USER->value):
+                return view('pages.user.dashboard', $data);
+
+            default:
+                abort(403, 'Unauthorized action.');
         }
     }
 

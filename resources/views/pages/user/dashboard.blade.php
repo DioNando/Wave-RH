@@ -7,7 +7,7 @@
         <x-slot name="header">
             <div class="flex flex-col gap-2">
                 <h3 class="flex items-center gap-2 text-2xl font-bold text-blue-600 dark:text-blue-400">
-                    {{ __('Tableau de bord Administrateur') }}
+                    {{ __('Tableau de bord Utilisateur') }}
                 </h3>
                 <div class="flex items-center">
                     @php
@@ -15,12 +15,12 @@
                         $roleColor = match (true) {
                             auth()->user()->hasRole(UserRole::ADMIN->value) => 'red',
                             auth()->user()->hasRole(UserRole::USER->value) => 'blue',
-                            default => 'gray',
+                            // default => 'gray',
                         };
                         $roleLabel = match (true) {
                             auth()->user()->hasRole(UserRole::ADMIN->value) => UserRole::ADMIN->label(),
                             auth()->user()->hasRole(UserRole::USER->value) => UserRole::USER->label(),
-                            default => 'Invité',
+                            // default => 'Invité oh',
                         };
                     @endphp
                     <x-badge.item :text="$roleLabel" :color="$roleColor" />
