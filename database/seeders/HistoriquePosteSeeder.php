@@ -42,6 +42,8 @@ class HistoriquePosteSeeder extends Seeder
                     'poste_id' => $poste->id,
                     'date_debut' => $dateDebut,
                     'date_fin' => $dateFin,
+                    'duree' => $dateFin ? $dateDebut->diffInMonths($dateFin) : null,
+                    // 'commentaires' => 'Changement de poste pour le collaborateur ' . $collaborateur->nom,
                     'raison_fin' => $this->getRaisonFinAleatoire(),
                     'statut' => $i === $nombreChangements - 1 ? 1 : 0,
                 ]);

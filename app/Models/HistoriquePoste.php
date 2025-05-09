@@ -11,6 +11,7 @@ class HistoriquePoste extends Model
         'poste_id',
         'date_debut',
         'date_fin',
+        'duree',
         'commentaires',
         'raison_fin',
         'statut',

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('poste_id')->constrained('postes')->onUpdate('cascade')->onDelete('cascade');
             $table->date('date_debut')->format('Y-m-d');
             $table->date('date_fin')->format('Y-m-d')->nullable();
+            $table->integer('duree')->nullable();
             $table->text('commentaires')->nullable();
             $table->text('raison_fin')->nullable();
             $table->boolean('statut')->default(1);

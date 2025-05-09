@@ -21,6 +21,7 @@
                         ['content' => 'Département', 'align' => 'text-left'],
                         ['content' => 'Date début', 'align' => 'text-left'],
                         ['content' => 'Date fin', 'align' => 'text-left'],
+                        ['content' => 'Durée (mois)', 'align' => 'text-left'],
                         ['content' => 'Commentaires', 'align' => 'text-left'],
                         ['content' => 'Raison fin', 'align' => 'text-left'],
                         ['content' => 'Statut', 'align' => 'text-left'],
@@ -42,6 +43,7 @@
                                     content="{{ \Carbon\Carbon::parse($row->date_debut)->translatedFormat('d F Y') }}" />
                                 <x-table.cell
                                     content="{{ $row->date_fin ? \Carbon\Carbon::parse($row->date_fin)->translatedFormat('d F Y') : 'En cours' }}" />
+                                <x-table.cell content="{{ $row->duree ?? ($row->date_debut ? round(\Carbon\Carbon::parse($row->date_debut)->diffInMonths(now())) : 'N/A') }}" />
                                 <x-table.cell content="{{ $row->commentaires }}" />
                                 <x-table.cell content="{{ $row->raison_fin }}" />
                                 <x-table.cell>
@@ -92,7 +94,7 @@
                                 <x-table.cell
                                     content="{{ \Carbon\Carbon::parse($row->date_debut)->translatedFormat('d F Y') }}" />
                                 <x-table.cell
-                                    content="{{ \Carbon\Carbon::parse($row->date_fin)->translatedFormat('d F Y') }}" />
+                                    content="{{ $row->date_fin ? \Carbon\Carbon::parse($row->date_fin)->translatedFormat('d F Y') : 'En cours' }}" />
                                 <x-table.cell content="{{ $row->duree }} jour(s)" />
                                 <x-table.cell class="font-medium" content="{{ $row->motif }}" />
                                 <x-table.cell content="{{ $row->commentaires }}" />
