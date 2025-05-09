@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Collaborateur extends Model
 {
+    /**
+     * Les relations à charger automatiquement.
+     *
+     * @var array
+     */
+    protected $with = ['langues', 'competencesTechniques'];
 
     protected $fillable = [
         // Informations gérérales

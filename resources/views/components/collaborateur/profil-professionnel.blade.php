@@ -16,10 +16,8 @@
     <x-card defaultOpen="false">
         <x-card.card-header :dropdown="true" title="Compétences et qualifications" type="primary" />
         <x-card.card-body divider>
-            <x-card.badge-list label="Langues" :items="$collaborateur->langues ? json_decode($collaborateur->langues) : []" color="yellow" emptyText="Aucune langue spécifiée" />
-            <x-card.badge-list label="Compétences techniques" :items="$collaborateur->competences_techniques
-                ? json_decode($collaborateur->competences_techniques)
-                : []" color="indigo"
+            <x-card.badge-list label="Langues" :items="$collaborateur->langues->pluck('nom')->toArray()" color="yellow" emptyText="Aucune langue spécifiée" />
+            <x-card.badge-list label="Compétences techniques" :items="$collaborateur->competencesTechniques->pluck('nom')->toArray()" color="indigo"
                 emptyText="Aucune compétence technique spécifiée" />
         </x-card.card-body>
     </x-card>

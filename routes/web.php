@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CertificationController;
 use App\Http\Controllers\CollaborateurController;
+use App\Http\Controllers\CompetenceTechniqueController;
 use App\Http\Controllers\ContactUrgenceController;
 use App\Http\Controllers\ContratTravailController;
 use App\Http\Controllers\DashboardController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\DiplomeController;
 use App\Http\Controllers\DocumentAdministratifController;
 use App\Http\Controllers\HistoriqueCongeController;
 use App\Http\Controllers\JourFerieController;
+use App\Http\Controllers\LangueController;
 use App\Http\Controllers\PaysController;
 use App\Http\Controllers\PosteController;
 use App\Http\Controllers\RegionController;
@@ -74,6 +76,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/contrats-travails', ContratTravailController::class);
     Route::resource('/conges', HistoriqueCongeController::class);
     Route::resource('/jours-feries', JourFerieController::class);
+    Route::resource('/langues', LangueController::class);
+    Route::resource('/competences-techniques', CompetenceTechniqueController::class);
 });
 
 // Gestion des erreurs personnalisée

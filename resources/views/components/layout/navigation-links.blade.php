@@ -29,8 +29,8 @@
                     ['route' => 'departements.index', 'label' => 'Départements', 'icon' => 'D'],
                     ['route' => 'types-documents.index', 'label' => 'Types de documents', 'icon' => 'T'],
                     ['route' => 'jours-feries.index', 'label' => 'Jours fériés', 'icon' => 'J'],
-                    // ['route' => 'competences-techniques.index', 'label' => 'Compétences techniques', 'icon' => 'C'],
-                    // ['route' => 'langues.index', 'label' => 'Langues', 'icon' => 'L'],
+                    ['route' => 'competences-techniques.index', 'label' => 'Compétences techniques', 'icon' => 'C'],
+                    ['route' => 'langues.index', 'label' => 'Langues', 'icon' => 'L'],
                 ];
             @endphp
 

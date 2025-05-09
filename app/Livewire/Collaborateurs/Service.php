@@ -269,8 +269,11 @@ class Service extends Form
         $this->matricule_interne = $collaborateur->matricule_interne;
         $this->solde_conge = $collaborateur->solde_conge ?? 0;
         // $this->document_cv = $collaborateur->document_cv;
-        $this->langues = $collaborateur->langues ? json_decode($collaborateur->langues, true) : [];
-        $this->competences_techniques = $collaborateur->competences_techniques ? json_decode($collaborateur->competences_techniques, true) : [];
+
+        // Charger les langues et compétences techniques à partir des relations
+        $this->langues = $collaborateur->id ? $collaborateur->langues->pluck('nom')->toArray() : [];
+        $this->competences_techniques = $collaborateur->id ? $collaborateur->competencesTechniques->pluck('nom')->toArray() : [];
+
         $this->situation_medicale = $collaborateur->situation_medicale;
         $this->notes_diverses = $collaborateur->notes_diverses;
     }
@@ -295,12 +298,45 @@ class Service extends Form
         //     $data['document_cv'] = $cvPath;
         // }
 
-        // Encoder les tableaux en JSON
-        $data['langues'] = json_encode($this->langues);
-        $data['competences_techniques'] = json_encode($this->competences_techniques);
+        // Stocker les langues et compétences séparément dans les relations
+        $langues = $this->langues;
+        $competences = $this->competences_techniques;
+
+        // Supprimer les champs qui ne sont plus dans le modèle
+        unset($data['langues']);
+        unset($data['competences_techniques']);
 
         // Créer l'enregistrement avec les données modifiées
-        Collaborateur::create($data);
+        $collaborateur = Collaborateur::create($data);
+
+        // Associer les langues
+        if (!empty($langues)) {
+            foreach ($langues as $langueNom) {
+                if (!empty($langueNom)) {
+                    $langue = \App\Models\Langue::where('nom', 'like', "%$langueNom%")->first();
+                    if ($langue) {
+                        $collaborateur->langues()->attach($langue->id, [
+                            'niveau' => \App\Enums\LangueNiveau::INTERMEDIAIRE->value
+                        ]);
+                    }
+                }
+            }
+        }
+
+        // Associer les compétences techniques
+        if (!empty($competences)) {
+            foreach ($competences as $competenceNom) {
+                if (!empty($competenceNom)) {
+                    $competence = \App\Models\CompetenceTechnique::where('nom', 'like', "%$competenceNom%")->first();
+                    if ($competence) {
+                        $collaborateur->competencesTechniques()->attach($competence->id, [
+                            'niveau' => 3,
+                            'notes' => null
+                        ]);
+                    }
+                }
+            }
+        }
     }
 
     public function update()
@@ -327,10 +363,48 @@ class Service extends Form
         //     }
         // }
 
-        // Encoder les tableaux en JSON
-        $data['langues'] = json_encode($this->langues);
-        $data['competences_techniques'] = json_encode($this->competences_techniques);
+        // Stocker les langues et compétences séparément dans les relations
+        $langues = $this->langues;
+        $competences = $this->competences_techniques;
 
+        // Supprimer les champs qui ne sont plus dans le modèle
+        unset($data['langues']);
+        unset($data['competences_techniques']);
+
+        // Mettre à jour l'enregistrement avec les données modifiées
         $this->collaborateur->update($data);
+
+        // Détacher toutes les relations existantes
+        $this->collaborateur->langues()->detach();
+        $this->collaborateur->competencesTechniques()->detach();
+
+        // Associer les nouvelles langues
+        if (!empty($langues)) {
+            foreach ($langues as $langueNom) {
+                if (!empty($langueNom)) {
+                    $langue = \App\Models\Langue::where('nom', 'like', "%$langueNom%")->first();
+                    if ($langue) {
+                        $this->collaborateur->langues()->attach($langue->id, [
+                            'niveau' => \App\Enums\LangueNiveau::INTERMEDIAIRE->value
+                        ]);
+                    }
+                }
+            }
+        }
+
+        // Associer les nouvelles compétences techniques
+        if (!empty($competences)) {
+            foreach ($competences as $competenceNom) {
+                if (!empty($competenceNom)) {
+                    $competence = \App\Models\CompetenceTechnique::where('nom', 'like', "%$competenceNom%")->first();
+                    if ($competence) {
+                        $this->collaborateur->competencesTechniques()->attach($competence->id, [
+                            'niveau' => 3,
+                            'notes' => null
+                        ]);
+                    }
+                }
+            }
+        }
     }
 }
