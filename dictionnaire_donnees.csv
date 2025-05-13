@@ -1,0 +1,272 @@
+Nom de la table,Nom de la colonne,Type de données,Taille,Obligatoire,Valeur par défaut,Clé,Label
+users,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique de l'utilisateur
+users,nom,VARCHAR,255,Oui,N/A,N/A,Nom de famille de l'utilisateur
+users,prenom,VARCHAR,255,Oui,N/A,N/A,Prénom de l'utilisateur
+users,email,VARCHAR,255,Oui,N/A,Unique,Adresse email de l'utilisateur
+users,email_verified_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de vérification de l'email
+users,password,VARCHAR,255,Oui,N/A,N/A,Mot de passe crypté
+users,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif de l'utilisateur
+users,remember_token,VARCHAR,100,Non,N/A,N/A,Token pour la fonctionnalité "Se souvenir de moi"
+users,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+users,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+password_reset_tokens,email,VARCHAR,255,Oui,N/A,PK,Adresse email de l'utilisateur demandant la réinitialisation
+password_reset_tokens,token,VARCHAR,255,Oui,N/A,N/A,Token de réinitialisation du mot de passe
+password_reset_tokens,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création du token
+sessions,id,VARCHAR,255,Oui,N/A,PK,Identifiant unique de la session
+sessions,user_id,BIGINT,N/A,Non,N/A,"FK, Index",Référence à l'utilisateur connecté
+sessions,ip_address,VARCHAR,45,Non,N/A,N/A,Adresse IP de l'utilisateur
+sessions,user_agent,TEXT,N/A,Non,N/A,N/A,Agent utilisateur (navigateur) de l'utilisateur
+sessions,payload,LONGTEXT,N/A,Oui,N/A,N/A,Données de la session encodées
+sessions,last_activity,INTEGER,N/A,Oui,N/A,Index,Timestamp de la dernière activité
+diplomes,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique du diplôme
+diplomes,collaborateur_id,BIGINT,N/A,Oui,N/A,FK,Référence au collaborateur
+diplomes,titre,VARCHAR,255,Oui,N/A,N/A,Titre ou nom du diplôme
+diplomes,etablissement,VARCHAR,255,Non,N/A,N/A,Établissement délivrant le diplôme
+diplomes,pays_id,BIGINT,N/A,Non,N/A,FK,Pays où le diplôme a été obtenu
+diplomes,date_obtention,DATE,N/A,Non,N/A,N/A,Date d'obtention du diplôme
+diplomes,niveau,ENUM,N/A,Non,N/A,N/A,Niveau d'études du diplôme
+diplomes,document_path,VARCHAR,255,Non,N/A,N/A,Chemin vers le document numérisé
+diplomes,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif du diplôme
+diplomes,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+diplomes,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+information_bancaires,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique de l'information bancaire
+information_bancaires,collaborateur_id,BIGINT,N/A,Oui,N/A,FK,Référence au collaborateur
+information_bancaires,nom_banque,VARCHAR,255,Oui,N/A,N/A,Nom de la banque
+information_bancaires,iban,VARCHAR,34,Oui,N/A,N/A,Numéro de compte bancaire international
+information_bancaires,code_swift,VARCHAR,11,Non,N/A,N/A,Code d'identification bancaire international
+information_bancaires,titulaire_compte,VARCHAR,255,Oui,N/A,N/A,Nom du titulaire du compte
+information_bancaires,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif de l'information bancaire
+information_bancaires,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+information_bancaires,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+contrat_travails,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique du contrat de travail
+contrat_travails,collaborateur_id,BIGINT,N/A,Oui,N/A,FK,Référence au collaborateur
+contrat_travails,type_contrat,ENUM,N/A,Oui,N/A,N/A,Type de contrat (CDI, CDD, Stage, etc.)
+contrat_travails,date_debut,DATE,N/A,Oui,N/A,N/A,Date de début du contrat
+contrat_travails,date_fin,DATE,N/A,Non,N/A,N/A,Date de fin du contrat
+contrat_travails,salaire,DECIMAL,"10,2",Non,N/A,N/A,Montant du salaire
+contrat_travails,document_path,VARCHAR,255,Non,N/A,N/A,Chemin vers le document numérisé
+contrat_travails,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif du contrat
+contrat_travails,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+contrat_travails,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+document_administratifs,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique du document administratif
+document_administratifs,collaborateur_id,BIGINT,N/A,Oui,N/A,FK,Référence au collaborateur
+document_administratifs,type_document_id,BIGINT,N/A,Oui,N/A,FK,Type de document administratif
+document_administratifs,date_emission,DATE,N/A,Non,N/A,N/A,Date d'émission du document
+document_administratifs,date_expiration,DATE,N/A,Oui,N/A,N/A,Date d'expiration du document
+document_administratifs,document_path,VARCHAR,255,Non,N/A,N/A,Chemin vers le document numérisé
+document_administratifs,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif du document
+document_administratifs,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+document_administratifs,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+collaborateur_competence_techniques,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique de l'association
+collaborateur_competence_techniques,collaborateur_id,BIGINT,N/A,Oui,N/A,FK,Référence au collaborateur
+collaborateur_competence_techniques,competence_technique_id,BIGINT,N/A,Oui,N/A,FK,Référence à la compétence technique
+collaborateur_competence_techniques,niveau,INTEGER,N/A,Oui,1,N/A,Niveau de maîtrise de la compétence (1-5)
+collaborateur_competence_techniques,notes,TEXT,N/A,Non,N/A,N/A,Notes ou commentaires sur cette compétence
+collaborateur_competence_techniques,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+collaborateur_competence_techniques,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+competence_techniques,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique de la compétence technique
+competence_techniques,nom,VARCHAR,255,Oui,N/A,N/A,Nom de la compétence
+competence_techniques,categorie,VARCHAR,255,Non,N/A,N/A,Catégorie de la compétence
+competence_techniques,description,TEXT,N/A,Non,N/A,N/A,Description de la compétence
+competence_techniques,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+competence_techniques,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+collaborateur_langues,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique de l'association
+collaborateur_langues,collaborateur_id,BIGINT,N/A,Oui,N/A,FK,Référence au collaborateur
+collaborateur_langues,langue_id,BIGINT,N/A,Oui,N/A,FK,Référence à la langue
+collaborateur_langues,niveau,ENUM,N/A,Oui,INTERMEDIAIRE,N/A,Niveau de maîtrise de la langue
+collaborateur_langues,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+collaborateur_langues,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+langues,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique de la langue
+langues,nom,VARCHAR,255,Oui,N/A,N/A,Nom de la langue
+langues,code,VARCHAR,10,Non,N/A,N/A,Code ISO de la langue
+langues,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+langues,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+collaborateurs,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique du collaborateur
+collaborateurs,nom,VARCHAR,255,Oui,N/A,N/A,Nom de famille du collaborateur
+collaborateurs,prenom,VARCHAR,255,Oui,NULL,N/A,Prénom du collaborateur
+collaborateurs,photo_profil,VARCHAR,255,Non,N/A,N/A,Chemin vers la photo de profil
+collaborateurs,genre,ENUM,N/A,Oui,N/A,N/A,Genre du collaborateur
+collaborateurs,date_naissance,DATE,N/A,Non,N/A,N/A,Date de naissance
+collaborateurs,lieu_naissance_id,BIGINT,N/A,Non,N/A,FK,Lieu de naissance (ville)
+collaborateurs,pays_id,BIGINT,N/A,Non,N/A,FK,Nationalité (pays)
+collaborateurs,statut_marital,ENUM,N/A,Oui,N/A,N/A,Statut marital du collaborateur
+collaborateurs,nombre_enfants,INTEGER,N/A,Oui,0,N/A,Nombre d'enfants à charge
+collaborateurs,cin,VARCHAR,50,Non,N/A,Unique,Numéro de carte d'identité nationale
+collaborateurs,cnss,VARCHAR,50,Non,N/A,Unique,Numéro de sécurité sociale
+collaborateurs,email_professionnel,VARCHAR,255,Non,N/A,Unique,Email professionnel
+collaborateurs,email_personnel,VARCHAR,255,Non,N/A,Unique,Email personnel
+collaborateurs,telephone_professionnel,VARCHAR,20,Non,N/A,Unique,Numéro de téléphone professionnel
+collaborateurs,telephone_personnel,VARCHAR,20,Non,N/A,Unique,Numéro de téléphone personnel
+collaborateurs,adresse_complete,TEXT,N/A,Non,N/A,N/A,Adresse postale complète
+collaborateurs,ville_id,BIGINT,N/A,Oui,N/A,FK,Ville de résidence
+collaborateurs,date_embauche,DATE,N/A,Non,N/A,N/A,Date d'embauche dans l'entreprise
+collaborateurs,matricule_interne,VARCHAR,50,Non,N/A,Unique,Matricule interne à l'entreprise
+collaborateurs,solde_conge,INTEGER,N/A,Oui,0,N/A,Solde de jours de congés disponibles
+collaborateurs,situation_medicale,TEXT,N/A,Non,N/A,N/A,Informations médicales importantes
+collaborateurs,notes_diverses,TEXT,N/A,Non,N/A,N/A,Notes diverses sur le collaborateur
+collaborateurs,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif du collaborateur
+collaborateurs,user_id,BIGINT,N/A,Oui,N/A,FK,Référence au compte utilisateur associé
+collaborateurs,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+collaborateurs,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+type_documents,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique du type de document
+type_documents,libelle,VARCHAR,255,Oui,N/A,N/A,Libellé du type de document
+type_documents,description,VARCHAR,255,Non,N/A,N/A,Description du type de document
+type_documents,couleur,VARCHAR,50,Oui,gray,N/A,Couleur associée au type (pour l'UI)
+type_documents,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif du type de document
+type_documents,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+type_documents,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+postes,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique du poste
+postes,nom,VARCHAR,255,Oui,N/A,N/A,Nom ou titre du poste
+postes,description,VARCHAR,255,Non,N/A,N/A,Description du poste
+postes,departement_id,BIGINT,N/A,Oui,N/A,FK,Département auquel le poste est rattaché
+postes,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif du poste
+postes,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+postes,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+departements,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique du département
+departements,nom,VARCHAR,255,Oui,N/A,N/A,Nom du département
+departements,description,VARCHAR,255,Non,N/A,N/A,Description du département
+departements,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif du département
+departements,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+departements,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+villes,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique de la ville
+villes,nom,VARCHAR,255,Oui,N/A,N/A,Nom de la ville
+villes,pays_id,BIGINT,N/A,Oui,N/A,FK,Pays de la ville
+villes,region_id,BIGINT,N/A,Oui,N/A,FK,Région de la ville
+villes,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif de la ville
+villes,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+villes,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+regions,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique de la région
+regions,nom,VARCHAR,255,Oui,N/A,N/A,Nom de la région
+regions,pays_id,BIGINT,N/A,Oui,N/A,FK,Pays de la région
+regions,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif de la région
+regions,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+regions,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+pays,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique du pays
+pays,nom,VARCHAR,255,Oui,N/A,N/A,Nom du pays
+pays,code_iso,VARCHAR,3,Oui,N/A,N/A,Code ISO du pays
+pays,nationalite,VARCHAR,255,Oui,N/A,N/A,Adjectif de nationalité
+pays,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif du pays
+pays,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+pays,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+certifications,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique de la certification
+certifications,collaborateur_id,BIGINT,N/A,Oui,N/A,FK,Référence au collaborateur
+certifications,titre,VARCHAR,255,Oui,N/A,N/A,Titre de la certification
+certifications,organisme,VARCHAR,255,Non,N/A,N/A,Organisme délivrant la certification
+certifications,pays_id,BIGINT,N/A,Non,N/A,FK,Pays où la certification a été obtenue
+certifications,date_obtention,DATE,N/A,Non,N/A,N/A,Date d'obtention de la certification
+certifications,date_expiration,DATE,N/A,Non,N/A,N/A,Date d'expiration de la certification
+certifications,document_path,VARCHAR,255,Non,N/A,N/A,Chemin vers le document numérisé
+certifications,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif de la certification
+certifications,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+certifications,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+contact_urgences,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique du contact d'urgence
+contact_urgences,collaborateur_id,BIGINT,N/A,Oui,N/A,FK,Référence au collaborateur
+contact_urgences,nom,VARCHAR,255,Oui,N/A,N/A,Nom complet du contact
+contact_urgences,relation,VARCHAR,255,Non,N/A,N/A,Relation avec le collaborateur
+contact_urgences,telephone,VARCHAR,20,Oui,N/A,N/A,Numéro de téléphone du contact
+contact_urgences,email,VARCHAR,255,Non,N/A,N/A,Email du contact
+contact_urgences,adresse_complete,TEXT,N/A,Non,N/A,N/A,Adresse complète du contact
+contact_urgences,ville_id,BIGINT,N/A,Oui,N/A,FK,Ville de résidence du contact
+contact_urgences,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif du contact
+contact_urgences,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+contact_urgences,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+historique_primes,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique de la prime
+historique_primes,collaborateur_id,BIGINT,N/A,Oui,N/A,FK,Référence au collaborateur
+historique_primes,date_prime,DATE,N/A,Oui,N/A,N/A,Date d'attribution de la prime
+historique_primes,type_prime,ENUM,N/A,Oui,N/A,N/A,Type de prime
+historique_primes,montant,DECIMAL,"10,2",Oui,N/A,N/A,Montant de la prime
+historique_primes,monnaie,ENUM,N/A,Oui,N/A,N/A,Devise de la prime
+historique_primes,motif,TEXT,N/A,Non,N/A,N/A,Motif d'attribution de la prime
+historique_primes,commentaires,TEXT,N/A,Non,N/A,N/A,Commentaires sur la prime
+historique_primes,document_path,VARCHAR,255,Non,N/A,N/A,Chemin vers le document numérisé
+historique_primes,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif de la prime
+historique_primes,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+historique_primes,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+historique_formations,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique de la formation
+historique_formations,collaborateur_id,BIGINT,N/A,Oui,N/A,FK,Référence au collaborateur
+historique_formations,titre,VARCHAR,255,Oui,N/A,N/A,Titre de la formation
+historique_formations,organisme,VARCHAR,255,Non,N/A,N/A,Organisme dispensant la formation
+historique_formations,type_formation,ENUM,N/A,Oui,N/A,N/A,Type de formation
+historique_formations,date_debut,DATE,N/A,Oui,N/A,N/A,Date de début de la formation
+historique_formations,date_fin,DATE,N/A,Non,N/A,N/A,Date de fin de la formation
+historique_formations,resultat,TEXT,N/A,Non,N/A,N/A,Résultat ou diplôme obtenu
+historique_formations,commentaires,TEXT,N/A,Non,N/A,N/A,Commentaires sur la formation
+historique_formations,document_path,VARCHAR,255,Non,N/A,N/A,Chemin vers le document numérisé
+historique_formations,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif de la formation
+historique_formations,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+historique_formations,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+historique_augmentations,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique de l'augmentation
+historique_augmentations,collaborateur_id,BIGINT,N/A,Oui,N/A,FK,Référence au collaborateur
+historique_augmentations,date_augmentation,DATE,N/A,Oui,N/A,N/A,Date de l'augmentation
+historique_augmentations,ancien_salaire,DECIMAL,"10,2",Oui,N/A,N/A,Ancien montant du salaire
+historique_augmentations,nouveau_salaire,DECIMAL,"10,2",Oui,N/A,N/A,Nouveau montant du salaire
+historique_augmentations,monnaie,ENUM,N/A,Oui,N/A,N/A,Devise du salaire
+historique_augmentations,pourcentage,DECIMAL,"5,2",Oui,N/A,N/A,Pourcentage d'augmentation
+historique_augmentations,motif,TEXT,N/A,Non,N/A,N/A,Motif de l'augmentation
+historique_augmentations,commentaires,TEXT,N/A,Non,N/A,N/A,Commentaires sur l'augmentation
+historique_augmentations,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif de l'augmentation
+historique_augmentations,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+historique_augmentations,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+historique_postes,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique de l'historique de poste
+historique_postes,collaborateur_id,BIGINT,N/A,Oui,N/A,FK,Référence au collaborateur
+historique_postes,poste_id,BIGINT,N/A,Oui,N/A,FK,Référence au poste
+historique_postes,date_debut,DATE,N/A,Oui,N/A,N/A,Date de début à ce poste
+historique_postes,date_fin,DATE,N/A,Non,N/A,N/A,Date de fin à ce poste
+historique_postes,duree,INTEGER,N/A,Non,N/A,N/A,Durée en jours à ce poste
+historique_postes,commentaires,TEXT,N/A,Non,N/A,N/A,Commentaires sur ce poste
+historique_postes,raison_fin,TEXT,N/A,Non,N/A,N/A,Raison de changement du poste
+historique_postes,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif de l'historique
+historique_postes,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+historique_postes,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+jour_feries,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique du jour férié
+jour_feries,nom,VARCHAR,255,Oui,N/A,N/A,Nom du jour férié
+jour_feries,description,TEXT,N/A,Non,N/A,N/A,Description du jour férié
+jour_feries,date,DATE,N/A,Oui,N/A,N/A,Date du jour férié
+jour_feries,est_recurrent,BOOLEAN,N/A,Oui,0,N/A,Indique si le jour férié revient chaque année
+jour_feries,est_confirme,BOOLEAN,N/A,Oui,0,N/A,Indique si le jour férié est confirmé
+jour_feries,type,ENUM,N/A,Oui,N/A,N/A,Type de jour férié
+jour_feries,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif du jour férié
+jour_feries,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+jour_feries,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+historique_conges,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique du congé
+historique_conges,collaborateur_id,BIGINT,N/A,Oui,N/A,FK,Référence au collaborateur
+historique_conges,type_conge,ENUM,N/A,Oui,N/A,N/A,Type de congé
+historique_conges,date_debut,DATE,N/A,Oui,N/A,N/A,Date de début du congé
+historique_conges,date_fin,DATE,N/A,Oui,N/A,N/A,Date de fin du congé
+historique_conges,duree,INTEGER,N/A,Oui,N/A,N/A,Durée du congé en jours
+historique_conges,motif,TEXT,N/A,Non,N/A,N/A,Motif du congé
+historique_conges,commentaires,TEXT,N/A,Non,N/A,N/A,Commentaires sur le congé
+historique_conges,document_path,VARCHAR,255,Non,N/A,N/A,Chemin vers le document numérisé
+historique_conges,statut,BOOLEAN,N/A,Oui,1,N/A,Statut actif/inactif du congé
+historique_conges,created_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de création de l'enregistrement
+historique_conges,updated_at,TIMESTAMP,N/A,Non,N/A,N/A,Date de dernière modification
+cache,key,VARCHAR,255,Oui,N/A,PK,Clé du cache
+cache,value,MEDIUMTEXT,N/A,Oui,N/A,N/A,Valeur du cache
+cache,expiration,INTEGER,N/A,Oui,N/A,N/A,Timestamp d'expiration du cache
+cache_locks,key,VARCHAR,255,Oui,N/A,PK,Clé du verrou
+cache_locks,owner,VARCHAR,255,Oui,N/A,N/A,Propriétaire du verrou
+cache_locks,expiration,INTEGER,N/A,Oui,N/A,N/A,Timestamp d'expiration du verrou
+jobs,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique du job
+jobs,queue,VARCHAR,255,Oui,N/A,Index,Nom de la queue
+jobs,payload,LONGTEXT,N/A,Oui,N/A,N/A,Données du job encodées
+jobs,attempts,TINYINT,N/A,Oui,N/A,N/A,Nombre de tentatives
+jobs,reserved_at,INTEGER,N/A,Non,N/A,N/A,Timestamp de réservation
+jobs,available_at,INTEGER,N/A,Oui,N/A,N/A,Timestamp de disponibilité
+jobs,created_at,INTEGER,N/A,Oui,N/A,N/A,Timestamp de création
+job_batches,id,VARCHAR,255,Oui,N/A,PK,Identifiant unique du lot de jobs
+job_batches,name,VARCHAR,255,Oui,N/A,N/A,Nom du lot de jobs
+job_batches,total_jobs,INTEGER,N/A,Oui,N/A,N/A,Nombre total de jobs dans le lot
+job_batches,pending_jobs,INTEGER,N/A,Oui,N/A,N/A,Nombre de jobs en attente
+job_batches,failed_jobs,INTEGER,N/A,Oui,N/A,N/A,Nombre de jobs échoués
+job_batches,failed_job_ids,LONGTEXT,N/A,Oui,N/A,N/A,Identifiants des jobs échoués
+job_batches,options,MEDIUMTEXT,N/A,Non,N/A,N/A,Options du lot de jobs
+job_batches,cancelled_at,INTEGER,N/A,Non,N/A,N/A,Timestamp d'annulation
+job_batches,created_at,INTEGER,N/A,Oui,N/A,N/A,Timestamp de création
+job_batches,finished_at,INTEGER,N/A,Non,N/A,N/A,Timestamp de fin
+failed_jobs,id,BIGINT,N/A,Oui,N/A,PK,Identifiant unique du job échoué
+failed_jobs,uuid,VARCHAR,255,Oui,N/A,Unique,Identifiant UUID du job
+failed_jobs,connection,TEXT,N/A,Oui,N/A,N/A,Connexion utilisée
+failed_jobs,queue,TEXT,N/A,Oui,N/A,N/A,Nom de la queue
+failed_jobs,payload,LONGTEXT,N/A,Oui,N/A,N/A,Données du job encodées
+failed_jobs,exception,LONGTEXT,N/A,Oui,N/A,N/A,Exception rencontrée
+failed_jobs,failed_at,TIMESTAMP,N/A,Oui,CURRENT_TIMESTAMP,N/A,Timestamp de l'échec

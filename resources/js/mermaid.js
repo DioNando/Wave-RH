@@ -8,6 +8,21 @@ mermaid.initialize({
     logLevel: 'error',
     fontFamily: 'Roboto, sans-serif',
 
+    // Better rendering for exports
+    er: {
+        useMaxWidth: false
+    },
+    flowchart: {
+        useMaxWidth: false,
+        htmlLabels: true
+    },
+    sequence: {
+        useMaxWidth: false
+    },
+    classDiagram: {
+        useMaxWidth: false
+    },
+
     // Dark theme detection based on your app's dark mode
     themeVariables: {
         darkMode: document.documentElement.getAttribute('data-theme') === 'dark'
