@@ -20,7 +20,8 @@
                 :responsive="true"
                 icon="heroicon-o-arrow-down-tray"
                 data-diagram-id="{{ $id }}"
-                onclick="exportDiagram('{{ $id }}', '{{ $caption ?? 'Diagram' }}')"
+                data-caption="{{ $caption }}"
+                onclick="exportDiagramSafe(this)"
             >
                 Exporter PNG
             </x-button.primary>
@@ -32,7 +33,8 @@
                 :responsive="true"
                 icon="heroicon-o-arrow-down-tray"
                 data-diagram-id="{{ $id }}"
-                onclick="exportDiagram('{{ $id }}', 'Diagram')"
+                data-caption="Diagram"
+                onclick="exportDiagramSafe(this)"
             >
                 Exporter PNG
             </x-button.primary>
@@ -85,6 +87,14 @@
             }, 500);
         }, 3000);
     }
+
+    // Safe wrapper for exporting diagrams
+    window.exportDiagramSafe = function(buttonElement) {
+        const id = buttonElement.getAttribute('data-diagram-id');
+        const caption = buttonElement.getAttribute('data-caption') || 'Diagram';
+
+        return exportDiagram(id, caption);
+    };
 
     // Function to export diagram as PNG
     window.exportDiagram = function(id, caption) {

@@ -21,11 +21,6 @@ class RoleSeeder extends Seeder
         $adminRole = Role::create(['name' => UserRole::ADMIN->value, 'guard_name' => 'web']);
         $userRole = Role::create(['name' => UserRole::USER->value, 'guard_name' => 'web']);
 
-        // Rôles additionnels (actuellement commentés dans l'enum)
-        // Role::create(['name' => UserRole::RH->value, 'guard_name' => 'web']);
-        // Role::create(['name' => UserRole::MANAGER->value, 'guard_name' => 'web']);
-        // Role::create(['name' => UserRole::EMPLOYE->value, 'guard_name' => 'web']);
-
         // Création de quelques permissions de base
         Permission::create(['name' => 'manage users', 'guard_name' => 'web']);
         Permission::create(['name' => 'manage roles', 'guard_name' => 'web']);

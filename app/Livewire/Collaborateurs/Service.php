@@ -355,14 +355,6 @@ class Service extends Form
             }
         }
 
-        // Gérer le CV
-        // if ($this->document_cv) {
-        //     if (!is_string($this->document_cv)) {
-        //         $cvPath = $this->document_cv->storePubliclyAs('cv', 'cv_' . strtolower($this->nom) . '_' . $this->document_cv->hashName(), 'public');
-        //         $data['document_cv'] = $cvPath;
-        //     }
-        // }
-
         // Stocker les langues et compétences séparément dans les relations
         $langues = $this->langues;
         $competences = $this->competences_techniques;
