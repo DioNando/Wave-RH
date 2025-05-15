@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class Filters extends Component
 {
-    public $type_document_id = [3,2];
+    public $type_document_id = [3,4];
     public $statut = [];
     public $date_emission_start = '';
     public $date_emission_end = '';
@@ -34,16 +34,47 @@ class Filters extends Component
     // Handle updating with correct type conversion
     public function updatedTypeDocumentId($value)
     {
-        // Ensure we're always dealing with an array
-        if (!is_array($value)) {
+        // Handle the value from the multiselect component
+        if (is_string($value) && $this->isJson($value)) {
+            // If JSON string received, convert it to array
+            $this->type_document_id = array_map('intval', json_decode($value, true));
+        } elseif (!is_array($value)) {
+            // If single value and not JSON, make it an array
             $this->type_document_id = [$value];
+        } else {
+            // If it's already an array, make sure all values are integers
+            $this->type_document_id = array_map('intval', $value);
         }
-        $this->updated();
+
+        // Dispatch the updated event
+        $this->dispatchFiltersUpdatedEvent();
+    }
+
+    public function updatedStatut($value)
+    {
+        // Ensure statut is always an array
+        if (!is_array($value)) {
+            $this->statut = is_null($value) ? [] : [$value];
+        }
+
+        // Dispatch the updated event
+        $this->dispatchFiltersUpdatedEvent();
     }
 
     public function updated($field = null)
     {
-        // Make sure we're working with arrays
+        // Only handle fields that don't have specific updated* methods
+        if (!in_array($field, ['type_document_id', 'statut'])) {
+            $this->dispatchFiltersUpdatedEvent();
+        }
+    }
+
+    /**
+     * Helper method to dispatch the filtersUpdated event
+     */
+    private function dispatchFiltersUpdatedEvent()
+    {
+        // Ensure type_document_id and statut are arrays
         if (!is_array($this->type_document_id)) {
             $this->type_document_id = is_null($this->type_document_id) ? [] : [$this->type_document_id];
         }
@@ -63,39 +94,42 @@ class Filters extends Component
         ]);
     }
 
-    // Process received values only when the form is submitted
+    // Process received values when the form is submitted
     public function filters()
     {
-        // Make sure we handle JSON string if it comes in that format
+        // Handle JSON string for type_document_id if needed
         if (is_string($this->type_document_id) && $this->isJson($this->type_document_id)) {
-            $this->type_document_id = json_decode($this->type_document_id, true);
+            $this->type_document_id = array_map('intval', json_decode($this->type_document_id, true));
         }
 
-        // if (is_string($this->statut) && $this->isJson($this->statut)) {
-        //     $this->statut = json_decode($this->statut, true);
-        // }
+        // Ensure we always have arrays with integers for IDs
+        if (is_array($this->type_document_id)) {
+            $this->type_document_id = array_map('intval', $this->type_document_id);
+        } else {
+            $this->type_document_id = [];
+        }
 
-        // Ensure we always have arrays
-        $this->type_document_id = is_array($this->type_document_id) ? $this->type_document_id : [];
+        // Ensure statut is always an array
         $this->statut = is_array($this->statut) ? $this->statut : [];
 
-        $this->dispatch('filtersUpdated', [
-            'type_document_id' => $this->type_document_id,
-            'statut' => $this->statut,
-            'date_emission_start' => $this->date_emission_start,
-            'date_emission_end' => $this->date_emission_end,
-            'date_expiration_start' => $this->date_expiration_start,
-            'date_expiration_end' => $this->date_expiration_end,
-            'collaborateur_id' => $this->collaborateur_id,
-        ]);
+        // Dispatch the filters updated event
+        $this->dispatchFiltersUpdatedEvent();
     }
 
     public function resetFilters()
     {
+        // Reset all properties to their initial values
         $this->reset();
-        // $this->type_document_id = [];
-        // $this->statut = [];
-        $this->dispatch('filtersUpdated', []);
+
+        // Ensure arrays are reset properly
+        $this->type_document_id = [];
+        $this->statut = [];
+
+        // Notify any JS components about the reset
+        $this->dispatch('multiselect:reset');
+
+        // Dispatch filters updated event
+        $this->dispatchFiltersUpdatedEvent();
     }
 
     // Helper function to check if a string is JSON

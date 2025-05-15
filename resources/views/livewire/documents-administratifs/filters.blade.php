@@ -8,16 +8,9 @@
     <div class="flex flex-wrap gap-x-10 space-y-5">
         <div class="w-full sm:w-64">
             <x-form.group name="type_document_id" label="Type de document">
-                <x-form.multiselect
-                    name="type_document_id"
-                    :options="$typeDocuments->pluck('libelle', 'id')->toArray()"
-                    :selected="$type_document_id"
+                <x-form.multiselect name="type_document_id" :options="$typeDocuments->pluck('libelle', 'id')->toArray()" :selected="$type_document_id"
                     placeholder="Sélectionner des types" />
             </x-form.group>
-            <!-- Debug info - remove in production -->
-            <div class="mt-1 text-xs text-gray-500">
-                Sélection: {{ is_array($type_document_id) ? implode(', ', $type_document_id) : $type_document_id }}
-            </div>
         </div>
 
         <fieldset class="">
