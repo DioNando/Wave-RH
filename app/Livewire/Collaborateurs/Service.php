@@ -5,6 +5,8 @@ namespace App\Livewire\Collaborateurs;
 use App\Enums\CollaborateurGenre;
 use App\Enums\CollaborateurStatutMarital;
 use App\Models\Collaborateur;
+use App\Models\CompetenceTechnique;
+use App\Models\Langue;
 use App\Models\Pays;
 use App\Models\User;
 use App\Models\Ville;
@@ -313,7 +315,7 @@ class Service extends Form
         if (!empty($langues)) {
             foreach ($langues as $langueNom) {
                 if (!empty($langueNom)) {
-                    $langue = \App\Models\Langue::where('nom', 'like', "%$langueNom%")->first();
+                    $langue = Langue::where('nom', 'like', "%$langueNom%")->first();
                     if ($langue) {
                         $collaborateur->langues()->attach($langue->id, [
                             'niveau' => \App\Enums\LangueNiveau::INTERMEDIAIRE->value
@@ -327,7 +329,7 @@ class Service extends Form
         if (!empty($competences)) {
             foreach ($competences as $competenceNom) {
                 if (!empty($competenceNom)) {
-                    $competence = \App\Models\CompetenceTechnique::where('nom', 'like', "%$competenceNom%")->first();
+                    $competence = CompetenceTechnique::where('nom', 'like', "%$competenceNom%")->first();
                     if ($competence) {
                         $collaborateur->competencesTechniques()->attach($competence->id, [
                             'niveau' => 3,
@@ -374,7 +376,7 @@ class Service extends Form
         if (!empty($langues)) {
             foreach ($langues as $langueNom) {
                 if (!empty($langueNom)) {
-                    $langue = \App\Models\Langue::where('nom', 'like', "%$langueNom%")->first();
+                    $langue = Langue::where('nom', 'like', "%$langueNom%")->first();
                     if ($langue) {
                         $this->collaborateur->langues()->attach($langue->id, [
                             'niveau' => \App\Enums\LangueNiveau::INTERMEDIAIRE->value
@@ -388,7 +390,7 @@ class Service extends Form
         if (!empty($competences)) {
             foreach ($competences as $competenceNom) {
                 if (!empty($competenceNom)) {
-                    $competence = \App\Models\CompetenceTechnique::where('nom', 'like', "%$competenceNom%")->first();
+                    $competence = CompetenceTechnique::where('nom', 'like', "%$competenceNom%")->first();
                     if ($competence) {
                         $this->collaborateur->competencesTechniques()->attach($competence->id, [
                             'niveau' => 3,

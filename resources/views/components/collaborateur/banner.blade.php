@@ -181,6 +181,61 @@
                             'body' => 'Êtes-vous sûr de vouloir supprimer ce collaborateur ? Cette action est irréversible.',
                         ]) --}}
 
+                        <form id="delete-form-{{ $collaborateur->id }}"
+                            action="{{ route('collaborateurs.destroy', $collaborateur) }}"
+                            method="POST"
+                            class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <x-button.outlined
+                                type="button"
+                                x-on:click.prevent="$dispatch('open-modal', 'confirm-delete-{{ $collaborateur->id }}')"
+                                color="red"
+                                icon="heroicon-o-trash">
+                                Supprimer
+                            </x-button.outlined>
+                        </form>
+
+                        <!-- Modal de confirmation de suppression -->
+                        <x-modal name="confirm-delete-{{ $collaborateur->id }}" :show="false">
+                            <div class="sm:p-6 p-4">
+                                <!-- Header -->
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:size-10">
+                                        <x-heroicon-o-exclamation-triangle
+                                            class="size-6 text-red-600" />
+                                    </div>
+                                    <h3 id="modal-title"
+                                        class="text-base font-semibold text-gray-900 dark:text-white">
+                                        Supprimer {{ $collaborateur->nom . ' ' . $collaborateur->prenom }}
+                                    </h3>
+                                </div>
+
+                                <!-- Body -->
+                                <div class="mt-3 text-sm text-gray-700 dark:text-gray-300">
+                                    <p>Êtes-vous sûr de vouloir supprimer ce collaborateur ? Cette action est irréversible.</p>
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="mt-5 sm:mt-4 flex flex-row-reverse gap-3">
+                                    <x-button.primary
+                                        type="button"
+                                        onclick="document.getElementById('delete-form-{{ $collaborateur->id }}').submit();"
+                                        x-on:click="$dispatch('close-modal', 'confirm-delete-{{ $collaborateur->id }}')"
+                                        color="red">
+                                        Supprimer
+                                    </x-button.primary>
+                                    <x-button.primary
+                                        type="button"
+                                        color="gray"
+                                        x-on:click="$dispatch('close-modal', 'confirm-delete-{{ $collaborateur->id }}')">
+                                        {{ __('Annuler') }}
+                                    </x-button.primary>
+                                </div>
+                            </div>
+                        </x-modal>
+
                         <form id="toggle-status-form-{{ $collaborateur->id }}"
                             action="{{ route('collaborateurs.update-statut') }}" method="POST" class="inline-block">
                             @csrf

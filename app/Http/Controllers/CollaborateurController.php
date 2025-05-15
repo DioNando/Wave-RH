@@ -68,7 +68,13 @@ class CollaborateurController extends Controller
      */
     public function destroy(Collaborateur $collaborateur)
     {
-        //
+        // Supprimer le collaborateur
+        $collaborateur->delete();
+        
+        // Message de succès
+        $message = 'Collaborateur supprimé avec succès';
+        
+        return redirect()->route('collaborateurs.index')->with('success', $message);
     }
 
     /**
