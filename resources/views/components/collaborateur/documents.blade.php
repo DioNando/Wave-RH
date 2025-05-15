@@ -12,7 +12,7 @@
                         ['content' => 'Date d\'émission', 'align' => 'text-left'],
                         ['content' => 'Date d\'expiration', 'align' => 'text-left'],
                         ['content' => 'Statut', 'align' => 'text-left'],
-                        ['content' => '', 'align' => 'text-right'],
+                        ['content' => 'Actions', 'align' => 'text-right'],
                     ];
                     $empty = 'Aucun document trouvé';
                 @endphp

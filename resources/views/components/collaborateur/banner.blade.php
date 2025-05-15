@@ -163,7 +163,7 @@
                     </button>
 
                     <!-- Actions secondaires qui apparaissent à droite -->
-                    <div x-show="open"x-cloak class="flex gap-3 ml-3" style="display: none;">
+                    <div x-show="open"x-cloak class="flex gap-3" style="display: none;">
                         <a href="#">
                             <x-button.outlined color="gray" responsive icon="heroicon-o-arrow-down-tray">
                                 Télécharger

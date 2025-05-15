@@ -1,7 +1,7 @@
 @props(['collaborateur'])
 
 <section x-show="activeTab === 'profil-personnel'" x-cloak class="space-y-4">
-    <x-card defaultOpen="true">
+    <x-card defaultOpen="false">
         <x-card.card-header :dropdown="true" title="Informations personnelles" type="primary" />
         <x-card.card-body divider>
             <x-card.card-row label="Nom" value="{{ $collaborateur->nom }}" />
@@ -39,7 +39,7 @@
         </x-card.card-body>
     </x-card>
 
-    <x-card defaultOpen="false">
+    <x-card defaultOpen="true">
         <x-card.card-header :dropdown="true" title="Contacts d'urgences" type="primary" />
         <x-card.card-body>
             <div class="mb-6">
@@ -55,38 +55,55 @@
                         ['content' => 'Adresse complète', 'align' => 'text-left'],
                         ['content' => 'Ville', 'align' => 'text-left'],
                         ['content' => 'Statut', 'align' => 'text-left'],
+                        ['content' => 'Actions', 'align' => 'text-right'],
                     ];
                     $empty = 'Aucun contact d\'urgence disponible';
                 @endphp
-                <table class="w-full">
-                    <x-table.head :background="false">
-                        @foreach ($headers as $header)
-                            <x-table.head-cell :content="$header['content']" :align="$header['align']" />
-                        @endforeach
-                    </x-table.head>
-                    <x-table.body>
-                        @forelse ($collaborateur->contact_urgences as $row)
-                            <tr>
-                                <x-table.cell content="{{ $row->nom }}" />
-                                <x-table.cell content="{{ $row->relation }}" />
-                                <x-table.cell align="right" content="{{ $row->telephone }}" />
-                                <x-table.cell content="{{ $row->email }}" />
-                                <x-table.cell content="{{ $row->adresse_complete }}" />
-                                <x-table.cell content="{{ $row->ville->nom }}" />
-                                <x-table.cell>
-                                    <x-badge.statut :statut="$row->statut" />
+                <div class="overflow-auto scrollbar-custom">
+                    <table class="w-full">
+                        <x-table.head :background="false">
+                            @foreach ($headers as $header)
+                                <x-table.head-cell :content="$header['content']" :align="$header['align']" />
+                            @endforeach
+                        </x-table.head>
+                        <x-table.body>
+                            @forelse ($collaborateur->contact_urgences as $row)
+                                <tr>
+                                    <x-table.cell content="{{ $row->nom }}" />
+                                    <x-table.cell content="{{ $row->relation }}" />
+                                    <x-table.cell align="right" content="{{ $row->telephone }}" />
+                                    <x-table.cell content="{{ $row->email }}" />
+                                    <x-table.cell content="{{ $row->adresse_complete }}" />
+                                    <x-table.cell content="{{ $row->ville->nom }}" />
+                                    <x-table.cell>
+                                        <x-badge.statut :statut="$row->statut" />
+                                    </x-table.cell>
+                                    <x-table.cell align="right">
+                                    <div class="flex gap-1 items-center justify-end">
+                                        @livewire('actions.toggle-status', [
+                                            'modelId' => $row->id,
+                                            'modelType' => 'contact d\'urgence',
+                                            'entity' => $row,
+                                            'simple' => true,
+                                            'refresh' => true
+                                        ], key('toggle-status-'.$row->id))
+                                        <x-label.divide-vertical />
+                                        <x-button.action simple="true"
+                                            icon="pencil-square" color="orange">Editer</x-button.action>
+                                    </div>
                                 </x-table.cell>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="{{ count($headers) }}"
-                                    class="text-center py-5 text-gray-500 dark:text-gray-400">
-                                    {{ $empty }}
-                                </td>
-                            </tr>
-                        @endforelse
-                    </x-table.body>
-                </table>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="{{ count($headers) }}"
+                                        class="text-center py-5 text-gray-500 dark:text-gray-400">
+                                        {{ $empty }}
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </x-table.body>
+                    </table>
+                </div>
             </div>
         </x-card.card-body>
     </x-card>

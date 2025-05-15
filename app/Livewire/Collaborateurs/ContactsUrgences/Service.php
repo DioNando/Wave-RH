@@ -88,4 +88,14 @@ class Service extends Form
 
         ContactUrgence::create($data);
     }
+
+    public function update(ContactUrgence $contactUrgence)
+    {
+        $this->validate();
+
+        $data = $this->all();
+        $data['collaborateur_id'] = $this->collaborateur->id;
+
+        $contactUrgence->update($data);
+    }
 }
