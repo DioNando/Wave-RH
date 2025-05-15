@@ -17,8 +17,8 @@
             <legend class="text-sm/6 font-medium text-gray-900 dark:text-gray-100">Statut</legend>
             <div
                 class="mt-1 flex gap-4 py-1.5 px-3 rounded-md bg-gray-100 dark:bg-white/5 outline -outline-offset-1 outline-gray-300 dark:outline-white/10">
-                <x-form.checkbox name="statut" label="Actif" value="true" :live="false" />
-                <x-form.checkbox name="statut" label="Inactif" value="false" :live="false" />
+                <x-form.checkbox name="statut" label="Actif" :value="true" :live="false" />
+                <x-form.checkbox name="statut" label="Inactif" :value="false" :live="false" />
             </div>
         </fieldset>
 
@@ -48,9 +48,7 @@
     </div>
 
     <div class="flex justify-end mt-6 md:mt-4 gap-3">
-        <div wire:click="resetFilters">
-            <x-button.outlined color="gray">Réinitialiser</x-button.outlined>
-        </div>
+        <x-button.outlined type="button" wire:click="resetFilters" color="gray">Réinitialiser</x-button.outlined>
         <x-button.primary type="submit">Filtrer</x-button.primary>
     </div>
 </x-form.form>

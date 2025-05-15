@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class Filters extends Component
 {
-    public $type_document_id = [3,4];
+    public $type_document_id = [];
     public $statut = [];
     public $date_emission_start = '';
     public $date_emission_end = '';

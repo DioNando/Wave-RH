@@ -1,4 +1,4 @@
-<div x-data="{ openFilters: true }">
+<div x-data="{ openFilters: false }">
     <div class="my-3 flex items-start justify-end flex-wrap gap-3 sm:mt-0">
         <livewire:table.searchbar />
         <x-button.outlined @click="openFilters = !openFilters" type="button" color="gray" responsive
