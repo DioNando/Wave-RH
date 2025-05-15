@@ -70,4 +70,30 @@ class CollaborateurController extends Controller
     {
         //
     }
+
+    /**
+     * Mettre à jour le statut des collaborateurs sélectionnés
+     */
+    public function updateStatut(Request $request)
+    {
+        // Valider les données reçues
+        $validated = $request->validate([
+            'ids' => 'required|json',
+            'statut' => 'required|boolean',
+        ]);
+
+        // Décoder les IDs des collaborateurs
+        $ids = json_decode($validated['ids'], true);
+        $statut = (bool) $validated['statut'];
+
+        // Mettre à jour le statut des collaborateurs
+        $count = Collaborateur::whereIn('id', $ids)->update(['statut' => $statut]);
+
+        // Message de succès
+        $message = $statut
+            ? $count . ' collaborateur(s) activé(s) avec succès'
+            : $count . ' collaborateur(s) désactivé(s) avec succès';
+
+        return redirect()->back()->with('success', $message);
+    }
 }

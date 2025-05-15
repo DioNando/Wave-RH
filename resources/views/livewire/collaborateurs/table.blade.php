@@ -3,11 +3,35 @@
 @endphp
 
 <div x-data="usersTable()">
+    <template x-if="selectedUsers.length > 0">
+        <div
+            class="p-6 mb-5 overflow-hidden text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-900 ring ring-gray-200 dark:ring-gray-700 rounded-lg flex flex-wrap gap-3 justify-end items-center">
+            <span class="text-sm text-gray-600 dark:text-gray-300"
+                x-text="`${selectedUsers.length} collaborateur(s) sélectionné(s)`"></span>
+            <form id="form-activate" action="{{ route('collaborateurs.update-statut') }}" method="POST">
+                @csrf
+                <input type="hidden" name="ids" x-bind:value="JSON.stringify(selectedUsers)">
+                <input type="hidden" name="statut" value="1">
+                <x-button.outlined type="submit" color="green" responsive icon="heroicon-o-check">
+                    Activer <span class="ml-1" x-text="'('+selectedUsers.length+')'"></span>
+                </x-button.outlined>
+            </form>
+            <form id="form-deactivate" action="{{ route('collaborateurs.update-statut') }}" method="POST">
+                @csrf
+                <input type="hidden" name="ids" x-bind:value="JSON.stringify(selectedUsers)">
+                <input type="hidden" name="statut" value="0">
+                <x-button.outlined type="submit" color="red" responsive icon="heroicon-o-x-mark">
+                    Désactiver <span class="ml-1" x-text="'('+selectedUsers.length+')'"></span>
+                </x-button.outlined>
+            </form>
+        </div>
+    </template>
     <x-table>
         <x-table.head>
             <th>
                 <div class="flex justify-center">
-                    <input type="checkbox" id="select-all-users" class="checkbox-custom" x-data x-on:click="toggleAll($event)">
+                    <input type="checkbox" id="select-all-users" class="checkbox-custom" x-data
+                        x-on:click="toggleAll($event)">
                 </div>
             </th>
             @foreach ($headers as $header)
@@ -16,10 +40,13 @@
         </x-table.head>
         <x-table.body class="bg-white dark:bg-gray-900">
             @forelse ($collaborateurs as $collaborateur)
-                <tr x-bind:class="{ 'bg-blue-50 dark:bg-blue-900/20': selectedUsers.includes({{ $collaborateur->id }}) }">
+                <tr
+                    x-bind:class="{ 'bg-blue-50 dark:bg-blue-900/20': selectedUsers.includes({{ $collaborateur->id }}) }">
                     <td class="px-4">
                         <div class="flex justify-center">
-                            <input type="checkbox" value="{{ $collaborateur->id }}" class="user-checkbox checkbox-custom" x-data x-on:click="toggleUser({{ $collaborateur->id }})">
+                            <input type="checkbox" value="{{ $collaborateur->id }}"
+                                class="user-checkbox checkbox-custom" x-data
+                                x-on:click="toggleUser({{ $collaborateur->id }})">
                         </div>
                     </td>
                     <x-table.cell class="w-0 pl-0 pr-0">
@@ -167,6 +194,23 @@
             function usersTable() {
                 return {
                     selectedUsers: [],
+                    init() {
+                        // Ajouter des confirmations avant de soumettre les formulaires
+                        document.getElementById('form-activate')?.addEventListener('submit', (e) => {
+                            if (!confirm(
+                                `Voulez-vous vraiment activer ${this.selectedUsers.length} collaborateur(s) ?`)) {
+                                e.preventDefault();
+                            }
+                        });
+
+                        document.getElementById('form-deactivate')?.addEventListener('submit', (e) => {
+                            if (!confirm(
+                                    `Voulez-vous vraiment désactiver ${this.selectedUsers.length} collaborateur(s) ?`
+                                    )) {
+                                e.preventDefault();
+                            }
+                        });
+                    },
                     toggleAll(event) {
                         const checkboxes = document.querySelectorAll('.user-checkbox');
                         const isChecked = event.target.checked;

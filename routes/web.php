@@ -78,6 +78,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/jours-feries', JourFerieController::class);
     Route::resource('/langues', LangueController::class);
     Route::resource('/competences-techniques', CompetenceTechniqueController::class);
+
+    // Route pour mettre à jour le statut des collaborateurs
+    Route::post('/collaborateurs/update-statut', [CollaborateurController::class, 'updateStatut'])->name('collaborateurs.update-statut');
 });
 
 // Gestion des erreurs personnalisée
