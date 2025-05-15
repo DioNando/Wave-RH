@@ -79,19 +79,36 @@
                                         <x-badge.statut :statut="$row->statut" />
                                     </x-table.cell>
                                     <x-table.cell align="right">
-                                    <div class="flex gap-1 items-center justify-end">
-                                        @livewire('actions.toggle-status', [
-                                            'modelId' => $row->id,
-                                            'modelType' => 'contact d\'urgence',
-                                            'entity' => $row,
-                                            'simple' => true,
-                                            'refresh' => true
-                                        ], key('toggle-status-'.$row->id))
-                                        <x-label.divide-vertical />
-                                        <x-button.action simple="true"
-                                            icon="pencil-square" color="orange">Editer</x-button.action>
-                                    </div>
-                                </x-table.cell>
+                                        <div class="flex gap-1 items-center justify-end">
+                                            @livewire(
+                                                'actions.toggle-status',
+                                                [
+                                                    'modelId' => $row->id,
+                                                    'modelType' => 'contact d\'urgence',
+                                                    'entity' => $row,
+                                                    'simple' => true,
+                                                    'refresh' => true,
+                                                ],
+                                                key('toggle-status-' . $row->id)
+                                            )
+                                            <x-label.divide-vertical />
+                                            <div
+                                                @contact-updated.window="$dispatch('close-modal', 'update-contact-{{ $row->id }}')">
+                                                <x-button.action
+                                                    @click="$dispatch('open-modal', 'update-contact-{{ $row->id }}')"
+                                                    simple="true" icon="pencil-square"
+                                                    color="orange">Editer</x-button.action>
+                                                @livewire(
+                                                    'collaborateurs.contacts-urgences.update',
+                                                    [
+                                                        'collaborateur' => $collaborateur,
+                                                        'contactUrgence' => $row,
+                                                    ],
+                                                    key('update-contact-' . $row->id)
+                                                )
+                                            </div>
+                                        </div>
+                                    </x-table.cell>
                                 </tr>
                             @empty
                                 <tr>
