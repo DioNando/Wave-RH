@@ -1,7 +1,9 @@
 @props(['collaborateur'])
 
 <aside class="mb-6">
-    <div x-data="{ isOpen: false }"
+    <div x-data="{
+        isOpen: false
+    }"
         class="rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden">
         <!-- Partie supérieure - Informations principales -->
         <div class="relative bg-gradient-to-r from-blue-600 to-blue-300 dark:from-blue-700 dark:to-blue-900 px-6 py-4">
@@ -151,7 +153,7 @@
             class="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 px-6 py-4 flex flex-wrap gap-3 justify-end">
             <!-- Actions principales -->
             <div class="flex gap-3 items-center">
-                <div x-data="{ open: false }" class="hidden relative flex items-center">
+                <div x-data="{ open: false }" class="relative flex items-center">
                     <!-- Bouton pour développer/réduire -->
                     <button @click="open = !open"
                         class="inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
@@ -177,16 +179,58 @@
                             'buttonLabel' => 'Supprimer',
                             'title' => 'Supprimer le collaborateur ' . $collaborateur->nom . ' ' . $collaborateur->prenom . ' ?',
                             'body' => 'Êtes-vous sûr de vouloir supprimer ce collaborateur ? Cette action est irréversible.',
-                        ])
+                        ]) --}}
 
-                        <form action="{{ route('collaborateurs.toggle-status', $collaborateur) }}" method="POST"
-                            class="inline-block">
+                        <form id="toggle-status-form-{{ $collaborateur->id }}"
+                            action="{{ route('collaborateurs.update-statut') }}" method="POST" class="inline-block">
                             @csrf
-                            @method('PUT')
-                            <x-button.outlined type="submit" :color="$collaborateur->statut ? 'gray' : 'green'" :icon="$collaborateur->statut ? 'heroicon-o-arrow-down' : 'heroicon-o-arrow-up'">
+                            <input type="hidden" name="ids" value="{{ json_encode([$collaborateur->id]) }}">
+                            <input type="hidden" name="statut" value="{{ $collaborateur->statut ? '0' : '1' }}">
+                            <x-button.outlined type="button"
+                                x-on:click.prevent="$dispatch('open-modal', 'confirm-toggle-status-{{ $collaborateur->id }}')"
+                                :color="$collaborateur->statut ? 'gray' : 'green'" :icon="$collaborateur->statut ? 'heroicon-o-x-mark' : 'heroicon-o-check'">
                                 {{ $collaborateur->statut ? 'Désactiver' : 'Activer' }}
                             </x-button.outlined>
-                        </form> --}}
+                        </form>
+
+                        <!-- Modal de confirmation -->
+                        <x-modal name="confirm-toggle-status-{{ $collaborateur->id }}" :show="false">
+                            <div class="sm:p-6 p-4">
+                                <!-- Header -->
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="flex size-12 shrink-0 items-center justify-center rounded-full {{ $collaborateur->statut ? 'bg-red-100' : 'bg-green-100' }} sm:size-10">
+                                        <x-heroicon-o-exclamation-triangle
+                                            class="size-6 {{ $collaborateur->statut ? 'text-red-600' : 'text-green-600' }}" />
+                                    </div>
+                                    <h3 id="modal-title"
+                                        class="text-base font-semibold text-gray-900 dark:text-white">
+                                        {{ $collaborateur->statut ? 'Désactiver' : 'Activer' }}
+                                        {{ $collaborateur->nom . ' ' . $collaborateur->prenom }}
+                                    </h3>
+                                </div>
+
+                                <!-- Body -->
+                                <div class="mt-3 text-sm text-gray-700 dark:text-gray-300">
+                                    <p>Êtes-vous sûr de vouloir {{ $collaborateur->statut ? 'désactiver' : 'activer' }}
+                                        ce collaborateur ?</p>
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="mt-5 sm:mt-4 flex flex-row-reverse gap-3">
+                                    <x-button.primary type="button"
+                                        onclick="document.getElementById('toggle-status-form-{{ $collaborateur->id }}').submit();"
+                                        x-on:click="$dispatch('close-modal', 'confirm-toggle-status-{{ $collaborateur->id }}')"
+                                        color="{{ $collaborateur->statut ? 'red' : 'green' }}">
+                                        {{ $collaborateur->statut ? 'Désactiver' : 'Activer' }}
+                                    </x-button.primary>
+                                    <x-button.primary type="button" color="gray"
+                                        x-on:click="$dispatch('close-modal', 'confirm-toggle-status-{{ $collaborateur->id }}')">
+                                        {{ __('Annuler') }}
+                                    </x-button.primary>
+                                </div>
+                            </div>
+                        </x-modal>
                     </div>
                 </div>
 
