@@ -16,13 +16,16 @@
             </div>
         </div>
         <div class="mt-6 flex items-center justify-between gap-x-3">
-            {{-- @livewire('base.delete', [
-                'modelId' => $this->form->langue->id,
-                'modelType' => 'langue',
-                'redirectRoute' => 'langues',
-                'redirectType' => 'index',
-                'entity' => $this->form->langue,
-            ]) --}}
+            @if(isset($this->form->langue->id))
+                @livewire('actions.delete', [
+                    'modelId' => $this->form->langue->id,
+                    'modelType' => 'langue',
+                    'redirectRoute' => 'langues',
+                    'entity' => $this->form->langue,
+                    'buttonLabel' => 'Supprimer',
+                    'body' => 'Êtes-vous sûr de vouloir supprimer cette langue ? Cette action est irréversible et supprimera également toutes les données associées.'
+                ])
+            @endif
             <x-button.primary type="submit" color="orange">Mettre à jour</x-button.primary>
         </div>
     </div>
