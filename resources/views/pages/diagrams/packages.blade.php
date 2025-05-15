@@ -53,7 +53,7 @@ Core --> Data
 Services --> UI
 Services --> Data
 
-classDef rootPackage fill:#f9f,stroke:#333,stroke-width:2px;
+classDef rootPackage fill:#fff,stroke:#333,stroke-width:2px;
 classDef corePackage fill:#bbf,stroke:#333,stroke-width:1px;
 classDef uiPackage fill:#bfb,stroke:#333,stroke-width:1px;
 classDef servicesPackage fill:#fbf,stroke:#333,stroke-width:1px;
@@ -178,7 +178,7 @@ Enums --> Http
 Enums --> Livewire
 Http --> Livewire
 
-classDef appPackage fill:#f9f,stroke:#333,stroke-width:2px;
+classDef appPackage fill:#fff,stroke:#333,stroke-width:2px;
 classDef modelsPackage fill:#bbf,stroke:#333,stroke-width:1px;
 classDef httpPackage fill:#fbf,stroke:#333,stroke-width:1px;
 classDef livewirePackage fill:#bfb,stroke:#333,stroke-width:1px;

@@ -16,11 +16,20 @@ class Table extends Component
 
     protected $updatesQueryString = ['search', 'categorieFilter'];
 
-    protected $listeners = ['searchUpdated' => 'updateSearch'];
+    protected $listeners = [
+        'searchUpdated' => 'updateSearch',
+        'categorieUpdated' => 'updateCategorie'
+    ];
 
     public function updateSearch($search)
     {
         $this->search = $search;
+        $this->resetPage();
+    }
+
+    public function updateCategorie($categorie)
+    {
+        $this->categorieFilter = $categorie;
         $this->resetPage();
     }
 

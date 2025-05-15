@@ -9,21 +9,6 @@
 @endphp
 
 <div>
-    <div class="mb-4">
-        <div class="flex flex-wrap items-center gap-4">
-            <div class="w-full sm:w-auto">
-                <label for="categorieFilter" class="sr-only">Filtrer par catégorie</label>
-                <select wire:model.live="categorieFilter" id="categorieFilter"
-                    class="w-full rounded-md dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-sm">
-                    <option value="">Toutes les catégories</option>
-                    @foreach ($categories as $categorie)
-                        <option value="{{ $categorie }}">{{ $categorie }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-    </div>
-
     <x-table.table :headers="$headers">
         <x-table.head>
             @foreach ($headers as $header)

@@ -132,45 +132,159 @@ UI-->>Nouveau: Affiche le tableau de bord
                 </p>
 
                 <x-diagram.mermaid caption="Diagramme de séquence pour la gestion des documents">
-                    sequenceDiagram
-                    autonumber
-                    actor User as Utilisateur
-                    participant UI as Interface Utilisateur
-                    participant Controller as DocumentController
-                    participant DocModel as DocumentAdministratif
-                    participant TypeModel as TypeDocument
-                    participant Storage as Système de Stockage
-                    participant DB as Base de Données
+sequenceDiagram
+autonumber
+actor User as Utilisateur
+participant UI as Interface Utilisateur
+participant Controller as DocumentController
+participant DocModel as DocumentAdministratif
+participant TypeModel as TypeDocument
+participant Storage as Système de Stockage
+participant DB as Base de Données
 
-                    User->>UI: Accède à la section documents
-                    UI->>Controller: Demande liste documents
-                    Controller->>DocModel: Récupère documents du collaborateur
-                    DocModel->>DB: SELECT * FROM document_administratifs WHERE collaborateur_id = ?
-                    DB-->>DocModel: Retourne les documents
-                    Controller->>TypeModel: Récupère les types de documents
-                    TypeModel->>DB: SELECT * FROM type_documents
-                    DB-->>TypeModel: Retourne les types de documents
-                    DocModel-->>Controller: Transmet documents avec leurs types
-                    Controller-->>UI: Affiche liste documents regroupés par type
-                    UI-->>User: Présente documents disponibles
+User->>UI: Accède à la section documents
+UI->>Controller: Demande liste documents
+Controller->>DocModel: Récupère documents du collaborateur
+DocModel->>DB: SELECT * FROM document_administratifs WHERE collaborateur_id = ?
+DB-->>DocModel: Retourne les documents
+Controller->>TypeModel: Récupère les types de documents
+TypeModel->>DB: SELECT * FROM type_documents
+DB-->>TypeModel: Retourne les types de documents
+DocModel-->>Controller: Transmet documents avec leurs types
+Controller-->>UI: Affiche liste documents regroupés par type
+UI-->>User: Présente documents disponibles
 
-                    User->>UI: Téléverse un nouveau document
-                    UI->>Controller: Transmet le fichier et métadonnées
-                    Controller->>Storage: Stocke le fichier
-                    Storage-->>Controller: Retourne le chemin du fichier
-                    Controller->>DocModel: Crée entrée document
-                    DocModel->>DB: INSERT INTO document_administratifs (collaborateur_id, type_document_id, document_path, date_emission, date_expiration)
-                    DB-->>DocModel: Confirmation insertion
-                    DocModel-->>Controller: Confirme création document
-                    Controller-->>UI: Confirme téléversement
-                    UI-->>User: Affiche confirmation et mise à jour liste
+User->>UI: Téléverse un nouveau document
+UI->>Controller: Transmet le fichier et métadonnées
+Controller->>Storage: Stocke le fichier
+Storage-->>Controller: Retourne le chemin du fichier
+Controller->>DocModel: Crée entrée document
+DocModel->>DB: INSERT INTO document_administratifs (collaborateur_id, type_document_id, document_path, date_emission, date_expiration)
+DB-->>DocModel: Confirmation insertion
+DocModel-->>Controller: Confirme création document
+Controller-->>UI: Confirme téléversement
+UI-->>User: Affiche confirmation et mise à jour liste
 
-                    User->>UI: Demande de visualiser un document
-                    UI->>Controller: Demande le document spécifique
-                    Controller->>Storage: Récupère le fichier
-                    Storage-->>Controller: Retourne le contenu du fichier
-                    Controller-->>UI: Affiche ou propose téléchargement
-                    UI-->>User: Affiche le document au format approprié
+User->>UI: Demande de visualiser un document
+UI->>Controller: Demande le document spécifique
+Controller->>Storage: Récupère le fichier
+Storage-->>Controller: Retourne le contenu du fichier
+Controller-->>UI: Affiche ou propose téléchargement
+UI-->>User: Affiche le document au format approprié
+                </x-diagram.mermaid>
+            </x-card.card-body>
+        </x-card>
+
+        <!-- Diagramme de séquence pour l'authentification -->
+        <x-card>
+            <x-card.card-body>
+                <h2 class="text-xl font-semibold mb-4">Processus d'authentification</h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Flux d'authentification des utilisateurs, y compris la connexion standard, la récupération de mot de passe et l'authentification à deux facteurs.
+                </p>
+
+                <x-diagram.mermaid caption="Diagramme de séquence pour l'authentification">
+sequenceDiagram
+autonumber
+actor User as Utilisateur
+participant UI as Interface Utilisateur
+participant Auth as AuthController
+participant Guard as Auth Guard
+participant UserModel as User
+participant DB as Base de Données
+participant Session as Session Handler
+participant Email as Service Email
+participant 2FA as Service 2FA
+
+%% Connexion standard
+User->>UI: Accède à la page de connexion
+UI-->>User: Affiche formulaire de connexion
+User->>UI: Saisit email et mot de passe
+UI->>Auth: Transmet les identifiants
+Auth->>Guard: Tente d'authentifier l'utilisateur
+Guard->>UserModel: Recherche l'utilisateur par email
+UserModel->>DB: SELECT * FROM users WHERE email = ?
+DB-->>UserModel: Retourne l'utilisateur
+
+alt Utilisateur introuvable
+    UserModel-->>Guard: Utilisateur non trouvé
+    Guard-->>Auth: Échec d'authentification
+    Auth-->>UI: Message d'erreur
+    UI-->>User: Affiche "Email non reconnu"
+else Utilisateur trouvé
+    UserModel-->>Guard: Utilisateur trouvé
+    Guard->>UserModel: Vérifie le hash du mot de passe
+
+    alt Mot de passe incorrect
+        UserModel-->>Guard: Mot de passe invalide
+        Guard-->>Auth: Échec d'authentification
+        Auth-->>UI: Message d'erreur
+        UI-->>User: Affiche "Mot de passe incorrect"
+    else Mot de passe correct
+        UserModel-->>Guard: Mot de passe valide
+
+        alt 2FA activé pour l'utilisateur
+            Guard->>2FA: Génère un code temporaire
+            2FA->>Email: Envoie le code
+            Email-->>User: Reçoit code par email
+            UI-->>User: Demande le code 2FA
+            User->>UI: Saisit le code 2FA
+            UI->>Auth: Transmet le code 2FA
+            Auth->>2FA: Vérifie le code
+
+            alt Code 2FA invalide
+                2FA-->>Auth: Code invalide
+                Auth-->>UI: Message d'erreur
+                UI-->>User: Affiche "Code invalide"
+            else Code 2FA valide
+                2FA-->>Auth: Code valide
+                Auth->>Session: Crée session authentifiée
+            end
+        else
+            Guard->>Session: Crée session authentifiée
+        end
+
+        Session-->>Auth: Confirmation session créée
+        Auth-->>UI: Redirige vers tableau de bord
+        UI-->>User: Affiche tableau de bord
+    end
+end
+
+%% Récupération de mot de passe
+User->>UI: Clique sur "Mot de passe oublié"
+UI-->>User: Affiche formulaire de récupération
+User->>UI: Saisit son email
+UI->>Auth: Demande réinitialisation
+Auth->>UserModel: Vérifie l'existence de l'email
+UserModel->>DB: SELECT * FROM users WHERE email = ?
+DB-->>UserModel: Retourne l'utilisateur si trouvé
+
+alt Email introuvable
+    UserModel-->>Auth: Email non trouvé
+    Auth-->>UI: Message générique pour éviter l'énumération
+    UI-->>User: Affiche "Si l'adresse existe, un email a été envoyé"
+else Email trouvé
+    UserModel-->>Auth: Email trouvé
+    Auth->>UserModel: Génère token de réinitialisation
+    UserModel->>DB: INSERT INTO password_resets (email, token)
+    DB-->>UserModel: Confirmation insertion
+    Auth->>Email: Envoie lien de réinitialisation
+    Email-->>User: Reçoit email avec lien
+
+    User->>UI: Clique sur le lien de réinitialisation
+    UI-->>User: Affiche formulaire nouveau mot de passe
+    User->>UI: Saisit nouveau mot de passe (2 fois)
+    UI->>Auth: Transmet nouveau mot de passe et token
+    Auth->>UserModel: Vérifie validité du token
+    UserModel->>DB: SELECT * FROM password_resets WHERE token = ? AND created_at > (now - 1h)
+    DB-->>UserModel: Confirme validité token
+    Auth->>UserModel: Met à jour le mot de passe
+    UserModel->>DB: UPDATE users SET password = ? WHERE email = ?
+    DB-->>UserModel: Confirme mise à jour
+    Auth->>DB: DELETE FROM password_resets WHERE email = ?
+    Auth-->>UI: Redirige vers login
+    UI-->>User: Affiche confirmation et écran de connexion
+end
                 </x-diagram.mermaid>
             </x-card.card-body>
         </x-card>
